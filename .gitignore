@@ -1,0 +1,3 @@
+*.lyx~
+*build
+.vscode/

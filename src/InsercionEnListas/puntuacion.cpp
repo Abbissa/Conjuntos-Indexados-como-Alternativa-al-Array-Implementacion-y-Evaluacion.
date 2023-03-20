@@ -1,6 +1,7 @@
-#include "puntuacion.h"
+#include "puntuacion.hpp"
 
-puntuacion::puntuacion(void)
+using namespace std;
+puntuacion::puntuacion()
 {
     time = 0;
     memory = 0;
@@ -18,12 +19,7 @@ ostream &operator<<(ostream &co, const puntuacion &p)
     return co;
 }
 
-bool puntuacion::operator<(const puntuacion &p)const
+bool puntuacion::operator<(const puntuacion &p) const
 {
-    if (time < p.time)
-        return true;
-
-    if (time==p.time&&memory < p.memory)
-        return true;
-    return false;
+    return time < p.time || (time == p.time && memory < p.memory);
 }

@@ -7,9 +7,13 @@
 #include <chrono>
 #include <iomanip>
 
-#include "puntuacion.h"
+#include "puntuacion.hpp"
 
 using namespace std;
+
+
+
+
 void prueba1();
 void prueba2();
 void prueba3();
@@ -39,7 +43,7 @@ void prueba1()
         puntuacion p = puntuacion(time, memory);
         datos.push_back(p);
     }
-    int i = 0;
+    size_t i = 0;
     while (i < datos.size())
     {
         cout << datos.at(i);
@@ -66,7 +70,7 @@ void prueba2()
         auto it = lower_bound(datos.begin(), datos.end(), p);
         datos.insert(it, p);
     }
-    int i = 0;
+    size_t i = 0;
     while (i < datos.size())
     {
         cout << datos.at(i);
@@ -78,22 +82,20 @@ void prueba3()
     vector<puntuacion> datos;
     double ti;
     int memory;
-    int n = 10000;
+    int n = 100000;
     int size = n;
     srand(time(NULL));
     auto start = std::chrono::system_clock::now();
     while (n--)
     {
-
         ti = (double)(rand());
         memory = rand();
 
         puntuacion p = puntuacion(ti, memory);
-        auto it = lower_bound(datos.begin(), datos.end(), p);
+        auto it = upper_bound(datos.begin(), datos.end(), p);
         datos.insert(it, p);
     }
-    int i = 0;
     auto end = std::chrono::system_clock::now();
     std::chrono::duration<double> diff = end - start;
-    std::cout << "Time to fill and iterate a vector of size " << size << std::setw(9) << " ints : " << diff.count() << " s\n";
+    std::cout << "Time to fill and iterate a vector of size " << size << std::setw(9) << " Integer : " << diff.count() << " s\n";
 }
