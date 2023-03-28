@@ -10,9 +10,11 @@ template <Item T>
 class Caja
 {
 public:
+
     std::shared_ptr<T> item;
     size_t capacity;
     Caja(size_t tam) : item(nullptr), capacity(tam) {}
+    
     void addItem(T addItem)
     {
         if (addItem.size < capacity)

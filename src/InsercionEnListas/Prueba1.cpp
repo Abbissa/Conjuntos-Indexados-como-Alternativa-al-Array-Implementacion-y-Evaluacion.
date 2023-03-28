@@ -70,6 +70,7 @@ void prueba2()
         auto it = lower_bound(datos.begin(), datos.end(), p);
         datos.insert(it, p);
     }
+     
     size_t i = 0;
     while (i < datos.size())
     {

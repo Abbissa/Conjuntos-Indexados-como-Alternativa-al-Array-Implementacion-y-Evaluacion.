@@ -1,3 +1,4 @@
 *.lyx~
 *build
 .vscode/
+*.out
