@@ -56,6 +56,16 @@ int main(int argc, char **argv)
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
     printf("Time to fill an array of size: %lld : %g s\n", size, tiempo);
 
+    puntuacion p2;
+    p = list[0];
+    for (size_t i = 1; i < size; i++)
+    {
+        p2 = list[i];
+        if (less(p2, p))
+            return 1;
+        p = p2;
+    }
+
     gettimeofday(&tf, NULL);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
     printf("Time to fill and free iterate a vector of size: %lld : %g s\n", size, tiempo);

@@ -48,6 +48,11 @@ int main(int argc, char **argv)
     {
 
         p = (puntuacion *)malloc(sizeof(puntuacion));
+        if (!p)
+        {
+            free(p);
+            return 1;
+        }
         p->time = (double)(rand() % 100);
         p->memory = rand() % 100;
 
@@ -58,10 +63,14 @@ int main(int argc, char **argv)
     gettimeofday(&tf, NULL);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
     printf("Time to fill an array of size: %lld : %g s\n", size, tiempo);
-
-    for (size_t i = 0; i < size; i++)
+    puntuacion *p2;
+    p = list[0];
+    for (size_t i = 1; i < size; i++)
     {
-        free(list[i]);
+        p2 = list[i];
+        if (less(*p2, *p))
+            return 1;
+        p = p2;
     }
 
     free(list);
