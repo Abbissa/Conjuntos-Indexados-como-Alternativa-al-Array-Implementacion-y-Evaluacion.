@@ -1,74 +1,48 @@
 #include <random>
 #include <iostream>
-#include "GappedList.hpp"
-#include "GappedListV2.hpp"
+#include <sys/time.h>
 
-int generateRandomNumbers(int);
-int generateInversedOrderedNumbers(int);
-int generateOrderedNumbers(int);
-#if (GNType == 0)
-#define GEN_NUMBERS(n) generateRandomNumbers(n)
-#elif (GNType == 1)
-#define GEN_NUMBERS(n) generateInversedOrderedNumbers(n)
-#elif (GNType == 2)
-#define GEN_NUMBERS(n) generateOrderedNumbers(n)
-#endif
+#include "HollowList.hpp"
+#include "ptrHollowList.hpp"
 
 #if (GLType == 0)
-GappedList<int> GL;
+HollowList<int> HL;
+#define NOMBRE "HollowList"
 #elif (GLType == 1)
-GappedListV2<int> GL;
+ptrHollowList<int> HL;
+#define NOMBRE "ptrHollowList"
 #endif
 
-size_t size_max = 10000;
-int min_value = 0;
-
 using namespace std;
-int main(int argc, char *argv[])
+int main()
 {
+    struct timeval ti, tf;
+    double tiempo;
+    gettimeofday(&ti, nullptr);
 
-    if (argc == 2)
+    int size_max = 0;
+    int num;
+    while (cin >> num && !cin.eof())
     {
-        size_max = strtol(argv[1], nullptr, 10);
-    }
-    else if (argc == 3)
-    {
-        size_max = strtol(argv[1], nullptr, 10);
-        min_value = strtol(argv[2], nullptr, 10);
+        HL.insert(num);
+        size_max++;
     }
 
-    for (size_t i = 0; i < size_max; i++)
-    {
-        int num = GEN_NUMBERS(i);
-
-        GL.insert(num);
-    }
-    int num = GL.remove();
+    gettimeofday(&tf, nullptr);
+    tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
+    num = HL.remove();
     for (size_t i = 0; i < size_max - 1; i++)
     {
 
-        int temp = GL.remove();
+        int temp = HL.remove();
         if (temp > num)
+        {
+            cerr << "Error: HollowList no ordenado" << endl;
             return 1;
+        }
         num = temp;
     }
+    cout << NOMBRE << "," << size_max << "," << tiempo << endl;
 
     return 0;
-}
-
-int generateRandomNumbers(size_t)
-{
-    mt19937 gen(time(nullptr));
-    uniform_int_distribution<int> dis(min_value, size_max);
-    return dis(gen);
-}
-
-int generateInversedOrderedNumbers(size_t num)
-{
-    return size_max - num;
-}
-
-int generateOrderedNumbers(size_t num)
-{
-    return num;
 }

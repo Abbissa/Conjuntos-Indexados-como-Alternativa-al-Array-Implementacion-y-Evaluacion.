@@ -6,89 +6,115 @@ enable_testing()
 
 # Añadir -O3
 
+add_compile_options(-O3)
 
-add_compile_definitions(BSType=0 RecStruct)
-add_compile_definitions(BSType=0 RecPtr)
+# Definiciones de compilacion
+add_executable(GenRandom ./genNumbers/genNumbers.cpp)
+add_executable(GenOrdered ./genNumbers/genNumbers.cpp)
+add_executable(GenInverse ./genNumbers/genNumbers.cpp)
 
-add_compile_definitions(BSType=1 IterStruct)
-add_compile_definitions(BSType=1 IterPtr)
-
-
-# set_source_files_properties(./Prototipo/Test.cpp ./Prototipo/GappedList.hpp ./Prototipo/GappedListV2.hpp PROPERTIES LANGUAGE CXX)
-
-add_executable(RecStruct ./InsercionEnListasC/insercion.c)
-add_executable(IterStruct ./InsercionEnListasC/insercion.c)
-add_executable(RecPtr ./InsercionEnListasC/insercionV2.c)
-add_executable(IterPtr ./InsercionEnListasC/insercionV2.c)
+target_compile_definitions(GenRandom PUBLIC GNType=0)
+target_compile_definitions(GenOrdered PUBLIC GNType=1)
+target_compile_definitions(GenInverse PUBLIC GNType=2)
 
 
-# add_compile_definitions(GNType=0 GappedRandomTest)
+add_executable(StructArrayRec ./InsercionEnListasC/StructArray.c)
+target_compile_definitions(StructArrayRec PUBLIC BSType=0 )
 
-# add_compile_definitions(GNType=1 GappedOrderedTest)
-# add_compile_definitions(GNType=2 GappedInverseOrderTest)
+add_executable(StructArrayIter ./InsercionEnListasC/StructArray.c)
+target_compile_definitions(StructArrayIter PUBLIC BSType=1 )
 
-# add_compile_definitions(GLType=0 GappedInverseOrderTest)
-# add_compile_definitions(GLType=0 GappedOrderedTest)
-# add_compile_definitions(GLType=0 GappedInverseOrderTest)
+add_executable(PtrArrayRec ./InsercionEnListasC/PtrArray.c)
+target_compile_definitions(PtrArrayRec PUBLIC BSType=0 )
 
-# add_compile_definitions(GNType=0 GappedV2RandomTest)
-# add_compile_definitions(GNType=1 GappedV2OrderedTest)
-# add_compile_definitions(GNType=2 GappedV2InverseOrderTest)
-
-# add_compile_definitions(GLType=1 GappedV2InverseOrderTest)
-# add_compile_definitions(GLType=1 GappedV2OrderedTest)
-# add_compile_definitions(GLType=1 GappedV2InverseOrderTest)
-
-# add_library(GL ./Prototipo/GappedList.hpp)
-# add_library(GLV2 ./Prototipo/GappedListV2.hpp)
-
-# target_include_directories(GL PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-# target_include_directories(GLV2 PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-
-# add_executable(GappedRandomTest ./Prototipo/Test.cpp)
-# add_executable(GappedOrderedTest ./Prototipo/Test.cpp ./Prototipo/GappedList.hpp ./Prototipo/GappedListV2.hpp)
-# add_executable(GappedInverseOrderTest ./Prototipo/Test.cpp ./Prototipo/GappedList.hpp ./Prototipo/GappedListV2.hpp)
-
-# add_executable(GappedV2RandomTest ./Prototipo/Test.cpp ./Prototipo/GappedList.hpp ./Prototipo/GappedListV2.hpp)
-# add_executable(GappedV2OrderedTest ./Prototipo/Test.cpp ./Prototipo/GappedList.hpp ./Prototipo/GappedListV2.hpp)
-# add_executable(GappedV2InverseOrderTest ./Prototipo/Test.cpp ./Prototipo/GappedList.hpp ./Prototipo/GappedListV2.hpp)
+add_executable(PtrArrayIter ./InsercionEnListasC/PtrArray.c)
+target_compile_definitions(PtrArrayIter PUBLIC BSType=1 )
 
 
+# add_executable(HollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp)
+# target_compile_definitions(HollowList PUBLIC GLType=0)
 
-# target_link_libraries(GappedRandomTest GL)
-# target_link_libraries(GappedOrderedTest GL)
-# target_link_libraries(GappedInverseOrderTest GL)
+# add_executable(ptrHollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp)
+# target_compile_definitions(ptrHollowList PUBLIC GLType=1)
 
-# target_link_libraries(GappedV2RandomTest GLV2)
-# target_link_libraries(GappedV2OrderedTest GLV2)
-# target_link_libraries(GappedV2InverseOrderTest GLV2)
+# add_executable(TestVector ./Prototipo/TestVector.cpp)
+# add_executable(TestSet ./Prototipo/TestSet.cpp)
 
-
-set(i 10000)
-MATH(EXPR cntr 200000)
-while(i LESS_EQUAL cntr)
-
-    # add_test(NAME GappedRandomTest${i} COMMAND GappedRandomTest 0 ${i})
-    # add_test(NAME GappedRandomTestWithNegativeNumers${i} COMMAND GappedRandomTest -${i} ${i})
-    # add_test(NAME GappedOrderedTest${i} COMMAND GappedOrderedTest 0 ${i})
-    # add_test(NAME GappedInverseOrderTest${i} COMMAND GappedInverseOrderTest 0 ${i})
+# Distintos tipos de listas ordenadas a probar
+set(programs
+    StructArrayRec
+    StructArrayIter
+    PtrArrayRec
+    PtrArrayIter
+    # HollowList
+    # ptrHollowList
     
-    # add_test(NAME GappedV2RandomTest${i} COMMAND GappedV2RandomTest 0 ${i})
-    # add_test(NAME GappedV2RandomTestWithNegativeNumers${i} COMMAND GappedV2RandomTest -${i} ${i})
-    # add_test(NAME GappedV2OrderedTest${i} COMMAND GappedV2OrderedTest 0 ${i})
-    # add_test(NAME GappedV2InverseOrderTest${i} COMMAND GappedV2InverseOrderTest 0 ${i})
+    
+)
+# Generadores de numeros
+set(gens
+    GenRandom
+    GenOrdered
+    GenInverse
+)
+# Listas más rapidas para probar con casos más grandes
+set(fPrograms
+    # HollowList
+    # ptrHollowList
+)
 
+file(WRITE ${CMAKE_SOURCE_DIR}/genGraphs/CSV/base/base.csv PROGRAM,NUMBERS,SIZE,TIME\n)
 
+function(defineCase program gen i)
 
-    add_test(NAME RecStruct${i} COMMAND RecStruct ${i})
-    add_test(NAME IterStruct${i} COMMAND IterStruct ${i})
-    add_test(NAME RecPtr${i} COMMAND RecPtr ${i})
-    add_test(NAME IterPtr${i} COMMAND IterPtr ${i})
-
-    MATH(EXPR i ${i}*2)
+add_custom_command( 
+    TARGET ${program} POST_BUILD
+    COMMAND ${CMAKE_BINARY_DIR}/${gen} ${i} | ${CMAKE_BINARY_DIR}/${program} >> ${output})
+    
+endfunction(defineCase program gen i)
+    
+    
+set(i 50000)
+MATH(EXPR cntr 500000)
+while(i LESS_EQUAL cntr)
+    foreach(program ${programs})
+        foreach(gen ${gens})
+            set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
+            add_custom_command( 
+                TARGET ${gen} POST_BUILD
+                COMMAND echo "PROGRAM,NUMBERS,SIZE,TIME" > ${output})
+            defineCase(${program} ${gen} ${i})
+        endforeach()
+    endforeach()
+    MATH(EXPR i ${i}+50000)
 endwhile()
 
 
+# Añadir mas casos para las listas más rapidas
+set(i 600000)
+MATH(EXPR cntr 2000000)
+while(i LESS_EQUAL cntr)
+    foreach(program ${fPrograms})
+        foreach(gen ${gens})
+            defineCase(${program} ${gen} ${i})
+        endforeach()
+    endforeach()
+    MATH(EXPR i ${i}+100000)
+endwhile()
+
+
+file(GLOB FILES_TO_CAT ${CMAKE_SOURCE_DIR}/genGraphs/CSV/*.csv )
+
+list(SORT FILES_TO_CAT)
+
+add_custom_command(
+    OUTPUT res.csv
+    COMMAND cat ${CMAKE_SOURCE_DIR}/genGraphs/CSV/base/base.csv > ${CMAKE_SOURCE_DIR}/genGraphs/res.csv
+    COMMAND cat ${FILES_TO_CAT} >> ${CMAKE_SOURCE_DIR}/genGraphs/res.csv
+    DEPENDS ${FILES_TO_CAT}
+)
+
+add_custom_target(concatenate_files DEPENDS res.csv)
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

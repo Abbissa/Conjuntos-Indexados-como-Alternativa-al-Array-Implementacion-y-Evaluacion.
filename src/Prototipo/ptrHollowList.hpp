@@ -3,10 +3,10 @@
 #include <memory>
 
 template <typename T>
-class GappedListV2
+class ptrHollowList
 {
 public:
-    const int THRESHOLD = 8;
+    int THRESHOLD = 32;
     std::vector<std::unique_ptr<std::vector<T>>> data;
 
     void insert(T elem)

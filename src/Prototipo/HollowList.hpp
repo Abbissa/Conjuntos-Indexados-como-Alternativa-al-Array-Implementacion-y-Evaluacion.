@@ -1,9 +1,9 @@
 #include <algorithm>
 #include <vector>
 
-const int THRESHOLD = 8;
+const int THRESHOLD = 16;
 template <typename T>
-class GappedList
+class HollowList
 {
 public:
     std::vector<std::vector<T>> data;

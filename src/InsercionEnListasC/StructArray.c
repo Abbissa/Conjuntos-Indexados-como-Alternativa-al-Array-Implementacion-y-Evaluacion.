@@ -18,22 +18,18 @@ int equals(puntuacion, puntuacion);
 
 #if (BSType == 0)
 #define BS(b, inf, sup) binarySearchRec(b, inf, sup)
-#else
+#define NOMBRE "StructArrayRec"
+#elif (BSType == 1)
 #define BS(b, inf, sup) binarySearchIter(b, inf, sup)
+#define NOMBRE "StructArrayIter"
 #endif
 
 int listSize = 0;
 int maxElems = 0;
 puntuacion **list;
 int memIncrease = 128;
-int main(int argc, char **argv)
+int main()
 {
-
-    size_t size = 10000;
-    if (argc == 2)
-    {
-        size = strtol(argv[1], NULL, 10);
-    }
 
     puntuacion *p;
     list = (puntuacion **)calloc(memIncrease, sizeof(p));
@@ -43,8 +39,9 @@ int main(int argc, char **argv)
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, NULL);
-
-    for (size_t i = 0; i < size; i++)
+    double time;
+    int size = 0;
+    while (scanf("%f", &time) == 1)
     {
 
         p = (puntuacion *)malloc(sizeof(puntuacion));
@@ -53,30 +50,32 @@ int main(int argc, char **argv)
             free(p);
             return 1;
         }
-        p->time = (double)(rand() % 100);
-        p->memory = rand() % 100;
+        p->time = time;
+        scanf("%d", &p->memory);
 
         int in = binarySearchIter(p, 0, listSize);
-
         add(p, in);
+        size++;
     }
     gettimeofday(&tf, NULL);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    printf("Time to fill an array of size: %lld : %g s\n", size, tiempo);
     puntuacion *p2;
     p = list[0];
     for (size_t i = 1; i < size; i++)
     {
         p2 = list[i];
         if (less(*p2, *p))
+        {
+            perror("ERROR: wrong output order");
             return 1;
+        }
         p = p2;
     }
+    printf("%s,%d,%g\n", NOMBRE, size, tiempo);
 
-    free(list);
-    gettimeofday(&tf, NULL);
-    tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    printf("Time to fill and free iterate a vector of size: %lld : %g s\n", size, tiempo);
+    // gettimeofday(&tf, NULL);
+    // tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
+    // printf("Time to fill and free iterate a vector of size: %lld : %g s\n", size, tiempo);
 }
 
 void add(puntuacion *val, int index)

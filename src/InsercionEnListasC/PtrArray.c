@@ -18,43 +18,37 @@ int equals(puntuacion, puntuacion);
 
 #if (BSType == 0)
 #define BS(b, inf, sup) binarySearchRec(b, inf, sup)
-#else
+#define NOMBRE "PtrArrayRec"
+#elif (BSType == 1)
 #define BS(b, inf, sup) binarySearchIter(b, inf, sup)
+#define NOMBRE "PtrArrayIter"
 #endif
 
 int listSize = 0;
 int maxElems = 0;
 puntuacion *list;
 size_t baseMem = 128;
-int main(int argc, char **argv)
+int main()
 {
-    size_t size = 10000;
-    if (argc == 2)
-    {
-        size = strtol(argv[1], NULL, 10);
-    }
+
     puntuacion p;
     list = (puntuacion *)calloc(baseMem, sizeof(puntuacion));
     maxElems = baseMem;
-    srand(time(NULL));
 
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, NULL);
-
-    for (size_t i = 0; i < size; i++)
+    int size = 0;
+    while (scanf("%lf", &p.time) == 1)
     {
 
-        p.time = (double)(rand() % 100);
-        p.memory = rand() % 100;
-
+        scanf("%d", &p.memory);
         int in = BS(p, 0, listSize);
-
         add(p, in);
+        size++;
     }
     gettimeofday(&tf, NULL);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    printf("Time to fill an array of size: %lld : %g s\n", size, tiempo);
 
     puntuacion p2;
     p = list[0];
@@ -62,13 +56,14 @@ int main(int argc, char **argv)
     {
         p2 = list[i];
         if (less(p2, p))
+        {
+            perror("ERROR: La lista no esta ordenada\n");
             return 1;
+        }
         p = p2;
     }
 
-    gettimeofday(&tf, NULL);
-    tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    printf("Time to fill and free iterate a vector of size: %lld : %g s\n", size, tiempo);
+    printf("%s,%d,%g\n", NOMBRE, size, tiempo);
 }
 
 void add(puntuacion val, int index)
@@ -78,7 +73,7 @@ void add(puntuacion val, int index)
     {
         if ((list = (puntuacion *)realloc(list, (size_t)(listSize * 2) * sizeof(val))) == NULL)
         {
-            perror("Error al alocar memoria\n");
+            perror("Error al reservar memoria\n");
             return;
         }
         maxElems *= 2;
@@ -91,7 +86,7 @@ void add(puntuacion val, int index)
         {
             if ((list = (puntuacion *)realloc(list, (size_t)(listSize * 2) * sizeof(val))) == NULL)
             {
-                perror("Error al alocar memoria\n");
+                perror("Error al reservar memoria\n");
                 return;
             }
             maxElems *= 2;
