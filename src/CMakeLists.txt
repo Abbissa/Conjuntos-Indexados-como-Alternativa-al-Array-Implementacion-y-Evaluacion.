@@ -30,15 +30,14 @@ target_compile_definitions(PtrArrayRec PUBLIC BSType=0 )
 add_executable(PtrArrayIter ./InsercionEnListasC/PtrArray.c)
 target_compile_definitions(PtrArrayIter PUBLIC BSType=1 )
 
+add_executable(HollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp)
+target_compile_definitions(HollowList PUBLIC GLType=0)
 
-# add_executable(HollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp)
-# target_compile_definitions(HollowList PUBLIC GLType=0)
+add_executable(ptrHollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp)
+target_compile_definitions(ptrHollowList PUBLIC GLType=1)
 
-# add_executable(ptrHollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp)
-# target_compile_definitions(ptrHollowList PUBLIC GLType=1)
-
-# add_executable(TestVector ./Prototipo/TestVector.cpp)
-# add_executable(TestSet ./Prototipo/TestSet.cpp)
+add_executable(TestVector ./Prototipo/TestVector.cpp)
+add_executable(TestSet ./Prototipo/TestSet.cpp)
 
 # Distintos tipos de listas ordenadas a probar
 set(programs
@@ -46,9 +45,10 @@ set(programs
     StructArrayIter
     PtrArrayRec
     PtrArrayIter
-    # HollowList
-    # ptrHollowList
-    
+    HollowList
+    ptrHollowList
+    TestVector
+    TestSet
     
 )
 # Generadores de numeros
@@ -59,22 +59,24 @@ set(gens
 )
 # Listas más rapidas para probar con casos más grandes
 set(fPrograms
-    # HollowList
-    # ptrHollowList
+    ptrHollowList
+    TestSet
 )
 
 file(WRITE ${CMAKE_SOURCE_DIR}/genGraphs/CSV/base/base.csv PROGRAM,NUMBERS,SIZE,TIME\n)
 
 function(defineCase program gen i)
-
-add_custom_command( 
-    TARGET ${program} POST_BUILD
-    COMMAND ${CMAKE_BINARY_DIR}/${gen} ${i} | ${CMAKE_BINARY_DIR}/${program} >> ${output})
-    
+MATH(EXPR j ${i}+1000000)
+message("Defining case ${program} ${gen} ${i} ${j}")
+    add_custom_command( 
+        TARGET ${program} POST_BUILD
+        COMMAND ${gen} ${j} >tmp
+        COMMAND ${program} ${i}  < tmp >> ${output}
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 endfunction(defineCase program gen i)
     
     
-set(i 50000)
+set(i 100000)
 MATH(EXPR cntr 500000)
 while(i LESS_EQUAL cntr)
     foreach(program ${programs})
@@ -82,24 +84,26 @@ while(i LESS_EQUAL cntr)
             set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
             add_custom_command( 
                 TARGET ${gen} POST_BUILD
-                COMMAND echo "PROGRAM,NUMBERS,SIZE,TIME" > ${output})
+                COMMAND echo "PROGRAM,TYPE,TEST,SIZE,TIME" > ${output})
             defineCase(${program} ${gen} ${i})
         endforeach()
     endforeach()
-    MATH(EXPR i ${i}+50000)
+    MATH(EXPR i ${i}+100000)
 endwhile()
 
 
 # Añadir mas casos para las listas más rapidas
 set(i 600000)
-MATH(EXPR cntr 2000000)
+MATH(EXPR cntr 3000000)
 while(i LESS_EQUAL cntr)
     foreach(program ${fPrograms})
         foreach(gen ${gens})
+            set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
+
             defineCase(${program} ${gen} ${i})
         endforeach()
     endforeach()
-    MATH(EXPR i ${i}+100000)
+    MATH(EXPR i ${i}+200000)
 endwhile()
 
 

@@ -4,8 +4,13 @@
 #include <algorithm>
 
 using namespace std;
-int main()
+int main(int argc, char const *argv[])
 {
+    int size = 10000;
+    if (argc == 2)
+    {
+        size = atoi(argv[1]);
+    }
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, nullptr);
@@ -13,8 +18,9 @@ int main()
     int size_max = 0;
     int num;
     vector<int> vec;
-    while (cin >> num && !cin.eof())
+    for (size_t i = 0; i < size; i++)
     {
+        cin >> num;
         auto it = upper_bound(vec.begin(), vec.end(), num);
         vec.insert(it, num);
         size_max++;
@@ -33,7 +39,19 @@ int main()
         }
         num = vec[i];
     }
-    cout << "Vector," << size_max << "," << tiempo << endl;
+
+    cout << "Vector,SLOW,INSERT," << size_max << "," << tiempo << endl;
+    gettimeofday(&ti, nullptr);
+
+    while (cin >> num && !cin.eof())
+    {
+        vec.erase(vec.begin());
+        auto it = upper_bound(vec.begin(), vec.end(), num);
+        vec.insert(it, num);
+    }
+    gettimeofday(&tf, nullptr);
+    tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
+    cout << "Vector,SLOW,USAGE," << size_max << "," << tiempo << endl;
 
     return 0;
 }

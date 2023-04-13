@@ -28,8 +28,14 @@ int listSize = 0;
 int maxElems = 0;
 puntuacion *list;
 size_t baseMem = 128;
-int main()
+int main(int argc, char const *argv[])
 {
+
+    int size = 10000;
+    if (argc == 2)
+    {
+        size = atoi(argv[1]);
+    }
 
     puntuacion p;
     list = (puntuacion *)calloc(baseMem, sizeof(puntuacion));
@@ -38,14 +44,22 @@ int main()
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, NULL);
-    int size = 0;
-    while (scanf("%lf", &p.time) == 1)
+    for (size_t i = 0; i < size; i++)
+
     {
 
-        scanf("%d", &p.memory);
+        if (!scanf("%lf", &p.time))
+        {
+            perror("Error al leer");
+            return 1;
+        }
+        if (!scanf("%d", &p.memory))
+        {
+            perror("Error al leer");
+            return 1;
+        }
         int in = BS(p, 0, listSize);
         add(p, in);
-        size++;
     }
     gettimeofday(&tf, NULL);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
@@ -63,7 +77,7 @@ int main()
         p = p2;
     }
 
-    printf("%s,%d,%g\n", NOMBRE, size, tiempo);
+    printf("%s,%s,%s,%d,%g\n", NOMBRE, "SLOW", "INSERT", size, tiempo);
 }
 
 void add(puntuacion val, int index)

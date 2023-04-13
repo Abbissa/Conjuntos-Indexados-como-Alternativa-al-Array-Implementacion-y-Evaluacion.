@@ -28,9 +28,13 @@ int listSize = 0;
 int maxElems = 0;
 puntuacion **list;
 int memIncrease = 128;
-int main()
+int main(int argc, char const *argv[])
 {
-
+    int size = 10000;
+    if (argc == 2)
+    {
+        size = atoi(argv[1]);
+    }
     puntuacion *p;
     list = (puntuacion **)calloc(memIncrease, sizeof(p));
     maxElems = memIncrease;
@@ -40,22 +44,29 @@ int main()
     double tiempo;
     gettimeofday(&ti, NULL);
     double time;
-    int size = 0;
-    while (scanf("%f", &time) == 1)
-    {
+    for (size_t i = 0; i < size; i++)
 
+    {
         p = (puntuacion *)malloc(sizeof(puntuacion));
         if (!p)
         {
             free(p);
             return 1;
         }
-        p->time = time;
-        scanf("%d", &p->memory);
+
+        if (!scanf("%lf", &p->time))
+        {
+            perror("Error al leer");
+            return 1;
+        }
+        if (!scanf("%d", &p->memory))
+        {
+            perror("Error al leer");
+            return 1;
+        }
 
         int in = binarySearchIter(p, 0, listSize);
         add(p, in);
-        size++;
     }
     gettimeofday(&tf, NULL);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
@@ -71,7 +82,7 @@ int main()
         }
         p = p2;
     }
-    printf("%s,%d,%g\n", NOMBRE, size, tiempo);
+    printf("%s,%s,%s,%d,%g\n", NOMBRE, "SLOW", "INSERT", size, tiempo);
 
     // gettimeofday(&tf, NULL);
     // tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
