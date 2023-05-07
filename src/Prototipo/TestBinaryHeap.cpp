@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sys/time.h>
-#include <vector>
+#include <set>
 #include <algorithm>
 #include "../InsercionEnListas/puntuacionSmall.hpp"
 #include "../InsercionEnListas/puntuacionMedium.hpp"
@@ -31,6 +31,7 @@ int main(int argc, char const *argv[])
 
 int runTestCase(int size)
 {
+    BinaryHeap<puntuacion> bh;
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, nullptr);
@@ -38,46 +39,32 @@ int runTestCase(int size)
     int size_max = 0;
     double time;
     int memory;
-    vector<puntuacion> vec;
-
     for (size_t i = 0; i < size; i++)
     {
+
         cin >> time;
         cin >> memory;
         puntuacion p = puntuacion(time, memory);
-        auto it = upper_bound(vec.begin(), vec.end(), p);
-        vec.insert(it, p);
+        bh.insert(p);
         size_max++;
     }
 
     gettimeofday(&tf, nullptr);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
 
-    puntuacion p = vec[0];
-    for (size_t i = 1; i < vec.size(); i++)
-    {
-        if (vec[i] < p)
-        {
-            cerr << "Error: Vector no ordenado" << endl;
-            return 1;
-        }
-        p = vec[i];
-    }
-
-    cout << "Vector,SLOW,INSERT," << size_max << "," << tiempo << endl;
+    cout << "BinaryHeap,FAST,INSERT," << size_max << "," << tiempo << endl;
     gettimeofday(&ti, nullptr);
 
     while (cin >> time && !cin.eof())
     {
         cin >> memory;
-        p = puntuacion(time, memory);
-        vec.erase(vec.begin());
-        auto it = upper_bound(vec.begin(), vec.end(), p);
-        vec.insert(it, p);
+        puntuacion p = puntuacion(time, memory);
+        bh.delete_min();
+        bh.insert(p);
     }
     gettimeofday(&tf, nullptr);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    cout << "Vector,SLOW,USAGE," << size_max << "," << tiempo << endl;
+    cout << "BinaryHeap,FAST,USAGE," << size_max << "," << tiempo << endl;
 
     return 0;
 }

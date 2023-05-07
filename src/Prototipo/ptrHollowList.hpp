@@ -6,7 +6,7 @@ template <typename T>
 class ptrHollowList
 {
 public:
-    int THRESHOLD = 32;
+    int THRESHOLD = 256;
     std::vector<std::unique_ptr<std::vector<T>>> data;
 
     void insert(T elem)
@@ -27,7 +27,7 @@ public:
 
             if (elem == (*data[midIndex])[0])
             {
-                inf = midIndex + 1;
+                inf = midIndex;
                 break;
             }
             else if (elem < (*data[midIndex])[0])
@@ -41,6 +41,7 @@ public:
         }
 
         index = (*data[inf])[0] >= elem && inf != 0 ? inf - 1 : inf;
+
         auto it = upper_bound(data[index]->begin(), data[index]->end(), elem);
         data[index]->insert(it, elem);
 

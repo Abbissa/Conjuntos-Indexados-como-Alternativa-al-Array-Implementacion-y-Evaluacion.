@@ -1,11 +1,11 @@
 #include <algorithm>
 #include <vector>
 
-const int THRESHOLD = 16;
 template <typename T>
 class HollowList
 {
 public:
+    int THRESHOLD = 256;
     std::vector<std::vector<T>> data;
 
     void insert(T elem)
@@ -46,7 +46,7 @@ public:
         if (data[index].size() > THRESHOLD)
         {
             size_t mid = data[index].size() / 2;
-            auto new_vec = std::vector<int>(data[index].begin() + mid, data[index].end());
+            auto new_vec = std::vector<T>(data[index].begin() + mid, data[index].end());
             data[index].erase(data[index].begin() + mid, data[index].end());
             data.insert(data.begin() + index + 1, new_vec);
         }

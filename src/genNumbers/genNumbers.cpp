@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 int generateRandomNumbers(int)
 {
 
-    return dis(gen);
+    return dis(gen) % 10000;
 }
 
 int generateInversedOrderedNumbers(int num)
