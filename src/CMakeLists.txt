@@ -169,7 +169,7 @@ endforeach()
 # endwhile()
 
 add_custom_command(TARGET GenRandom POST_BUILD
-    COMMAND echo "PROGRAM,TEST,TYPE,SIZE,MEM,TIME,SYSTIME,PAGE_FAULTS" > ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv)
+    COMMAND echo "PROGRAM,TEST,TYPE,SIZE,MEM,SYS_TIME,USER_TIME,PAGE_FAULTS" > ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv)
 # Añadir mas casos para las listas más rapidas
 set(i 500000)
 MATH(EXPR cntr 4000000)

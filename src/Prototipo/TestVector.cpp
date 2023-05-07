@@ -52,21 +52,9 @@ int runTestCase(int size)
 
     gettimeofday(&tf, nullptr);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-
-    puntuacion p = vec[0];
-    for (size_t i = 1; i < vec.size(); i++)
-    {
-        if (vec[i] < p)
-        {
-            cerr << "Error: Vector no ordenado" << endl;
-            return 1;
-        }
-        p = vec[i];
-    }
-
-    cout << "Vector,SLOW,INSERT," << size_max << "," << tiempo << endl;
     gettimeofday(&ti, nullptr);
 
+    puntuacion p = vec[0];
     while (cin >> time && !cin.eof())
     {
         cin >> memory;
@@ -76,8 +64,19 @@ int runTestCase(int size)
         vec.insert(it, p);
     }
     gettimeofday(&tf, nullptr);
+    cout << "Vector,SLOW,INSERT," << size_max << "," << tiempo << endl;
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
     cout << "Vector,SLOW,USAGE," << size_max << "," << tiempo << endl;
+    p = vec[0];
+    for (size_t i = 1; i < vec.size(); i++)
+    {
+        if (vec[i] < p)
+        {
+            cerr << "Error: Vector no ordenado" << endl;
+            return 1;
+        }
+        p = vec[i];
+    }
 
     return 0;
 }
