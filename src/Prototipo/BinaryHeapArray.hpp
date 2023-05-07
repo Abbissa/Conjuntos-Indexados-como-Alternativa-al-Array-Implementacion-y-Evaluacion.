@@ -7,7 +7,7 @@ class BinaryHeap
 {
 private:
     std::vector<T> heap;
-    void heapify_up(int index)
+    void bubble_up(int index)
     {
         if (index == 0)
         {
@@ -17,10 +17,10 @@ private:
         if (heap[index] < heap[parent_index])
         {
             std::swap(heap[index], heap[parent_index]);
-            heapify_up(parent_index);
+            bubble_up(parent_index);
         }
     }
-    void heapify_down(int index)
+    void bubble_down(int index)
     {
         int left_child_index = 2 * index + 1;
         int right_child_index = 2 * index + 2;
@@ -36,7 +36,7 @@ private:
         if (smallest != index)
         {
             std::swap(heap[index], heap[smallest]);
-            heapify_down(smallest);
+            bubble_down(smallest);
         }
     }
 
@@ -47,13 +47,13 @@ public:
         for (int i = 0; i < vec.size(); i++)
         {
             heap.push_back(vec[i]);
-            heapify_up(i);
+            bubble_up(i);
         }
     }
     void insert(T val)
     {
         heap.push_back(val);
-        heapify_up(heap.size() - 1);
+        bubble_up(heap.size() - 1);
     }
     T get_min()
     {
@@ -65,7 +65,7 @@ public:
         T ret = heap[0];
         heap[0] = heap.back();
         heap.pop_back();
-        heapify_down(0);
+        bubble_down(0);
         return ret;
     }
     bool is_empty()

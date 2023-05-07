@@ -66,5 +66,16 @@ int runTestCase(int size)
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
     cout << "BinaryHeap,FAST,USAGE," << size_max << "," << tiempo << endl;
 
+    puntuacion p = bh.delete_min();
+    while (bh.is_empty() == false)
+    {
+        puntuacion temp = bh.delete_min();
+        if (temp < p)
+        {
+            cerr << "ERROR" << endl;
+            return 1;
+        }
+        p = temp;
+    }
     return 0;
 }
