@@ -64,4 +64,21 @@ public:
 
         return ret;
     }
+    bool isEmpty()
+    {
+        return data.size() == 0;
+    }
+    T peek()
+    {
+        return (*data[data.size() - 1])[data[data.size() - 1]->size() - 1];
+    }
+    int size()
+    {
+        int size = 0;
+        for (size_t i = 0; i < data.size(); i++)
+        {
+            size += data[i]->size();
+        }
+        return size;
+    }
 };

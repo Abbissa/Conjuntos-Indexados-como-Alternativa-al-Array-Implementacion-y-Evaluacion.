@@ -151,7 +151,7 @@ foreach(gen ${gens})
     set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
             add_custom_command( 
                 TARGET ${gen} POST_BUILD
-            COMMAND echo "PROGRAM,TYPE,TEST,SIZE,TIME" > ${output})
+            COMMAND echo "PROGRAM,TEST,TYPE,SIZE,TIME" > ${output})
 endforeach()
 
 # set(i 100000)

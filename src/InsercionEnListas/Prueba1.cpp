@@ -7,12 +7,11 @@
 #include <chrono>
 #include <iomanip>
 
-#include "puntuacion.hpp"
-
+#include "puntuacionSmall.hpp"
+#include "puntuacionMedium.hpp"
+#include "puntuacionLarge.hpp"
+typedef puntuacionSmall puntuacion;
 using namespace std;
-
-
-
 
 void prueba1();
 void prueba2();
@@ -20,9 +19,16 @@ void prueba3();
 
 int main()
 {
+    puntuacion p = puntuacion(1, 2);
+    puntuacionMedium p2 = puntuacionMedium(1, 2);
+    puntuacionLarge p3 = puntuacionLarge(1, 2);
+    cout << sizeof(p) << endl;
+    cout << sizeof(p2) << endl;
+    cout << sizeof(p3) << endl;
+
     // prueba1();
     // prueba2();
-    prueba3();
+    // prueba3();
 }
 
 void prueba1()
@@ -70,7 +76,7 @@ void prueba2()
         auto it = lower_bound(datos.begin(), datos.end(), p);
         datos.insert(it, p);
     }
-     
+
     size_t i = 0;
     while (i < datos.size())
     {

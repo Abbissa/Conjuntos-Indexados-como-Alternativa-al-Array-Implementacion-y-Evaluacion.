@@ -19,10 +19,13 @@ using HL = HollowList<T>;
 
 #if (testType == 0)
 typedef puntuacionSmall puntuacion;
+#define TYPE "Small"
 #elif (testType == 1)
 typedef puntuacionMedium puntuacion;
+#define TYPE "Medium"
 #elif (testType == 2)
 typedef puntuacionLarge puntuacion;
+#define TYPE "Large"
 
 #endif
 
@@ -50,7 +53,6 @@ int runTestCase(int elems, int THRESHOLD)
     double tiempo;
     gettimeofday(&ti, nullptr);
 
-    int size_max = 0;
     int memory;
     double time;
     for (size_t i = 0; i < elems; i++)
@@ -60,7 +62,6 @@ int runTestCase(int elems, int THRESHOLD)
         cin >> memory;
         puntuacion p = puntuacion(time, memory);
         hl.insert(p);
-        size_max++;
     }
 
     gettimeofday(&tf, nullptr);
@@ -76,30 +77,28 @@ int runTestCase(int elems, int THRESHOLD)
     }
     gettimeofday(&tf, nullptr);
 
-    cout << NOMBRE << ","
-         << "FAST,INSERT," << size_max << "," << tiempo << endl;
+    cout << NOMBRE << "-" << hl.THRESHOLD << ","
+         << "INSERT," << TYPE << "," << hl.size() << "," << tiempo << endl;
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    cout << NOMBRE << ","
-         << "FAST,USAGE," << size_max << "," << tiempo << endl;
-
+    cout << NOMBRE << "-" << hl.THRESHOLD << ","
+         << "USAGE," << TYPE << "," << hl.size() << "," << tiempo << endl;
+    gettimeofday(&ti, nullptr);
+    int tam = hl.size();
     puntuacion p = hl.remove();
     int errores = 0;
-    for (size_t i = 0; i < size_max - 1; i++)
+    while (!hl.isEmpty())
     {
 
         puntuacion temp = hl.remove();
         if (temp > p)
         {
-            errores++;
-            cerr << i << endl;
+            cerr << "Error: HollowList no ordenado" << endl;
         }
         p = temp;
     }
-    if (errores > 0)
-    {
-        cerr << "Error: HollowList no ordenado" << endl;
-        cerr << "Error: " << errores << endl;
-        return 1;
-    }
+    gettimeofday(&tf, nullptr);
+    tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
+    cout << NOMBRE << "-" << hl.THRESHOLD << ","
+         << "REMOVE," << TYPE << "," << tam << "," << tiempo << endl;
     return 0;
 }

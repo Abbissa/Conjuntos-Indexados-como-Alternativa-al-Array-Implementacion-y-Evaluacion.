@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-class puntuacionSmall
+struct puntuacionSmall
 {
 
 public:
@@ -8,7 +8,7 @@ public:
 
     puntuacionSmall(double ti, int memory)
     {
-        time = ti;
+        time = ti + memory;
     }
 
     friend std::ostream &operator<<(std::ostream &co, const puntuacionSmall &p)

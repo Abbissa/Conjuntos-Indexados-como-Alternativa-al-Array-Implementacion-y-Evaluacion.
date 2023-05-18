@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 #include <algorithm>
 
@@ -6,74 +5,60 @@ template <typename T>
 class BinaryHeap
 {
 private:
-    std::vector<T> heap;
-    void bubble_up(int index)
+    std::vector<T> data;
+
+    void bubbleUp(int index)
     {
         if (index == 0)
-        {
             return;
-        }
-        int parent_index = (index - 1) / 2;
-        if (heap[index] < heap[parent_index])
+        int parent = (index - 1) / 2;
+        if (data[parent] > data[index])
         {
-            std::swap(heap[index], heap[parent_index]);
-            bubble_up(parent_index);
+            std::swap(data[parent], data[index]);
+            bubbleUp(parent);
         }
     }
-    void bubble_down(int index)
+    void bubbleDown(int index)
     {
-        int left_child_index = 2 * index + 1;
-        int right_child_index = 2 * index + 2;
-        int smallest = index;
-        if (left_child_index < heap.size() && heap[left_child_index] < heap[smallest])
+        int left = index * 2 + 1;
+        int right = index * 2 + 2;
+        int min = index;
+
+        if (left < data.size() && data[min] > data[left])
+            min = left;
+        if (right < data.size() && data[min] > data[right])
+            min = right;
+        if (min != index)
         {
-            smallest = left_child_index;
-        }
-        if (right_child_index < heap.size() && heap[right_child_index] < heap[smallest])
-        {
-            smallest = right_child_index;
-        }
-        if (smallest != index)
-        {
-            std::swap(heap[index], heap[smallest]);
-            bubble_down(smallest);
+            std::swap(data[min], data[index]);
+            bubbleDown(min);
         }
     }
 
 public:
-    BinaryHeap() {}
-    BinaryHeap(std::vector<T> vec)
+    void insert(T elem)
     {
-        for (int i = 0; i < vec.size(); i++)
-        {
-            heap.push_back(vec[i]);
-            bubble_up(i);
-        }
+        data.push_back(elem);
+        bubbleUp(data.size() - 1);
     }
-    void insert(T val)
+    T getMin()
     {
-        heap.push_back(val);
-        bubble_up(heap.size() - 1);
+        return data[0];
     }
-    T get_min()
+    T extractMin()
     {
-
-        return heap[0];
+        T min = data[0];
+        data[0] = data[data.size() - 1];
+        data.pop_back();
+        bubbleDown(0);
+        return min;
     }
-    T delete_min()
+    bool empty()
     {
-        T ret = heap[0];
-        heap[0] = heap.back();
-        heap.pop_back();
-        bubble_down(0);
-        return ret;
-    }
-    bool is_empty()
-    {
-        return heap.empty();
+        return data.empty();
     }
     int size()
     {
-        return heap.size();
+        return data.size();
     }
 };

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-class puntuacionLarge
+struct puntuacionLarge
 {
 
 public:

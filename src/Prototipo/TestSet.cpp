@@ -8,10 +8,13 @@
 
 #if (testType == 0)
 typedef puntuacionSmall puntuacion;
+#define TYPE "Small"
 #elif (testType == 1)
 typedef puntuacionMedium puntuacion;
+#define TYPE "Medium"
 #elif (testType == 2)
 typedef puntuacionLarge puntuacion;
+#define TYPE "Large"
 
 #endif
 
@@ -35,9 +38,9 @@ int runTestCase(int size)
     double tiempo;
     gettimeofday(&ti, nullptr);
 
-    int size_max = 0;
     double time;
     int memory;
+    // int j = 0;
     for (size_t i = 0; i < size; i++)
     {
 
@@ -45,26 +48,29 @@ int runTestCase(int size)
         cin >> memory;
         puntuacion p = puntuacion(time, memory);
         set.insert(p);
-        size_max++;
+        // j++;
     }
-
+    // cerr << j << endl;
     gettimeofday(&tf, nullptr);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
 
-    cout << "Set,FAST,INSERT," << size_max << "," << tiempo << endl;
+    cout << "TestSet,INSERT," << TYPE << "," << set.size() << "," << tiempo << endl;
     gettimeofday(&ti, nullptr);
-
+    // j = 0;
     while (cin >> time && !cin.eof())
     {
+        // j++;
         cin >> memory;
         puntuacion p = puntuacion(time, memory);
         set.erase(set.begin());
         set.insert(p);
     }
+    // cerr << j << endl;
     gettimeofday(&tf, nullptr);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    cout << "Set,FAST,USAGE," << size_max << "," << tiempo << endl;
-
+    cout << "TestSet,USAGE," << TYPE << "," << set.size() << "," << tiempo << endl;
+    gettimeofday(&ti, nullptr);
+    int tam = set.size();
     puntuacion p = *set.begin();
     set.erase(set.begin());
     while (set.size() > 0)
@@ -76,8 +82,13 @@ int runTestCase(int size)
             cerr << "Error: Set no ordenado" << endl;
             return 1;
         }
+        if (p == temp)
+            cerr << "test" << endl;
         p = temp;
     }
+    gettimeofday(&tf, nullptr);
+    tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
+    cout << "TestSet,REMOVE," << TYPE << "," << tam << "," << tiempo << endl;
 
     return 0;
 }

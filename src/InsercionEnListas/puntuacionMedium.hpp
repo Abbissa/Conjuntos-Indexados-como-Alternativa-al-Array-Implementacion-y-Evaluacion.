@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-class puntuacionMedium
+struct puntuacionMedium
 {
 
 public:
