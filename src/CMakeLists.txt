@@ -4,7 +4,7 @@ project(OrderedLists VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
-# Añadir -O3
+# Anadir -O3
 
 add_compile_options(-O3)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3")
@@ -13,14 +13,7 @@ message(STATUS "CMAKE_CXX_COMPILER_ID is ${CMAKE_CXX_COMPILER_ID}")
 message(STATUS "CMAKE_CXX_COMPILER_VERSION is ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "FLAGS is ${CMAKE_CXX_FLAGS}")
 
-# Definiciones de compilacion
-add_executable(GenRandom ./genNumbers/genNumbers.cpp)
-add_executable(GenOrdered ./genNumbers/genNumbers.cpp)
-add_executable(GenInverse ./genNumbers/genNumbers.cpp)
 
-target_compile_definitions(GenRandom PUBLIC GNType=0)
-target_compile_definitions(GenOrdered PUBLIC GNType=1)
-target_compile_definitions(GenInverse PUBLIC GNType=2)
 
 
 add_executable(StructArrayRec ./InsercionEnListasC/StructArray.c)
@@ -36,15 +29,25 @@ add_executable(PtrArrayIter ./InsercionEnListasC/PtrArray.c)
 target_compile_definitions(PtrArrayIter PUBLIC BSType=1 )
 
 
+# Definiciones de compilacion
+add_executable(GenRandom ./genNumbers/genNumbers.cpp)
+add_executable(GenOrdered ./genNumbers/genNumbers.cpp)
+add_executable(GenInverse ./genNumbers/genNumbers.cpp)
+
+target_compile_definitions(GenRandom PUBLIC GNType=0)
+target_compile_definitions(GenOrdered PUBLIC GNType=1)
+target_compile_definitions(GenInverse PUBLIC GNType=2)
+
+
 function(addHollowListExecutable type)
     add_executable(HollowList${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp  ./InsercionEnListas/puntuacionLarge.hpp InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
-    target_compile_definitions(HollowList${type} PUBLIC GLType=0)
+    target_compile_definitions(HollowList${type} PUBLIC HLType=0)
     target_compile_definitions(HollowList${type} PUBLIC testType=${type})
 endfunction(addHollowListExecutable type)
 
 function(addptrHollowListExecutable type)
     add_executable(ptrHollowList${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
-    target_compile_definitions(ptrHollowList${type} PUBLIC GLType=1)
+    target_compile_definitions(ptrHollowList${type} PUBLIC HLType=1)
     target_compile_definitions(ptrHollowList${type} PUBLIC testType=${type})
     
 endfunction(addptrHollowListExecutable type)
@@ -59,52 +62,16 @@ function(addTestSetExecutable type)
     add_executable(TestSet${type} ./Prototipo/TestSet.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
     target_compile_definitions(TestSet${type} PUBLIC testType=${type})
 endfunction(addTestSetExecutable type)
+
 function(addBinaryHeapExecutable type)
-    add_executable(TestBinaryHeap${type} ./Prototipo/TestBinaryHeap.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
+    add_executable(TestBinaryHeap${type} ./Prototipo/TestBinaryHeap.cpp
+     ./InsercionEnListas/puntuacionLarge.hpp
+      ./InsercionEnListas/puntuacionMedium.hpp 
+      InsercionEnListas/puntuacionSmall.hpp)
     target_compile_definitions(TestBinaryHeap${type} PUBLIC testType=${type})
 endfunction(addBinaryHeapExecutable type)
 
-
-
-
-
-# add_compile_definitions(testType=2)
-# add_executable(HollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp  ./InsercionEnListas/puntuacionLarge.hpp InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
-# target_compile_definitions(HollowList PUBLIC GLType=0)
-
-# add_executable(ptrHollowList ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
-# target_compile_definitions(ptrHollowList PUBLIC GLType=1)
-
-# add_executable(TestVector ./Prototipo/TestVector.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
-# add_executable(TestSet ./Prototipo/TestSet.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
-# add_executable(TestBinaryHeap ./Prototipo/TestBinaryHeap.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
-
 # Distintos tipos de listas ordenadas a probar
-set(programs
-    # StructArrayRec
-    # StructArrayIter
-    # PtrArrayRec
-    # PtrArrayIter
-
-    HollowList
-    TestSet
-    TestBinaryHeap
-    ptrHollowList
-
-    
-)
-# Generadores de numeros
-set(gens
-    GenRandom
-    GenOrdered
-    GenInverse
-)
-# Listas más rapidas para probar con casos más grandes
-# set(fPrograms
-#     TestSet
-#     TestBinaryHeap
-# )
-
 set(types
     0
     1
@@ -118,9 +85,25 @@ foreach(type ${types})
     addBinaryHeapExecutable(${type})
 endforeach()
 
+# Generadores de numeros
+set(gens
+    GenRandom
+    GenOrdered
+    GenInverse
+)
 
 
 file(WRITE ${CMAKE_SOURCE_DIR}/genGraphs/CSV/base/base.csv PROGRAM,NUMBERS,SIZE,TIME\n)
+
+foreach(gen ${gens})
+    set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
+            add_custom_command( 
+                TARGET ${gen} POST_BUILD
+            COMMAND echo "PROGRAM,TEST,TYPE,SIZE,TIME" > ${output})
+endforeach()
+
+add_custom_command(TARGET GenRandom POST_BUILD
+    COMMAND echo "PROGRAM,TEST,TYPE,SIZE,MEM,SYS_TIME,ELAPSED_TIME,PAGE_FAULTS" > ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv)
 
 function(defineCaseHollowList program gen i type)
     MATH(EXPR j 2*${i}+2000000)
@@ -130,62 +113,42 @@ function(defineCaseHollowList program gen i type)
         add_custom_command( 
             TARGET ${program}${type} POST_BUILD
             COMMAND ${gen} ${j} >tmp
-            COMMAND /usr/bin/time -o ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv -a -f "${program}-${size},${gen},${type},${i},%M,%S,%U,%R" ${CMAKE_BINARY_DIR}/${program}${type} ${i} ${size}  < tmp >> ${output}
+            COMMAND /usr/bin/time -o ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv
+                -a
+                -f "${program}-${size},${gen},${type},${i},%M,%S,%e,%R" 
+                ${CMAKE_BINARY_DIR}/${program}${type} ${i} ${size}  < tmp >> ${output}
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
         MATH(EXPR size 2*${size})
     endwhile()
 endfunction(defineCaseHollowList program gen i)
-
-
 
 function(defineCase program gen i type)
     MATH(EXPR j 2*${i}+2000000)
     add_custom_command( 
         TARGET ${program}${type} POST_BUILD
         COMMAND ${gen} ${j} >tmp
-        COMMAND /usr/bin/time -o ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv -a -f "${program},${gen},${type},${i},%M,%S,%U,%R" ${CMAKE_BINARY_DIR}/${program}${type} ${i}  < tmp >> ${output}
+        COMMAND /usr/bin/time -o ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv
+        -a 
+        -f "${program},${gen},${type},${i},%M,%S,%e,%R"
+        ${CMAKE_BINARY_DIR}/${program}${type} ${i}  < tmp >> ${output}
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
 endfunction(defineCase program gen i)
 
-foreach(gen ${gens})
-    set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
-            add_custom_command( 
-                TARGET ${gen} POST_BUILD
-            COMMAND echo "PROGRAM,TEST,TYPE,SIZE,TIME" > ${output})
-endforeach()
-
-# set(i 100000)
-# MATH(EXPR cntr 250000)
-# while(i LESS_EQUAL cntr)
-#     foreach(gen ${gens})
-#         foreach(program ${programs})
-#             set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
-#             defineCase(${program} ${gen} ${i})
-#         endforeach()
-#         # defineCaseHollowList(ptrHollowList ${gen} ${i})
-#         # defineCaseHollowList(HollowList ${gen} ${i})
-#     endforeach()
-#     MATH(EXPR i ${i}+50000)
-# endwhile()
-
-add_custom_command(TARGET GenRandom POST_BUILD
-    COMMAND echo "PROGRAM,TEST,TYPE,SIZE,MEM,SYS_TIME,USER_TIME,PAGE_FAULTS" > ${CMAKE_SOURCE_DIR}/genGraphs/CSV/sys.csv)
-# Añadir mas casos para las listas más rapidas
 set(i 500000)
 MATH(EXPR cntr 4000000)
+set(repeat 2)
 while(i LESS_EQUAL cntr)
     foreach(gen ${gens})
         foreach(type ${types})
-            
-        
             set(output ${CMAKE_SOURCE_DIR}/genGraphs/CSV/${gen}.csv)
-            defineCaseHollowList(ptrHollowList ${gen} ${i} ${type})
-            defineCaseHollowList(HollowList ${gen} ${i} ${type})
             defineCase(TestSet ${gen} ${i} ${type})
-            defineCase(TestBinaryHeap ${gen} ${i} ${type})
+            foreach(rep RANGE ${repeat})
+                defineCaseHollowList(ptrHollowList ${gen} ${i} ${type})
+                defineCaseHollowList(HollowList ${gen} ${i} ${type})
+                defineCase(TestBinaryHeap ${gen} ${i} ${type})
+            endforeach()
         endforeach()
     endforeach()
-
     MATH(EXPR i ${i}+500000)
 endwhile()
 

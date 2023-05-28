@@ -304,102 +304,79 @@ thepage
 Introducción
 \end_layout
 
+\begin_layout Standard
+En el mundo de la programación, las estructuras de datos son elementos esenciale
+s para la manipulación de información.
+ Entre las estructuras de datos más utilizadas se encuentran las listas
+ ordenadas, que permiten almacenar datos en un orden específico, lo que
+ facilita la búsqueda y recuperación de información de manera eficiente
+ y ordenada.
+\end_layout
+
+\begin_layout Standard
+Una de las implementaciones de lista ordenada más utilizadas es la ofrecida
+ por el estándar C++ a través de la clase std::set.
+ En este trabajo se propone la implementación de una serie de interfaces
+ de lista ordenada con el objetivo de plantear alternativas frente al std::set.
+\end_layout
+
 \begin_layout Section
-Overview
+Motivación del proyecto
 \end_layout
 
 \begin_layout Standard
-En el contexto actual de la programacion las listas ordenadas son una pieza
- central en distintas areas, destacando entre ellas aquellas que requieran
- navegacion a través de un grafo.
- ....
+La necesidad de esta implementación surge de la demanda creciente de sistemas
+ y aplicaciones que requieren la manipulación eficiente de grandes cantidades
+ de información.
+ En estos casos, es esencial contar con una estructura de datos que permita
+ la recuperación rápida y precisa de los datos.
+ Por lo tanto, a pesar de que la implementación std::set este optimizada,
+ el desarrollo de una estructura alternativa más eficiente supondría una
+ mejora en una gran cantidad de aplicaciones y sistemas.
+ Además, aun en el caso de que se fracase en la implementación de una estructura
+ más eficiente, la exploración de otras alternativas puede llevar a la concepció
+n de mejoras a los algoritmos ya existentes.
+\end_layout
+
+\begin_layout Section
+Objetivos
 \end_layout
 
 \begin_layout Standard
-Tecnologias usadas:
+El objetivo principal de este proyecto es la implementación de una interfaz
+ de lista ordenada y compararla con el rendimiento de la implementación
+ std::set del estándar de C++, el cual se puede dividir en los siguientes
+ subobjetivos:
 \end_layout
 
-\begin_layout Standard
-CMake: gestion de proyectos en C++, generacion automatica de tests y scripts,
- usados para generar y ejecutar de forma automatica los casos de prueba
- utilizados para evaluar las distintas estructuras.
+\begin_layout Itemize
+
+\lang english
+Analizar las interfaces del std::set y el std::vector.
 \end_layout
 
-\begin_layout Standard
-Python: Pequeño comentario sobre Python y justificación de su uso
-\end_layout
+\begin_layout Itemize
 
-\begin_layout Standard
-C: Comentar ventajas de C en cuanto a velocidad y manejo de memoria
-\end_layout
-
-\begin_layout Standard
-C++: Comentar posibles ventajas de C++ sobre C
-\end_layout
-
-\begin_layout Standard
-En caso de usarse comentar uso y ventajas de QTCreator
-\end_layout
-
-\begin_layout Standard
-bla bla bla bla bla bla bla bla bla bla bla, see 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:The-next-section"
-
-\end_inset
-
-.
- Bla bla bla bla bla bla bla bl a bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla DLC-coatings
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-symbol "DLC"
-description "diamond-like carbon"
-literal "true"
-
-\end_inset
-
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla,
- see 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Fowl1928"
-literal "true"
-
-\end_inset
-
-.
+\lang english
+Diseñar e implementar alternativas al array que no usen almacenamiento contiguo
+ de todos sus elementos con interfaz tipo conjunto ordenado.
  
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:Integral-sine"
-
-\end_inset
-
- is the definition of the integral sine function.
-\begin_inset Formula 
-\begin{equation}
-\int\frac{\sin(x)}{x}\,\mathrm{d}x=\mathrm{Si}(x)\label{eq:Integral-sine}
-\end{equation}
-
-\end_inset
-
-
 \end_layout
 
-\begin_layout Section
-The next section
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:The-next-section"
+\begin_layout Itemize
 
-\end_inset
+\lang english
+Diseñar e implementar un conjunto de pruebas automáticas para evaluar la
+ validez y rendimiento de las estructuras de datos diseñadas.
+ 
+\end_layout
 
+\begin_layout Itemize
 
+\lang english
+Analizar el rendimiento de estructuras de datos alternativas a los arrays
+ cuya interfaz se corresponde con un conjunto indexado y compararlos con
+ otras implementaciones.
 \end_layout
 
 \begin_layout Standard

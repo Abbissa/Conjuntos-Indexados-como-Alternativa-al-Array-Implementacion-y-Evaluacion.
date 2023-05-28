@@ -1,6 +1,7 @@
 #include <random>
 #include <iostream>
 #include <sys/time.h>
+#include <climits>
 
 int generateRandomNumbers(int);
 int generateInversedOrderedNumbers(int);
@@ -34,7 +35,7 @@ int main(int argc, char *argv[])
         min_value = strtol(argv[1], nullptr, 10);
         size_max = strtol(argv[2], nullptr, 10);
     }
-    dis = std::uniform_int_distribution<int>(min_value, size_max);
+    dis = std::uniform_int_distribution<int>(min_value, 2 * size_max);
 
     for (size_t i = 0; i < size_max; i++)
     {

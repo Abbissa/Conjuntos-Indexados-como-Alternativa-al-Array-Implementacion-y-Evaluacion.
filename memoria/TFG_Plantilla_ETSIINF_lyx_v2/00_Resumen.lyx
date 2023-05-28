@@ -105,8 +105,52 @@ Resumen
 \end_layout
 
 \begin_layout Standard
-Aquí va el resumen del TFG.
- Extensión máxima 2 páginas.
+El presente documento aborda la comparación de tres estructuras de datos:
+ std::set, HollowList y ptrHollowList, y BinaryHeap.
+ Se examinan sus implementaciones, operaciones y se realizan pruebas para
+ evaluar su rendimiento.
+\end_layout
+
+\begin_layout Standard
+La implementación de std::set en C++ utiliza un árbol rojo-negro, conocido
+ como Red-Black Tree, que garantiza un árbol auto balanceado.
+ Las operaciones de inserción, borrado y búsqueda en std::set tienen un
+ tiempo de ejecución de O(log n), donde n es el número de elementos.
+\end_layout
+
+\begin_layout Standard
+Por otro lado, HollowList y ptrHollowList son estructuras que se basan en
+ un vector de vectores para almacenar elementos.
+ La diferencia entre ellas radica en que ptrHollowList almacena una lista
+ de punteros a vectores, mientras que HollowList almacena directamente los
+ vectores.
+ Estas estructuras realizan búsquedas binarias para determinar en qué vector
+ insertar un nuevo elemento y tienen un tiempo de ejecución de O(log n)
+ para la inserción.
+\end_layout
+
+\begin_layout Standard
+El BinaryHeap es una implementación de un montículo sobre un array en lugar
+ de un árbol.
+ Permite el acceso a los nodos padre e hijos a través de cálculos de índice.
+ Las operaciones de inserción y borrado del primer elemento tienen un tiempo
+ de ejecución de O(log n), mientras que la búsqueda no es posible de implementar
+ eficientemente en esta estructura.
+\end_layout
+
+\begin_layout Standard
+Se realizaron pruebas en cada estructura, insertando elementos en diferentes
+ cantidades y evaluando el tiempo de ejecución, uso de memoria y fallos
+ de página.
+ Se utilizaron distintos objetos para almacenar en las estructuras y se
+ probaron diferentes casos de entrada (datos ordenados, ordenados en orden
+ inverso y en orden aleatorio).
+\end_layout
+
+\begin_layout Standard
+Los resultados de las pruebas permitieron comparar el rendimiento de cada
+ estructura en términos de tiempo de ejecución, uso de memoria y fallos
+ de página.
 \end_layout
 
 \begin_layout Standard
@@ -162,14 +206,56 @@ adds table of contents entry
 \begin_layout Standard
 
 \lang english
-<<Abstract of the Final Degree Project.
- Maximum length: 2 pages.>>
+This document addresses the comparison of three data structures: std::set,
+ HollowList, ptrHollowList, and BinaryHeap.
+ Their implementations, operations, and performance are examined through
+ tests.
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-End
+The implementation of std::set in C++ utilizes a red-black tree, known as
+ Red-Black Tree, which ensures a self-balanced tree.
+ The insertion, deletion, and search operations in std::set have a runtime
+ of O(log n), where n is the number of elements.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+On the other hand, HollowList and ptrHollowList are structures that rely
+ on a vector of vectors to store elements.
+ The difference between them lies in ptrHollowList storing a list of pointers
+ to vectors, while HollowList directly stores the vectors.
+ These structures perform binary searches to determine which vector to insert
+ a new element into and have a runtime of O(log n) for insertion.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+BinaryHeap is an implementation of a heap over an array instead of a tree.
+ It allows access to parent and child nodes through index calculations.
+ The insertion and deletion of the first element have a runtime of O(log
+ n), while search is not efficiently implementable in this structure.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+Tests were conducted on each structure, inserting elements in different
+ quantities and evaluating the runtime, memory usage, and page faults.
+ Various objects were used to store in the structures, and different input
+ cases (sorted data, reverse sorted data, and randomly ordered data) were
+ tested.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+The test results enabled a comparison of the performance of each structure
+ in terms of runtime, memory usage, and page faults.
 \end_layout
 
 \end_body

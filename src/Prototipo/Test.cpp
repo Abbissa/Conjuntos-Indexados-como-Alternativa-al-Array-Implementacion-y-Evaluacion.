@@ -9,11 +9,11 @@
 #include "../InsercionEnListas/puntuacionLarge.hpp"
 
 template <typename T>
-#if (GLType == 0)
+#if (HLType == 0)
 using HL = HollowList<T>;
 #define NOMBRE "HollowList"
-#elif (GLType == 1)
-using HL = HollowList<T>;
+#elif (HLType == 1)
+using HL = ptrHollowList<T>;
 #define NOMBRE "ptrHollowList"
 #endif
 

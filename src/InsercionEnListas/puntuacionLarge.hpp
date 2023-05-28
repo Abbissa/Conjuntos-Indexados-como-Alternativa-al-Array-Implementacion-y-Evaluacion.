@@ -6,7 +6,7 @@ struct puntuacionLarge
 public:
     double time;
     int memory;
-    char name[35];
+    char name[50];
     puntuacionLarge(double ti, int mem)
     {
         time = ti;

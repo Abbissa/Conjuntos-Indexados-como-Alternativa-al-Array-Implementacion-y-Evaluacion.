@@ -208,22 +208,22 @@
 %%*********************************************** 
 
 %% Escribe Nombre y Apellidos del autor del trabajo:
-\newcommand{\NombreAutor}{ <<nombre y apellidos>> }
+\newcommand{\NombreAutor}{ Carlos Gaspar Pozo Serrano }
 
 %% Escribe el Grado: 
-\newcommand{\Grado}{ <<título del grado>> }
+\newcommand{\Grado}{Ingeniería Informática }
 
 %% Escribe el Título del Trabajo:
-\newcommand{\TituloTFG}{ Título del Trabajo, con Mayúscula en Todas las Palabras que no Sean Conectivas (Artículos, Preposiciones, Conjunciones)} 
+\newcommand{\TituloTFG}{ Conjuntos Indexados como Alternativa al Array Implementación y Evaluación} 
 
 %% Escribe Nombre y Apellidos del Tutor del trabajo: 
-\newcommand{\NombreTutor}{ <<nombre y apellidos>> } 
+\newcommand{\NombreTutor}{ Santiago Tapia Fernández } 
 
 % Escribe el Departamento al que pertenece el Tutor:
-\newcommand{\Departamento}{ <<departamento>> }
+\newcommand{\Departamento}{ Lenguajes y Sistemas Informáticos e Ingeniería de Software }
 
 % Escribe la fecha de lectura, en formato: Mes - Año
-\newcommand{\Fecha}{ <<Mes  Año>> }
+\newcommand{\Fecha}{ Junio - 2023 }
 %%***********************************************
 \end_preamble
 \options intoc,bibliography=totoc,index=totoc,BCOR10mm,captions=tableheading,titlepage
@@ -234,7 +234,7 @@ customHeadersFooters
 \maintain_unincluded_children false
 \language spanish
 \language_package default
-\inputencoding utf8
+\inputencoding utf8x
 \fontencoding global
 \font_roman "bookman" "default"
 \font_sans "lmss" "default"
@@ -339,7 +339,7 @@ customHeadersFooters
 \is_math_indent 1
 \math_indentation default
 \math_numbering_side default
-\quotes_style english
+\quotes_style french
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 2
@@ -907,7 +907,27 @@ status open
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "02_Desarrollo.lyx"
+filename "02_EntornoDeDesarrollo.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Branch chapter-2
+inverted 0
+status open
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "03_Desarrollo.lyx"
 
 \end_inset
 
@@ -927,7 +947,7 @@ status open
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "03_Resultados.lyx"
+filename "04_Resultados.lyx"
 
 \end_inset
 
@@ -947,7 +967,7 @@ status open
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "04_AnalisisImpacto.lyx"
+filename "05_AnalisisImpacto.lyx"
 
 \end_inset
 
@@ -1087,7 +1107,7 @@ Nota: Para editar cómodamente el archivo de bibliografía se puede utilizar
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-btprint "btPrintAll"
+btprint "btPrintCited"
 bibfiles "99_Bibliografia"
 options "alpha"
 

@@ -1,0 +1,1310 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass scrbook
+\begin_preamble
+% increases link area for cross-references and autoname them
+% if you change the document language to e.g. French
+% you must change "extrasenglish" to "extrasfrench"
+\AtBeginDocument{%
+ \renewcommand{\ref}[1]{\mbox{\autoref{#1}}}
+}
+\def\refnamechanges{%
+ \renewcommand*{\equationautorefname}[1]{}
+ \renewcommand{\sectionautorefname}{sec.\negthinspace}
+ \renewcommand{\subsectionautorefname}{sec.\negthinspace}
+ \renewcommand{\subsubsectionautorefname}{sec.\negthinspace}
+ \renewcommand{\figureautorefname}{Fig.\negthinspace}
+ \renewcommand{\tableautorefname}{Tab.\negthinspace}
+}
+\@ifpackageloaded{babel}{\addto\extrasenglish{\refnamechanges}}{\refnamechanges}
+
+% in case somebody want to have the label "Equation"
+%\renewcommand{\eqref}[1]{Equation~(\negthinspace\autoref{#1})}
+
+% that links to image floats jumps to the beginning
+% of the float and not to its caption
+\usepackage[figure]{hypcap}
+
+% the pages of the TOC is numbered roman
+% and a pdf-bookmark for the TOC is added
+\let\myTOC\tableofcontents
+\renewcommand\tableofcontents{%
+  \frontmatter
+  \pdfbookmark[1]{\contentsname}{}
+  \myTOC
+  \mainmatter }
+
+% makes caption labels bold
+% for more info about these settings, see
+% http://mirrors.ctan.org/macros/latex/contrib/koma-script/doc/scrguien.pdf
+\setkomafont{captionlabel}{\bfseries}
+\setcapindent{1em}
+
+% enables calculations
+\usepackage{calc}
+
+% fancy page header/footer settings
+% for more information see section 9 of
+% ftp://www.ctan.org/pub/tex-archive/macros/latex2e/contrib/fancyhdr/fancyhdr.pdf
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+% increases the bottom float placement fraction
+\renewcommand{\bottomfraction}{0.5}
+
+% avoids that floats are placed above its sections
+\let\mySection\section\renewcommand{\section}{\suppressfloats[t]\mySection}
+\end_preamble
+\options intoc,bibliography=totoc,index=totoc,BCOR10mm,captions=tableheading,titlepage
+\use_default_options true
+\master TFG.lyx
+\begin_modules
+customHeadersFooters
+\end_modules
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding utf8x
+\fontencoding global
+\font_roman "lmodern" "default"
+\font_sans "lmss" "default"
+\font_typewriter "lmtt" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_title "Your title"
+\pdf_author "Your name"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\branch NoChildDocument
+\selected 0
+\filename_suffix 0
+\color #ff0000
+\end_branch
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 2
+\paragraph_separation skip
+\defskip medskip
+\is_math_indent 1
+\math_indentation default
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 2
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Left Header
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+chaptername
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+thechapter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+rightmark
+\end_layout
+
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Enable page headers and add the chapter to the header line.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Right Header
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+leftmark
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Left Footer
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+thepage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Center Footer
+
+\end_layout
+
+\begin_layout Right Footer
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+thepage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Resultados
+\end_layout
+
+\begin_layout Standard
+Para poder visualizar mejor los resultados de las pruebas se han utilizado
+ las librerías pandas, matplotlib y numpy de Python.
+\end_layout
+
+\begin_layout Standard
+En primer lugar, se utilizará la librería pandas para leer los archivos
+ CSV donde se han almacenado los resultados de las pruebas.
+ Esto permitirá filtrar y manipular los datos de acuerdo con las necesidades
+ específicas del análisis.
+\end_layout
+
+\begin_layout Standard
+A continuación, se empleará la librería matplotlib para generar las gráficas
+ que visualizarán los resultados.
+ Esta biblioteca ofrece diversas opciones para personalizar las gráficas,
+ como los ejes, los títulos y las etiquetas y los colores asignados a cada
+ estructura.
+\end_layout
+
+\begin_layout Standard
+Además, se utilizará la librería numpy para calcular las medias de cada
+ prueba.
+ Esto es especialmente útil cuando se desean obtener valores promedio para
+ un conjunto de datos, lo que permite suavizar las variaciones y obtener
+ una visión más general del rendimiento.
+\end_layout
+
+\begin_layout Standard
+Al combinar estas tres librerías, se podrá exponer de manera clara y comprensibl
+e los resultados obtenidos en las pruebas realizadas.
+ Esto facilitará el análisis y la interpretación de los datos para evaluar
+ el rendimiento de las distintas estructuras y casos de prueba utilizados.
+\end_layout
+
+\begin_layout Section
+Exposición de resultados
+\end_layout
+
+\begin_layout Standard
+Dada la gran cantidad de graficas que se han generado, solo se comentaran
+ en detalle las relacionadas con los casos de prueba que se usan elementos
+ en orden aleatorio, ya que este sera el caso más general de uso.
+ Además se comentaran los resultados mas destacables del resto de casos
+ de prueba y se incluirá la totalidad de las graficas obtenidas en el anexo.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Insertar elementos
+\end_layout
+
+\begin_layout Standard
+En la gráfica de la 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "InsPeqRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ se puede observar que en el caso de el objeto pequeño la estructura más
+ eficiente al insertar elementos es el BinaryHeap, siendo los tiempos de
+ el resto de estructuras entre 3 y 7 segundos mas lentas en el caso de 4
+ millones de elementos.
+ La segunda estructura más eficiente es la colección de HollowList, en la
+ cual no se aprecia ninguna que destaque, ni por ser más rápida ni por ser
+ más lenta.
+ Por ultimo, 3 segundos por detrás, se encuentra la estructura std::set.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Small-INSERT.svg
+	scale 40
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "InsPeqRandom"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Insertar valores aleatorios de el objeto pequeño en distintas estructuras
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align left
+En el caso de las pruebas realizadas sobre el objeto mediano, se puede observar
+ en la 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "InsMedRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ que las estructuras siguen el mismo comportamiento que en el caso del objeto
+ pequeño, la estructura más eficiente es el BinaryHeap, seguida por la colección
+ de estructuras HollowList, donde no se aprecia ninguna diferencia notable
+ entre ellas, y por ultimo la estructura std::set, llegando en el caso de
+ esta prueba hasta los 10 segundos.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Medium-INSERT.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "InsMedRandom"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Insertar valores aleatorios de el objeto mediano en distintas estructuras
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por último, en el caso de los objetos grandes, se aprecia un cambio considerable
+ en el rendimiento de las distintas estructuras.
+ Como se ve en la 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "InsGraRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ la estructura más rápida sigue siendo el BinaryHeap, sin embargo, la segunda
+ estructura más eficiente a pasado a ser el std::set, seguida de las HollowList.
+ En la sección de análisis se comentaran posibles razones por la que pueda
+ suceder esto.
+ También se puede observar que en este caso las estructuras HollowList y
+ ptrHollowList, las estructuras que tenían limites de tamaño de las sublistas
+ más pequeños han obtenido mejores resultados, estos detalles también se
+ comentaran en la sección de análisis.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Large-INSERT.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "InsGraRandom"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Insertar valores aleatorios de el objeto grande en distintas estructuras
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Uso de la estructura
+\end_layout
+
+\begin_layout Standard
+En la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "UsoRandomPeq"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ se pueden observar resultados similares a los que se han obtenido en los
+ tiempos de inserción de objetos pequeños, la estructura BinaryHeap es la
+ más eficiente, seguida de las estructuras HollowList y por ultimo la estructura
+ std::set.
+ Observando con detalle los tiempos de las distintas estructuras HollowList
+ y ptrHollowList se puede observar que las que tienen un mayor limite de
+ tamaño de las sublistas, 512 o 256, obtienen resultados mejores a las que
+ tienen un valor más pequeño para este valor, 128, llegando a tener un rendimien
+to peor que el std::set en el caso de ptrHollowList-128.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Small-USAGE.svg
+	scale 40
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "UsoRandomPeq"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uso de distintas estructuras con objetos pequeños
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Al igual que en el caso de prueba anterior, en la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "UsoMedRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ se observan los mismos resultados, aunque las diferencias entre las distintas
+ estructuras HollowList son menos notables.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Medium-USAGE.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "UsoMedRandom"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uso de distintas estructuras con objetos medianos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Del mismo modo que sucedía sucede con la inserción de elementos, en la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "UsoGraRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ se puede observar los mismos cambios, BinaryHeap es la estructura más eficiente
+, seguida por std::set y por ultimo las estructuras HollowList.
+ Además, observando las estructuras HollowList se observa que en este caso
+ las estructuras con tamaños máximos de las sublistas mas pequeños, 128
+ o 256, tienen un mejor rendimiento que las estructuras que tienen valores
+ mas grandes, 512.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Large-USAGE.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "UsoGraRandom"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uso de distintas estructuras con objetos grandes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Borrado de elementos
+\end_layout
+
+\begin_layout Standard
+En cuanto a los tiempos de borrado de los elementos en las figuras 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "BorradoPeqRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "BorradoMedRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ y 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "BorradoGraRandom"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, se observa que, debido a su coste constante del borrado, las estructuras
+ HollowList son las más rápidas al ejecutar está operación, siendo 10 veces
+ más rápidas que la estructura std::set y aproximadamente 100 veces mas
+ rápidas que las estructura BinaryHeap.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Small-REMOVE.svg
+	scale 40
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "BorradoPeqRandom"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Borrado de elementos pequeños
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Medium-REMOVE.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "BorradoMedRandom"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Borrado de elementos medianos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_GenRandom-Large-REMOVE.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "BorradoGraRandom"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Borrado de elementos grandes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Tiempos totales de ejecución
+\end_layout
+
+\begin_layout Standard
+Comentar como se conservan los patrones observados en la insercion de elementos
+ debido a que es la operacion mas costosa.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Tiempo total (s)-GenRandom-0.svg
+	scale 40
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Tiempo total (s)-GenRandom-1.svg
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Tiempo total (s)-GenRandom-2.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Memoria total usada
+\end_layout
+
+\begin_layout Standard
+Comentar como se reduce las distancias entre el uso de memoria de una estructura
+ y otra al aumentar el tamaño de la estructura
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Memoria (KB)-GenRandom-0.svg
+	scale 40
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uso de memoria en las pruebas con objetos pequeños
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Memoria (KB)-GenRandom-1.svg
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uso de memoria en las pruebas con objetos medianos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Memoria (KB)-GenRandom-2.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Uso de memoria en las pruebas con objetos grandes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Fallos de página
+\end_layout
+
+\begin_layout Standard
+Comentar gran aumento el gran cambio en el numero de fallos de pagina que
+ se produce entre las estructuras pequeñas
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Fallos de página-GenRandom-0.svg
+	scale 40
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fallos de página en las pruebas con objetos pequeños
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Fallos de página-GenRandom-1.svg
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fallos de página en las pruebas con objetos medianos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/carlo/Documents/GitHub/TFG/src/genGraphs/figure_Fallos de página-GenRandom-2.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fallos de pagina en las pruebas con objetos grandes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Análisis
+\end_layout
+
+\begin_layout Standard
+La estructura mas eficiente es BinaryHeap, HollowList parece funcionar mejor
+ con sublistas grandes cuando los elementos son pequeños y sublistas pequeñas
+ cuando los elementos son grandes
+\end_layout
+
+\begin_layout Standard
+Error de concepto, la estructura ptrHollowList esta mal planteada, ya que
+ de por si la estructura std::vector ya añade indireccion, std::vector no
+ almacena el vector sino punteros al mismo, por lo tanto esta implementacion
+ tan solo añade coste al tener que recuperar la estructura at traves del
+ puntero y posteriormente consultar el vector a traves del puntero de la
+ estructua std::vector.
+\end_layout
+
+\begin_layout Standard
+Posible mejora, vector de nodos que contienen un elemento y una lista de
+ elementos, permite agilizar la primera busqueda
+\end_layout
+
+\begin_layout Standard
+\begin_inset Branch NoChildDocument
+inverted 0
+status collapsed
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "thesisExample"
+options "alpha"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomencl_print
+LatexCommand printnomenclature
+set_width "custom"
+width "2.5cm"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
