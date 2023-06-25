@@ -314,8 +314,11 @@ Implementaciones a comparar
 
 \begin_layout Standard
 La implementación del set en C++ es una variante de los Binary Search Trees
- llamada Red-Black Tree, esta es una estructura en árbol que se rige por
- las siguientes normas:
+ llamada 
+\family typewriter
+Red-Black Tree
+\family default
+, esta es una estructura en árbol que se rige por las siguientes normas:
 \end_layout
 
 \begin_layout Itemize
@@ -336,7 +339,11 @@ Todos los caminos desde un nodo determinado hasta cualquier nodo hoja pasa
 \end_layout
 
 \begin_layout Standard
-Además de seguir las restricciones que imponen los BST:
+Además de seguir las restricciones que imponen los 
+\family typewriter
+BST
+\family default
+:
 \end_layout
 
 \begin_layout Itemize
@@ -383,24 +390,42 @@ Búsqueda:
 \end_layout
 
 \begin_layout Subsection*
-3.1.2 HollowList y ptrHollowList
+3.1.2 HollowList, ptrHollowList y HollowListv2
 \end_layout
 
 \begin_layout Standard
-Estas dos estructuras se basan en la misma idea, un std::vector que a su
- vez contenga std::vector que contengan los elementos que se deseen almacenar
- en la estructura.
+Las estructuras 
+\family typewriter
+HollowList
+\family default
+ y 
+\family typewriter
+ptrHollowList
+\family default
+ estructuras se basan en la misma idea, un 
+\family typewriter
+std::vector
+\family default
+ que a su vez contenga std::vector que contengan los elementos que se deseen
+ almacenar en la estructura.
  Un parámetro relevante a la hora de usar estas estructuras es el tamaño
- de las sublistas, ya que este determina cuantos elementos puede almacenar
- cada vector antes de dividirse en dos vectores con la mitad de tamaño cada
- uno.
+ máximo de las sublistas, ya que este determina cuantos elementos puede
+ almacenar cada vector antes de dividirse en dos vectores con la mitad de
+ tamaño cada uno.
 \end_layout
 
 \begin_layout Standard
-La diferencia entre estas dos estructuras es que la estructura ptrHollowList
- 
+La diferencia entre estas dos estructuras es que la estructura 
+\family typewriter
+ptrHollowList
+\family default
+ almacena una lista de punteros a 
+\family typewriter
+std::vector
+\family default
+.En la 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "ptrHollowList"
 plural "false"
 caps "false"
@@ -408,8 +433,22 @@ noprefix "false"
 
 \end_inset
 
- almacena una lista de punteros a std::vector, en verde, la lista de vectores
- y en morado los vectores secundarios.
+ se puede ver un ejemplo de un 
+\family typewriter
+ptrHollowList
+\family default
+ de sublistas de 4 elementos como máximo.
+ En el ejemplo la lista de vectores aparece marcada en verde mientras los
+ vectores secundarios son marcados en morado.
+ También se puede observar que, aunque el tamaño máximo de las sublistas
+ es 4, puede haber sublistas dentro de la estructura con menos elementos,
+ esto lo que permite es insertar elementos en mitad de la lista son tener
+ que mover ningún elemento ya almacenado, en el ejemplo podrían introducirse
+ elementos con valor entre 23 y 35, 42 y 45 o superiores a 47 sin ningún
+ coste adicional.
+ Estas operaciones en un vector sin huecos tendrían el coste adicional de
+ desplazar los elementos que se sitúen por detrás de la posición donde se
+ desea insertar el elemento para poder hacerle hueco.
 \end_layout
 
 \begin_layout Standard
@@ -422,7 +461,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename C:/Users/carlo/Downloads/ptrHollowList.drawio.pdf
+	filename include/ptrHollowList.pdf
 	scale 50
 
 \end_inset
@@ -452,7 +491,11 @@ Estructura ptrHollowList con sublistas de 4 elementos
 \end_layout
 
 \begin_layout Standard
-Por otra parte, la estructura HollowList 
+Por otra parte, la estructura 
+\family typewriter
+HollowList
+\family default
+ 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "HollowList"
@@ -479,7 +522,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename C:/Users/carlo/Downloads/HollowList.drawio (1).pdf
+	filename include/HollowList.pdf
 	scale 50
 
 \end_inset
@@ -506,6 +549,102 @@ Estructura HollowList con sublistas de 4 elementos
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Por ultimo, la estructura 
+\family typewriter
+HollowListv2
+\family default
+ es una iteración posterior a 
+\family typewriter
+HollowList
+\family default
+ que se ideo tras observar los resultados obtenidos, analizar el origen
+ de estos resultados y pensar en como solucionar los problemas encontrados.
+ Tanto los resultados como el análisis se pueden encontrar en la capitulo
+ resultados.
+\end_layout
+
+\begin_layout Standard
+Esta estructura parte del mismo concepto que 
+\family typewriter
+HollowList
+\family default
+, la única diferencia es que se sustituye el listado de vectores por un
+ listado de objetos que a su vez contendrán un elemento, el que seria el
+ elemento más pequeño de las sublistas que se tenian en la estructura 
+\family typewriter
+HollowList
+\family default
+ y un vector que contendrá el resto de elementos de la sublista.
+ La razón de esta modificación es que tanto en la 
+\family typewriter
+HollowList 
+\family default
+como en la 
+\family typewriter
+ptrHollowList
+\family default
+ hay que hacer un acceso extra a memoria cada vez que se quiera consultar
+ el primer elemento de una sublista, con este cambio lo que se pretende
+ es eliminar ese acceso a memoria para así agilizar las operaciones sobre
+ esta estructura.
+ En la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "HollowListv2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ se puede observar como seria una estructura HollowListv2 con los mismos
+ elementos que se han mostrado en los ejemplos anteriores.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename include/HollowListv2.pdf
+	scale 50
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "HollowListv2"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estructura HollowListv2 con sublistas de 4 elementos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -532,15 +671,23 @@ Insertar
 \end_layout
 
 \begin_layout Standard
-Al realizar una inserción sobre una HollowList se realizan dos búsquedas.
+Al realizar una inserción sobre una 
+\family typewriter
+HollowList
+\family default
+ se realizan dos búsquedas.
  Primero se realiza una búsqueda para determinar en qué vector se ha de
  insertar el nuevo elemento, esto se realiza a través de una búsqueda binaria
  sobre el primer elemento de cada vector.
  A continuación se realiza una segunda búsqueda para determinar la posición
  del elemento dentro del propio vector.
- Para esto se utiliza la función upper_bound, que devuelve la posición de
- un elemento a partir de un iterador de inicio, uno de final y el propio
- elemento, usando esa posición se inserta el elemento en el vector determinado.
+ Para esto se utiliza la función 
+\family typewriter
+upper_bound
+\family default
+, que devuelve la posición de un elemento a partir de un iterador de inicio,
+ uno de final y el propio elemento, usando esa posición se inserta el elemento
+ en el vector determinado.
  Por último se comprueba si el valor del vector supera un cierto valor límite,
  si esto sucede se extrae la mitad superior del vector y se inserta a continuaci
 ón en la lista de vectores.
@@ -548,8 +695,15 @@ Al realizar una inserción sobre una HollowList se realizan dos búsquedas.
 
 \begin_layout Standard
 Teniendo esto en cuenta se puede calcular el coste de insertar un elemento
- de la siguiente forma, donde n es el número total de elementos y m es el
- tamaño de las sublistas: 
+ de la siguiente forma, donde 
+\family typewriter
+n
+\family default
+ es el número total de elementos y 
+\family typewriter
+m
+\family default
+ es el tamaño de las sublistas: 
 \begin_inset Formula 
 \[
 \ensuremath{\log_{2}\left(\frac{n}{m}\right)+\log_{2}({m})+{m}}=\ensuremath{\log_{2}\left(\frac{n}{m}\cdot m\right)+{m}\approx}\log_{2}\left(n\right)\rightarrow O(\log\left(n\right))
@@ -572,7 +726,11 @@ noprefix "false"
 \end_inset
 
  se puede ver el estado de la estructura después de haber insertado un 11
- en una HollowList.
+ en una 
+\family typewriter
+HollowList
+\family default
+.
 \end_layout
 
 \begin_layout Standard
@@ -798,12 +956,16 @@ La consulta del primer elemento de la estructura, al contrario que el borrado
 \end_layout
 
 \begin_layout Subsection*
-3.1.2 BinaryHeap
+3.1.3 BinaryHeap
 \end_layout
 
 \begin_layout Standard
-BinaryHeap es una implementación de un montículo sobre un array en lugar
- de sobre un árbol.
+
+\family typewriter
+BinaryHeap
+\family default
+ es una implementación de un montículo sobre un array en lugar de sobre
+ un árbol.
  Esto implica que en lugar a los nodos hijo o padre a través de los atributos
  del nodo actual, se accede aplicando un cálculo al índice actual.
  Dependiendo de a que nodo se desee acceder hay que realizar las siguientes
@@ -1102,7 +1264,9 @@ name "InsertarBinaryHeap"
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Resultado de insertar un 11 en una BinaryHeap
+Resultado de insertar un 11 en una 
+\family typewriter
+BinaryHeap
 \end_layout
 
 \end_inset
@@ -1148,7 +1312,11 @@ name "InsertarBinaryHeapArbol"
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Resultado de insertar un 11 en una BinaryHeap en forma de árbol
+Resultado de insertar un 11 en una 
+\family typewriter
+BinaryHeap
+\family default
+ en forma de árbol
 \end_layout
 
 \end_inset
@@ -1329,11 +1497,11 @@ En el caso de esta estructura no se puede implementar la operación de búsqueda
 \end_layout
 
 \begin_layout Section
-Tests realizados
+Pruebas realizadas
 \end_layout
 
-\begin_layout Subsection
-Estructura de las pruebas realizadas
+\begin_layout Subsection*
+3.2.1 Estructura de las pruebas realizadas
 \end_layout
 
 \begin_layout Standard
@@ -1352,15 +1520,58 @@ Las pruebas que se han realizado sobre estas estructuras han consistido
 \end_layout
 
 \begin_layout Itemize
-Un objeto que contiene un double, por lo que ocupa 8 bytes,
+Un objeto que contiene un 
+\family typewriter
+double
+\family default
+, por lo que ocupa 8 bytes, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Objeto pequeño"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Un objeto con un double y un entero, por lo que ocupa 16 bytes
+Un objeto con un 
+\family typewriter
+double
+\family default
+ y un 
+\family typewriter
+int
+\family default
+, por lo que ocupa 16 bytes, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Objeto mediano"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Y por último una estructura con un double, un entero y un array de chars
+Y por último un objeto con un 
+\family typewriter
+double
+\family default
+, un 
+\family typewriter
+int
+\family default
+ y un 
+\family typewriter
+array de chars
+\family default
  que contiene los valores 
 \begin_inset Quotes fld
 \end_inset
@@ -1369,29 +1580,525 @@ puntuacion:
 \begin_inset Quotes frd
 \end_inset
 
- concatenado con el valor del double, un guion y el valor del entero, ocupando
- un total de 64 bytes.
+ concatenado con el valor del 
+\family typewriter
+double
+\family default
+, un guion y el valor del 
+\family typewriter
+int
+\family default
+, ocupando un total de 64 bytes, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Objeto grande"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Los casos de prueba que se usan en los tests son los siguientes:
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "src/puntuacionSmall.hpp"
+lstparams "firstline=6,lastline=16,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-Datos ordenados en orden.
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Objeto pequeño
 \end_layout
 
-\begin_layout Itemize
-Datos ordenados en orden inverso.
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Objeto pequeño"
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Itemize
-Datos en orden aleatorio
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Además, de cada una de las pruebas realizados sobre cada una de las estructuras
- se extraen los siguientes datos:
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "src/puntuacionMedium.hpp"
+lstparams "firstline=6,lastline=18,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Objeto mediano
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Objeto mediano"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "src/puntuacionLarge.hpp"
+lstparams "firstline=6,lastline=22,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Objeto grande
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Objeto grande"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Para la creación de estos objetos para su posterior uso en los distintos
+ casos de prueba que se han implementado, se ha utilizado una clase, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Generadores de numeros"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, para poder generar números en orden creciente, decreciente o aleatorio
+ dependiendo de el parámetro con el que se compile el programa.
+ De este código cabe resaltar dos detalles, el primero es el uso de macros
+ para definir como serán los números que generará dependiendo del valor
+ de 
+\family typewriter
+GNType
+\family default
+.
+ El segundo detalle es como se generan los números aleatorios, para esto
+ se ha decidido usar 
+\family typewriter
+std::mt19937 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "std::mt19937"
+literal "false"
+
+\end_inset
+
+
+\family default
+ ,
+\family typewriter
+ 
+\family default
+un generador de números aleatorios, y 
+\family typewriter
+std::uniform_int_distribution
+\family default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "std::uniform_int_distribution"
+literal "false"
+
+\end_inset
+
+, que permite que los números generados sigan una distribución uniforme.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "src/genNumbers.cpp"
+lstparams "basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Clase para generar los números
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Generadores de numeros"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Una vez se ha establecido los objetos que se van a usar para las pruebas
+ y los valores que estos podrán tener, se pueden explicar las pruebas que
+ se van a realizar y los valores que se van a extraer de ellas.
+\end_layout
+
+\begin_layout Standard
+Para ello se va a usar de ejemplo el código utilizado para las pruebas sobre
+ las estructuras 
+\family typewriter
+HollowList
+\family default
+, 
+\family typewriter
+ptrHollowList 
+\family default
+y 
+\family typewriter
+HollowListv2 
+\family default
+ya que las diferencias entre este código y el utilizado para las pruebas
+ sobre el resto de estructuras se reducen al uso de macros para determinar
+ que estructura se va a usar y la inicialización de las estructuras con
+ el tamaño de las sublistas deseado.
+\end_layout
+
+\begin_layout Standard
+En el 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "DefParamTestHollowList"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ se definen las macros para la ejecución de las distintas pruebas.
+ Se pueden observar dos configuraciones, en una se define, dependiendo del
+ valor de 
+\family typewriter
+HLType,
+\family default
+ que estructura de las tres disponibles se va a usar, definiendo también
+ la macro 
+\family typewriter
+NOMBRE 
+\family default
+que contendrá el nombre de la estructura utilizada para poder determinar
+ a que estructura corresponden los resultados que se impriman por la salida
+ estándar.
+ La segunda configuración determina el tipo de objeto que se va a usar en
+ la prueba, pequeño, mediano o grande, dependiendo del valor de 
+\family typewriter
+testType
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "src/Test.cpp"
+lstparams "firstline=12,lastline=33,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Definición de macros para las pruebas sobre las estructuras 
+\family typewriter
+HollowList
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "DefParamTestHollowList"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A continuación, en el 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "DefParamExec"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, se puede ver la definición de dos parámetros que se definen en ejecución,
+ el primero es el el numero de elementos con el que se van a realizar las
+ pruebas, que tomará valores entre 500.000 y 4.000.000, y el valor del tamaño
+ máximo de las sublistas, que podrá ser 512, 256 o 128.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "src/Test.cpp"
+lstparams "firstline=38,lastline=49,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Definición de parámetros para las pruebas sobre las estructuras 
+\family typewriter
+HollowList
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "DefParamExec"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Una vez definidos los parámetros con los que se va a realizar la prueba,
+ se pasa a la ejecución de la misma, para ello se utiliza el código 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Exec"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Esta se puede dividir en tres partes, en todas ellas se mide el tiempo
+ que tarde la ejecución, para ello se usa la estructura 
+\family typewriter
+timeval 
+\family default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "timeval"
+literal "false"
+
+\end_inset
+
+ y el método 
+\family typewriter
+gettimeofday 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gettimeofday"
+literal "false"
+
+\end_inset
+
+ 
+\family default
+para medir los tiempos de inicio y fin de la prueba.
+\end_layout
+
+\begin_layout Standard
+Primero se inserta en la estructura tantos objetos 
+\family typewriter
+puntuacion 
+\family default
+como se haya definido en los parámetros, para ello se leen dos números de
+ entrada estándar, se crea el objeto 
+\family typewriter
+puntuacion 
+\family default
+y se inserta en la estructura.
+ Una vez se han insertado todos los elementos deseados se calcula el tiempo
+ que ha tardado en ejecutarse la inserción de los elementos.
+\end_layout
+
+\begin_layout Standard
+Una vez insertados los elementos deseados se entra en un bucle en el cual
+ se eliminan y se insertan elementos hasta el fin de los datos de entrada,
+ por como se ejecutan las pruebas se insertan y eliminan un total de 1.000.000
+ de elementos.
+ Cuando se han insertado y eliminado todos los elementos deseados se calcula
+ el tiempo que se ha tardado en ejecutar y se muestran por pantalla los
+ resultados.
+\end_layout
+
+\begin_layout Standard
+Por ultimo se eliminan todos los elementos restantes de la estructura, para
+ ello se usa un bucle en el cual, mientras la estructura no esté vacia se
+ eliminan elementos y se comprueba que el orden es correcto, en 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset include
+LatexCommand lstinputlisting
+filename "src/Test.cpp"
+lstparams "firstline=51,lastline=107,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pruebas sobre las estructuras 
+\family typewriter
+HollowList
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Exec"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -1410,8 +2117,8 @@ Uso de memoria
 Fallos de página
 \end_layout
 
-\begin_layout Subsection
-Generación de las pruebas
+\begin_layout Subsection*
+3.2.2 Generación de las pruebas
 \end_layout
 
 \begin_layout Standard
@@ -1436,12 +2143,30 @@ noprefix "false"
  En el ejemplo de función se define primero el ejecutable junto con los
  distintos ficheros necesarios para generar el binario y posteriormente
  se añaden las definiciones necesarias para cada test.
- En el caso de ejemplo del BinaryHeap solo es necesaria la definición del
- objeto que se va a utilizar en las pruebas.
- En otros casos como la estructura HollowList también es necesario definir
- cuál de las dos estructuras usar, si ptrHollowList o HollowList, ya que
- en ambos casos se usa el mismo código para realizar las pruebas, lo único
- que varía es la estructura que se usa para ejecutarlas.
+ En el caso de ejemplo del 
+\family typewriter
+BinaryHeap
+\family default
+ solo es necesaria la definición del objeto que se va a utilizar en las
+ pruebas.
+ En otros casos como la estructura 
+\family typewriter
+HollowList
+\family default
+ también es necesario definir cuál de las tres estructuras usar, si 
+\family typewriter
+ptrHollowList
+\family default
+, 
+\family typewriter
+HollowList
+\family default
+ o 
+\family typewriter
+HollowListv2
+\family default
+, ya que en estos casos se usa el mismo código para realizar las pruebas,
+ lo único que varía es la estructura que se usa para ejecutarlas.
  
 \end_layout
 
@@ -1450,13 +2175,13 @@ noprefix "false"
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset CommandInset include
 LatexCommand lstinputlisting
 filename "src/CMakeLists.txt"
-lstparams "firstline=66,lastline=86,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left"
+lstparams "firstline=74,lastline=95,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={[gnu]make}"
 
 \end_inset
 
@@ -1643,7 +2368,7 @@ status open
 \begin_inset CommandInset include
 LatexCommand lstinputlisting
 filename "src/CMakeLists.txt"
-lstparams "firstline=108,lastline=153,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left"
+lstparams "firstline=117,lastline=163,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left"
 
 \end_inset
 
@@ -1671,8 +2396,8 @@ name "Generacion de las pruebas"
 
 \end_layout
 
-\begin_layout Subsection
-Resultados esperados
+\begin_layout Subsection*
+3.2.3 Resultados esperados
 \end_layout
 
 \begin_layout Standard

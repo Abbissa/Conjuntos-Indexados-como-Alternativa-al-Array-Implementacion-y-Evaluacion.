@@ -1,5 +1,5 @@
-#include <algorithm>
 #include <vector>
+#include <algorithm>
 
 template <typename T>
 class HollowList
@@ -7,12 +7,14 @@ class HollowList
 public:
     int THRESHOLD = 256;
     std::vector<std::vector<T>> data;
+    int tam = 0;
 
     void insert(T elem)
     {
-        size_t inf = 0;
-        size_t sup = data.size() - 1;
-        size_t index;
+        tam++;
+        std::size_t inf = 0;
+        std::size_t sup = data.size() - 1;
+        std::size_t index;
         if (data.size() == 0)
         {
             data.push_back({elem});
@@ -45,7 +47,7 @@ public:
 
         if (data[index].size() > THRESHOLD)
         {
-            size_t mid = data[index].size() / 2;
+            std::size_t mid = data[index].size() / 2;
             auto new_vec = std::vector<T>(data[index].begin() + mid, data[index].end());
             data[index].erase(data[index].begin() + mid, data[index].end());
             data.insert(data.begin() + index + 1, new_vec);
@@ -54,6 +56,7 @@ public:
 
     T remove()
     {
+        tam--;
         int tam = data.size();
         T ret = data[tam - 1][data[tam - 1].size() - 1];
         data[tam - 1].erase(--data[tam - 1].end());
@@ -64,7 +67,7 @@ public:
     }
     T peek()
     {
-        return data[data.size() - 1][data[data.size() - 1].size() - 1];
+        return data.back().back();
     }
     bool isEmpty()
     {
@@ -72,11 +75,7 @@ public:
     }
     int size()
     {
-        int size = 0;
-        for (size_t i = 0; i < data.size(); i++)
-        {
-            size += data[i].size();
-        }
-        return size;
+
+        return tam;
     }
 };

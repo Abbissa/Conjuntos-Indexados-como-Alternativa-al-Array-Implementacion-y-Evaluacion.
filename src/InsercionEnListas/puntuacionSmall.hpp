@@ -8,7 +8,11 @@ public:
 
     puntuacionSmall(double ti, int memory)
     {
-        time = ti * memory;
+        time = ti + memory;
+    }
+    puntuacionSmall()
+    {
+        time = 0;
     }
 
     friend std::ostream &operator<<(std::ostream &co, const puntuacionSmall &p)

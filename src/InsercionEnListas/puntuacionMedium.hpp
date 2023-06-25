@@ -11,6 +11,11 @@ public:
         time = ti;
         memory = mem;
     }
+    puntuacionMedium()
+    {
+        time = 0;
+        memory = 0;
+    }
 
     friend std::ostream &operator<<(std::ostream &co, const puntuacionMedium &p)
     {

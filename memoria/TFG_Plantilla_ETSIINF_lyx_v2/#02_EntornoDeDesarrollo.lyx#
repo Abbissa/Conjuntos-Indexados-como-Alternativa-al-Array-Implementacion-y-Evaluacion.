@@ -327,7 +327,7 @@ CMake
 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "1"
+key "CMAKE"
 literal "true"
 
 \end_inset
@@ -348,14 +348,24 @@ literal "true"
 \begin_layout Itemize
 
 \series bold
-QT Creator:
+C: 
 \series default
- se ha decidido usar este IDE de forma adicional a Visual Studio Code debido
- a la amplia gama de herramientas de las que se dispone para el análisis
- y depurado de la ejecución de los programas, esta información es importante
- ya que permite analizar que partes del código consumen más tiempo de ejecución
- y así poder focalizar las optimizaciones de las distintas implementaciones
- sobre las partes del código que más impacto generan.
+El lenguaje C se ha utilizado como transición entre Java, lenguaje con el
+ cual se tenia más familiaridad, y C++, lenguaje en el que se ha desarrollado
+ este trabajo.
+ Esto se ha realizado de esta forma debido a que ya se tenia conocimientos
+ del lenguaje C, al contrario que C++, lenguaje que no se había utilizado
+ antes.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+C++: 
+\series default
+El lenguaje C++ se ha utilizado debido a dos razones, es un lenguaje muy
+ eficiente y permite el manejo de memoria dinámica de una forma más sencilla
+ que en C a través de los smart_pointers.
 \end_layout
 
 \begin_layout Itemize
@@ -363,7 +373,7 @@ QT Creator:
 \series bold
 Python: 
 \series default
-por ultimo se ha decidido usar Pyhton para graficar los resultados obtenidos
+por último se ha decidido usar Pyhton para graficar los resultados obtenidos
  de las ejecuciones de las distintas implementaciones sobre los distintos
  casos de prueba.
  Se ha decidido usar este lenguaje por la facilidad que presenta a la hora

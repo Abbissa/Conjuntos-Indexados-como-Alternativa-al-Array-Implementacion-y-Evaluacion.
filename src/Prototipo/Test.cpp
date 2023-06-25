@@ -4,6 +4,7 @@
 
 #include "HollowList.hpp"
 #include "ptrHollowList.hpp"
+#include "HollowListv2.hpp"
 #include "../InsercionEnListas/puntuacionSmall.hpp"
 #include "../InsercionEnListas/puntuacionMedium.hpp"
 #include "../InsercionEnListas/puntuacionLarge.hpp"
@@ -15,6 +16,9 @@ using HL = HollowList<T>;
 #elif (HLType == 1)
 using HL = ptrHollowList<T>;
 #define NOMBRE "ptrHollowList"
+#elif (HLType == 2)
+using HL = HollowListv2<T>;
+#define NOMBRE "HollowListv2"
 #endif
 
 #if (testType == 0)
@@ -26,7 +30,6 @@ typedef puntuacionMedium puntuacion;
 #elif (testType == 2)
 typedef puntuacionLarge puntuacion;
 #define TYPE "Large"
-
 #endif
 
 using namespace std;
@@ -42,7 +45,7 @@ int main(int argc, char const *argv[])
     if (argc >= 3)
         THRESHOLD = atoi(argv[2]);
 
-    runTestCase(size, THRESHOLD);
+    return runTestCase(size, THRESHOLD);
 }
 
 int runTestCase(int elems, int THRESHOLD)
@@ -85,7 +88,6 @@ int runTestCase(int elems, int THRESHOLD)
     gettimeofday(&ti, nullptr);
     int tam = hl.size();
     puntuacion p = hl.remove();
-    int errores = 0;
     while (!hl.isEmpty())
     {
 
@@ -93,6 +95,7 @@ int runTestCase(int elems, int THRESHOLD)
         if (temp > p)
         {
             cerr << "Error: HollowList no ordenado" << endl;
+            return 1;
         }
         p = temp;
     }

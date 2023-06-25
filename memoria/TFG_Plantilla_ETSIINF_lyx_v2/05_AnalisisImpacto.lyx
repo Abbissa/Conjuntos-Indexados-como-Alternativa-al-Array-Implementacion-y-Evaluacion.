@@ -301,23 +301,73 @@ thepage
 \end_layout
 
 \begin_layout Chapter
-Analisis Impacto / Conclusiones / Path fordward
+Conclusiones
+\end_layout
+
+\begin_layout Itemize
+El objetivo del trabajo era explorar e implementar alternativas al std::set
+ en el ambito de los conjuntos ordenados
+\end_layout
+
+\begin_layout Itemize
+Se han implementado cuatro interfaces de conjuntos ordenado en C++ como
+ alternativas al std::set.
+\end_layout
+
+\begin_layout Itemize
+Tres de las implementaciones se basan en el concepto de una lista ordenada
+ con huecos entre sus elementos, para asi facilitar la insercion de nuevos
+ elementos, mientras que la ultima es una implementacion de un monticulo
+ binario usando un vector en vez de nodos.
+\end_layout
+
+\begin_layout Itemize
+Se ha implementado la compilacion del codigo usando CMake para poder realizar
+ distintas pruebas sobre distintas estructuras.
+\end_layout
+
+\begin_layout Itemize
+Se ha automatizado la ejecucion de las pruebas y la extraccion de los resultados
+ a un fichero 
+\family typewriter
+csv
+\family default
+ usando CMake.
+\end_layout
+
+\begin_layout Itemize
+Con los resultados obtenidos se han podido sacar conclusiones sobre el rendimien
+to de las estructuras y se han propuesto nuevas alternativas.
 \end_layout
 
 \begin_layout Standard
-Mejoras: cambiar la estructura de HollowList para que en lugar de almacenar
- un vector un vector de vectores almacene un vector de nodos que contienen
- un objeto de tipo T y un vector, de esta forma se puede agilizar la primera
- busqueda, busqueda para encontrar el vector donde se ha de almacenar el
- nuevo elemento.
+
+\lang spanish
+A partir del análisis realizado sobre los resultados, se pueden considerar
+ los siguientes pasos para un estudio más profundo y abordar las limitaciones
+ identificadas:
 \end_layout
 
-\begin_layout Section
-Overview
+\begin_layout Itemize
+
+\lang spanish
+Evaluación exhaustiva de HollowList y std::set: Aunque se han observado
+ las fortalezas y debilidades de HollowList y std::set en términos de rendimient
+o y uso de memoria, es importante realizar pruebas más detalladas para evaluar
+ su eficiencia en operaciones específicas, como la eliminación de elementos
+ concretos o la búsqueda de elementos.
+ Estas métricas adicionales ayudarán a comprender mejor las ventajas y limitacio
+nes de cada estructura en diferentes contextos de aplicación.
 \end_layout
 
-\begin_layout Section
-The next section
+\begin_layout Itemize
+
+\lang spanish
+Pruebas de escalabilidad: Es importante evaluar el rendimiento y la eficiencia
+ de las estructuras de datos en distintos casos de uso: volúmenes de datos
+ más grandes y más pequeños, datos de mayor y menor tamaño.
+ Estas pruebas pueden ser útiles para concretar los casos de uso y parámetros
+ ideales para cada estructura.
 \end_layout
 
 \begin_layout Standard

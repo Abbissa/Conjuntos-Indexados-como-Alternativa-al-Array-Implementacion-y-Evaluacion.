@@ -8,9 +8,11 @@ class ptrHollowList
 public:
     int THRESHOLD = 256;
     std::vector<std::unique_ptr<std::vector<T>>> data;
+    int tam = 0;
 
     void insert(T elem)
     {
+        tam++;
         size_t inf = 0;
         size_t sup = data.size() - 1;
         size_t index;
@@ -56,6 +58,7 @@ public:
 
     T remove()
     {
+        tam--;
         size_t tam = data.size();
         T ret = (*data[tam - 1])[data[tam - 1]->size() - 1];
         data[tam - 1]->erase(--data[tam - 1]->end());
@@ -74,11 +77,7 @@ public:
     }
     int size()
     {
-        int size = 0;
-        for (size_t i = 0; i < data.size(); i++)
-        {
-            size += data[i]->size();
-        }
-        return size;
+
+        return tam;
     }
 };

@@ -135,7 +135,7 @@ El BinaryHeap es una implementación de un montículo sobre un array en lugar
  Permite el acceso a los nodos padre e hijos a través de cálculos de índice.
  Las operaciones de inserción y borrado del primer elemento tienen un tiempo
  de ejecución de O(log n), mientras que la búsqueda no es posible de implementar
- eficientemente en esta estructura.
+ eficientemente en esta estructura debido a su estructura de montículo.
 \end_layout
 
 \begin_layout Standard
@@ -235,10 +235,12 @@ On the other hand, HollowList and ptrHollowList are structures that rely
 \begin_layout Standard
 
 \lang english
-BinaryHeap is an implementation of a heap over an array instead of a tree.
+The BinaryHeap is an implementation of a heap on top of an array instead
+ of a tree.
  It allows access to parent and child nodes through index calculations.
- The insertion and deletion of the first element have a runtime of O(log
- n), while search is not efficiently implementable in this structure.
+ The insertion and removal operations of the first element have a runtime
+ of O(log n), while searching is not efficiently implementable in this structure
+ due to its heap structure.
 \end_layout
 
 \begin_layout Standard

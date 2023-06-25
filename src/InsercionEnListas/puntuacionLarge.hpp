@@ -14,6 +14,12 @@ public:
         std::string nameStr = "puntuacion:" + std::to_string(ti) + "-" + std::to_string(mem);
         std::strcpy(name, nameStr.c_str());
     }
+    puntuacionLarge()
+    {
+        time = 0;
+        memory = 0;
+        std::strcpy(name, "");
+    }
 
     friend std::ostream &operator<<(std::ostream &co, const puntuacionLarge &p)
     {

@@ -1019,7 +1019,7 @@ Appendix is of course optional
 
 \begin_layout Left Header
 \begin_inset Argument 1
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1125,7 +1125,7 @@ options "alpha"
 
 \begin_layout Left Header
 \begin_inset Argument 1
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1135,7 +1135,7 @@ status open
 
 Nomenclature
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 print 

@@ -324,11 +324,11 @@ s de las que dispone para trabajar con distintos lenguajes y tipos de fichero.
 CMake
 \series default
 \lang english
-
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CMAKE"
-literal "true"
+literal "false"
 
 \end_inset
 
@@ -343,6 +343,29 @@ literal "true"
  Además esta herramienta permite generar de forma sencilla binarios de un
  mismo fichero con distintos parámetros de compilación, lo cual facilita
  la realización de pruebas para binarios con distintos parámetros.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+C: 
+\series default
+El lenguaje C se ha utilizado como transición entre Java, lenguaje con el
+ cual se tenia más familiaridad, y C++, lenguaje en el que se ha desarrollado
+ este trabajo.
+ Esto se ha realizado de esta forma debido a que ya se tenia conocimientos
+ del lenguaje C, al contrario que C++, lenguaje que no se había utilizado
+ antes.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+C++: 
+\series default
+El lenguaje C++ se ha utilizado debido a dos razones, es un lenguaje muy
+ eficiente y permite el manejo de memoria dinámica de una forma más sencilla
+ que en C a través de los smart_pointers.
 \end_layout
 
 \begin_layout Itemize
@@ -365,47 +388,7 @@ Github:
 \series default
 para el control de versiones se ha decidido usar github debido al conocimiento
  que se tiene de esta herramienta, ya que es el sistema que se ha utilizado
- para la realización de otros proyectos.
-\end_layout
-
-\begin_layout Section
-Especificaciones del sistema
-\end_layout
-
-\begin_layout Itemize
-Procesador: AMD Ryzen 5 5500U with Radeon Graphics 2.10 GHz
-\end_layout
-
-\begin_layout Itemize
-RAM: 8 GB
-\end_layout
-
-\begin_layout Itemize
-Sockets: 1
-\end_layout
-
-\begin_layout Itemize
-Nucleos: 6
-\end_layout
-
-\begin_layout Itemize
-Procesadores lógicos: 12
-\end_layout
-
-\begin_layout Itemize
-Cache L1: 384 kB
-\end_layout
-
-\begin_layout Itemize
-Cache L2 3 MB
-\end_layout
-
-\begin_layout Itemize
-Cache L3: 8 MB
-\end_layout
-
-\begin_layout Itemize
-Compilador: GNU 9.3.0 con opción -O3
+ para la realización de otros proyectos.-O3
 \end_layout
 
 \begin_layout Standard

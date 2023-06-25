@@ -315,9 +315,17 @@ s para la manipulación de información.
 
 \begin_layout Standard
 Una de las implementaciones de lista ordenada más utilizadas es la ofrecida
- por el estándar C++ a través de la clase std::set.
+ por el estándar C++ a través de la clase 
+\family typewriter
+std::set
+\family default
+.
  En este trabajo se propone la implementación de una serie de interfaces
- de lista ordenada con el objetivo de plantear alternativas frente al std::set.
+ de lista ordenada con el objetivo de plantear alternativas frente al 
+\family typewriter
+std::set
+\family default
+.
 \end_layout
 
 \begin_layout Section
@@ -330,9 +338,12 @@ La necesidad de esta implementación surge de la demanda creciente de sistemas
  de información.
  En estos casos, es esencial contar con una estructura de datos que permita
  la recuperación rápida y precisa de los datos.
- Por lo tanto, a pesar de que la implementación std::set este optimizada,
- el desarrollo de una estructura alternativa más eficiente supondría una
- mejora en una gran cantidad de aplicaciones y sistemas.
+ Por lo tanto, a pesar de que la implementación 
+\family typewriter
+std::set
+\family default
+ este optimizada, el desarrollo de una estructura alternativa más eficiente
+ supondría una mejora en una gran cantidad de aplicaciones y sistemas.
  Además, aun en el caso de que se fracase en la implementación de una estructura
  más eficiente, la exploración de otras alternativas puede llevar a la concepció
 n de mejoras a los algoritmos ya existentes.
@@ -352,7 +363,15 @@ El objetivo principal de este proyecto es la implementación de una interfaz
 \begin_layout Itemize
 
 \lang english
-Analizar las interfaces del std::set y el std::vector.
+Analizar las interfaces del 
+\family typewriter
+std::set
+\family default
+ y el 
+\family typewriter
+std::vector
+\family default
+.
 \end_layout
 
 \begin_layout Itemize

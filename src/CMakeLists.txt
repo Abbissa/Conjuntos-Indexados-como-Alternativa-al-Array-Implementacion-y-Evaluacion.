@@ -52,6 +52,14 @@ function(addptrHollowListExecutable type)
     
 endfunction(addptrHollowListExecutable type)
 
+function(addHollowListv2Executable type)
+    add_executable(HollowListv2${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp ./Prototipo/HollowListv2.hpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
+    target_compile_definitions(HollowListv2${type} PUBLIC HLType=2)
+    target_compile_definitions(HollowListv2${type} PUBLIC testType=${type})
+    
+endfunction(addHollowListv2Executable type)
+
+
 function(addTestVectorExecutable type)
     add_executable(TestVector${type} ./Prototipo/TestVector.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
     target_compile_definitions(TestVector${type} PUBLIC testType=${type})
@@ -80,6 +88,7 @@ set(types
 foreach(type ${types})
     addHollowListExecutable(${type})
     addptrHollowListExecutable(${type})
+    addHollowListv2Executable(${type})
     addTestVectorExecutable(${type})
     addTestSetExecutable(${type})
     addBinaryHeapExecutable(${type})
@@ -145,6 +154,7 @@ while(i LESS_EQUAL cntr)
             foreach(rep RANGE ${repeat})
                 defineCaseHollowList(ptrHollowList ${gen} ${i} ${type})
                 defineCaseHollowList(HollowList ${gen} ${i} ${type})
+                defineCaseHollowList(HollowListv2 ${gen} ${i} ${type})
                 defineCase(TestBinaryHeap ${gen} ${i} ${type})
             endforeach()
         endforeach()
