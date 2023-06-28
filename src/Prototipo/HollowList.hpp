@@ -5,7 +5,7 @@ template <typename T>
 class HollowList
 {
 public:
-    int THRESHOLD = 256;
+    int threshold = 256;
     std::vector<std::vector<T>> data;
     int tam = 0;
 
@@ -45,7 +45,7 @@ public:
         auto it = upper_bound(data[index].begin(), data[index].end(), elem);
         data[index].insert(it, elem);
 
-        if (data[index].size() > THRESHOLD)
+        if (data[index].size() > threshold)
         {
             std::size_t mid = data[index].size() / 2;
             auto new_vec = std::vector<T>(data[index].begin() + mid, data[index].end());

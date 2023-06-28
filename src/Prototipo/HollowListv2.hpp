@@ -1,8 +1,6 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
-#include "../InsercionEnListas/puntuacionSmall.hpp"
-#include "../InsercionEnListas/puntuacionMedium.hpp"
 template <typename T>
 struct Node
 {
@@ -21,7 +19,7 @@ class HollowListv2
 {
 
 public:
-    int THRESHOLD = 256;
+    int threshold = 256;
     std::vector<Node<T>> data;
     int tam = 0;
 
@@ -68,7 +66,7 @@ public:
         auto it = std::upper_bound(vec->begin(), vec->end(), elem);
         vec->insert(it, elem);
 
-        if (vec->size() > THRESHOLD - 1)
+        if (vec->size() > threshold - 1)
         {
             size_t mid = vec->size() / 2;
             auto new_vec = std::vector<T>(vec->begin() + mid, vec->end());

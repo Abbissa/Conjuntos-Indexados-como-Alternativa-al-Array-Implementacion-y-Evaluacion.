@@ -308,6 +308,11 @@ Resultados
 Especificaciones del sistema
 \end_layout
 
+\begin_layout Standard
+Para la ejecución de las pruebas se ha utilizado un equipo con las siguientes
+ especificaciones:
+\end_layout
+
 \begin_layout Itemize
 Procesador: AMD Ryzen 5 5500U with Radeon Graphics 2.10 GHz
 \end_layout
@@ -321,7 +326,7 @@ Sockets: 1
 \end_layout
 
 \begin_layout Itemize
-Nucleos: 6
+Núcleos: 6
 \end_layout
 
 \begin_layout Itemize
@@ -329,7 +334,7 @@ Procesadores lógicos: 12
 \end_layout
 
 \begin_layout Itemize
-Cache L1: 384 kB
+Cache L1: 384 KB
 \end_layout
 
 \begin_layout Itemize
@@ -341,7 +346,7 @@ Cache L3: 8 MB
 \end_layout
 
 \begin_layout Itemize
-Compilador: GNU 9.3.0 con opción 
+Compilador: GNU 9.3.0 con opción -O3
 \end_layout
 
 \begin_layout Section
@@ -354,26 +359,21 @@ Para poder visualizar mejor los resultados de las pruebas se han utilizado
 \end_layout
 
 \begin_layout Standard
-En primer lugar, se utilizará la librería pandas para leer los archivos
- CSV donde se han almacenado los resultados de las pruebas.
- Esto permitirá filtrar y manipular los datos de acuerdo con las necesidades
- específicas del análisis.
+En primer lugar, se ha utilizadola librería pandas para leer los archivos
+ CSV donde se han almacenado los resultados de las pruebas y filtrar los
+ resultados por estructura y caso de prueba para poder diferenciar los rendimien
+tos de las distintas estructuras en los distintos casos de prueba.
 \end_layout
 
 \begin_layout Standard
-A continuación, se empleará la librería matplotlib para generar las gráficas
- que visualizarán los resultados.
- Esta biblioteca ofrece diversas opciones para personalizar las gráficas,
- como los ejes, los títulos y las etiquetas y los colores asignados a cada
+A continuación se utiliza la librería numpy para calcular las medias de
+ rendimiento por cada caso de prueba, ya que, excluyendo la estructura 
+\family typewriter
+std::set
+\family default
+, todas las pruebas se han realizado 3 veces con el objetivo de suavizar
+ las variaciones y obtener una visión más general del rendimiento de cada
  estructura.
-\end_layout
-
-\begin_layout Standard
-Además, se utilizará la librería numpy para calcular las medias de cada
- prueba.
- Esto es especialmente útil cuando se desean obtener valores promedio para
- un conjunto de datos, lo que permite suavizar las variaciones y obtener
- una visión más general del rendimiento.
  Por último, una vez se han calculado las medias, para las estructuras ptrHollow
 List, HollowList y HollowListv2, se seleccionan los tamaños de sublistas
  que den un mejor resultado, para así evitar mostrar el rendimiento de todas
@@ -381,32 +381,20 @@ List, HollowList y HollowListv2, se seleccionan los tamaños de sublistas
 \end_layout
 
 \begin_layout Standard
-Al combinar estas tres librerías, se podrá exponer de manera clara y comprensibl
-e los resultados obtenidos en las pruebas realizadas.
- Esto facilitará el análisis y la interpretación de los datos para evaluar
- el rendimiento de las distintas estructuras y casos de prueba utilizados.
+Por último, se usa la librería matplotlib para generar las gráficas en las
+ que visualizarán los resultados.
+ Para las graficas se han utilizado distintos colores para identificar con
+ facilidad las distintas estructuras y los resultados se muestran con escala
+ logarítmica en ambos ejes.
 \end_layout
 
 \begin_layout Standard
-Dada la gran cantidad de graficas que se han generado, solo se comentaran
+Dada la gran cantidad de gráficas que se han generado, solo se comentaran
  las relacionadas con los casos de prueba que se usan elementos en orden
- aleatorio, ya que este sera el caso más general de uso, quedando el resto
- de gráficas, en este caso con todas las variaciones de 
-\family typewriter
-ptrHollowList
-\family default
-, 
-\family typewriter
-HollowList 
-\family default
-y 
-\family typewriter
-HollowListv2 
-\family default
-disponibles en el Anexo.
+ aleatorio, ya que este será el caso más general de uso.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 
 \series bold
 Insertar elementos
@@ -415,7 +403,7 @@ Insertar elementos
 \begin_layout Standard
 En la gráfica de la 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "InsPeqRandom"
 plural "false"
 caps "false"
@@ -423,18 +411,18 @@ noprefix "false"
 
 \end_inset
 
- se puede observar que en el caso de el objeto pequeño la estructura más
- eficiente al insertar elementos es el 
+ se puede observar que en el caso del objeto pequeño la estructura más eficiente
+ al insertar elementos es el 
 \family typewriter
 BinaryHeap
 \family default
-, siendo los tiempos de el resto de estructuras entre 2 y 5 segundos más
- lentas en el caso de 4 millones de elementos.
+, siendo los tiempos del resto de estructuras entre 2 y 5 segundos más lentas
+ en el caso de 4 millones de elementos.
  Las siguientes estructuras más eficientes son 
 \family typewriter
 HollowList
 \family default
- con sublistas de 512 elementos seguida por 
+ usando sublistas de 512 elementos, seguida por 
 \family typewriter
 ptrHollowList
 \family default
@@ -483,7 +471,7 @@ name "InsPeqRandom"
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Insertar valores aleatorios de el objeto pequeño en distintas estructuras
+Insertar valores aleatorios del objeto pequeño
 \end_layout
 
 \end_inset
@@ -502,7 +490,7 @@ Insertar valores aleatorios de el objeto pequeño en distintas estructuras
 En el caso de las pruebas realizadas sobre el objeto mediano, se puede observar
  en la 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "InsMedRandom"
 plural "false"
 caps "false"
@@ -554,6 +542,7 @@ con un tiempo de 7,5 segundos.
 \noindent
 \align center
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -581,7 +570,7 @@ name "InsMedRandom"
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Insertar valores aleatorios de el objeto mediano en distintas estructuras
+Insertar valores aleatorios del objeto mediano
 \end_layout
 
 \end_inset
@@ -599,7 +588,7 @@ Por último, en el caso de los objetos grandes, se aprecia un cambio considerabl
  en el rendimiento de las distintas estructuras.
  Como se ve en la 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "InsGraRandom"
 plural "false"
 caps "false"
@@ -611,7 +600,7 @@ noprefix "false"
 \family typewriter
 BinaryHeap
 \family default
-, sin embargo, la segunda estructura más eficiente a pasado a ser el 
+, sin embargo, la segunda estructura más eficiente ha pasado a ser el 
 \family typewriter
 std::set
 \family default
@@ -630,11 +619,9 @@ ptrHollowList
 \family default
 es ocupada por la estructura 
 \family typewriter
-HollowListv2.
- 
+HollowListv2
 \family default
-En la sección de análisis se comentaran posibles razones por la que pueda
- suceder esto.
+.
  También se puede observar que en este caso las estructuras 
 \family typewriter
 HollowList
@@ -643,10 +630,10 @@ HollowList
 \family typewriter
 ptrHollowList
 \family default
-, las estructuras que tenían limites de tamaño de las sublistas más pequeños,
+, las estructuras que tenían límites de tamaño de las sublistas más pequeños,
  128 elementos por sublista, han obtenido mejores resultados, frente a los
  casos de prueba de elementos pequeños donde las estructuras más eficientes
- tenían tamaños de sublista de 256 o 512.
+ tenían tamaños de sublista de 512 o 256.
 \end_layout
 
 \begin_layout Standard
@@ -677,7 +664,7 @@ name "InsGraRandom"
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Insertar valores aleatorios de el objeto grande en distintas estructuras
+Insertar valores aleatorios del objeto grande
 \end_layout
 
 \end_inset
@@ -691,9 +678,21 @@ Insertar valores aleatorios de el objeto grande en distintas estructuras
 \end_layout
 
 \begin_layout Standard
+A partir de los resultados obtenidos, se puede concluir que todas las estructura
+s cumplen de forma práctica el orden de complejidad que se les exigia en
+ los requisitos definidos.
+\end_layout
+
+\begin_layout Subsection
 
 \series bold
 Uso de la estructura
+\end_layout
+
+\begin_layout Standard
+Como se ha explicado anteriormente, este caso de prueba consiste en la inserción
+ y eliminación de 1.000.000 de elementos una vez ya esta la estructura llena
+ con una cantidad de terminada de elementos.
 \end_layout
 
 \begin_layout Standard
@@ -714,9 +713,9 @@ BinaryHeap
 \family default
  es la más eficiente, seguida de las estructuras 
 \family typewriter
-HollowList, ptrHollowList 
+HollowList, ptrHollowList
 \family default
-y 
+ y 
 \family typewriter
 HollowListv2
 \family default
@@ -747,7 +746,7 @@ mantiene el mismo tamaño de sublista, 128.
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -804,9 +803,9 @@ tiene un rendimiento notablemente peor que
 std::set 
 \family default
 en la prueba realizada con 4.000.000.
- Analizando la evolución de la grafica, se puede estimar que este caso es
- una anomalía, y que, repitiendo las pruebas más veces este resultado anómalo
- se suavizaría.
+ Analizando la evolución de la gráfica, se puede estimar que este caso es
+ una anomalía, y que, obteniendo una media usando más casos de prueba, la
+ evolución de la gráfica sería más gradual.
  
 \end_layout
 
@@ -815,7 +814,7 @@ en la prueba realizada con 4.000.000.
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -865,8 +864,8 @@ noprefix "false"
 \end_inset
 
  se puede observar los mismos cambios, aunque con dos diferencias notables.
- La primera es que, al contrario que en el caso de la insercion, las estructuras
- 
+ La primera es que, al contrario que en el caso prueba de insertar elementos,
+ las estructuras 
 \family typewriter
 HollowList 
 \family default
@@ -884,12 +883,13 @@ std::set
 \family typewriter
 HollowListv2
 \family default
- es notablemente peor
+ es notablemente peor que el rendimiento del resto de estructuras.
+ En cuanto al tamaño para las sublistas de las estructuras 
 \family typewriter
- 
+HollowList
 \family default
-que el rendimiento del resto de estructuras.
- 
+ de nuevo se observa que en el caso de prueba con objetos grandes las estructura
+s obtienen un mejor rendimiento al usar sublistas pequeñas.
 \end_layout
 
 \begin_layout Standard
@@ -897,7 +897,7 @@ que el rendimiento del resto de estructuras.
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -933,6 +933,19 @@ Uso de distintas estructuras con objetos grandes
 \end_layout
 
 \begin_layout Standard
+Aunque en este caso de prueba no se evalua de forma concreta ninguno de
+ los requisitos que se imponia a las estructuras, vemos que en este caso
+ tambien mantienen un coste aproximado logarítmico, destacando en este aspecto
+ la estructura 
+\family typewriter
+BinaryHeap
+\family default
+ la cual mantiene el tiempo de uso con 1.000.000 de elementos de forma casi
+ constante desde las pruebas realizadas con 500.000 elementos hasta las realizada
+s con 4.000.000 de elementos.
+\end_layout
+
+\begin_layout Subsection
 
 \series bold
 Borrado de elementos
@@ -979,16 +992,47 @@ HollowList
 ptrHollowList 
 \family default
 son las más rápidas al ejecutar está operación, siendo 10 veces más rápidas
- que la estructura std::set y aproximadamente 100 veces mas rápidas que
+ que la estructura std::set y aproximadamente 100 veces más rápidas que
  las estructura BinaryHeap.
- Un resultado que llama la atención es que, al contrario que el resto de
- estructuras, el coste temporal del borrado de elementos para la estructura
+ Un resultado que llama la atención es que el rendimiento de la operación
+ de borrado de elementos para la estructura 
+\family typewriter
+HollowListv2
+\family default
+ disminuye según aumenta el tamaño de los elementos que se utilizan en las
+ estructuras.
+ Este resultado tambien aparece en el resto de estructuras, pero con un
+ efecto mucho menor.
+ Esto se puede observar comparando la estructura 
+\family typewriter
+HollowListv2 
+\family default
+con la estructura 
+\family typewriter
+std::set
+\family default
+.
+ En el caso de borrado de elementos pequeños se observa que la estructura
  
 \family typewriter
 HollowListv2 
 \family default
-incrementa según aumenta el tamaño de los elementos que se utilizan en las
- estructuras.
+es más eficiente que el 
+\family typewriter
+std::set
+\family default
+, en el caso de borrado de elementos medianos pasan a tener un rendimiento
+ aproximandamente igual.
+ Y por último, en el caso de borrado de elementos grandes, la estructura
+ 
+\family typewriter
+HollowListv2 
+\family default
+es superada por la estructura 
+\family typewriter
+std::set
+\family default
+.
 \end_layout
 
 \begin_layout Standard
@@ -1116,7 +1160,7 @@ Borrado de elementos grandes
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 
 \series bold
 Tiempos totales de ejecución
@@ -1154,10 +1198,20 @@ noprefix "false"
 \end_inset
 
  el tiempo total del uso de estas estructuras se ve fuertemente afectado
- por la operación de inserción, ya que es la mas costosa.
+ por la operación de inserción, ya que es la más costosa.
  Por esta razón, se observa que los rendimientos de las estructuras son
  muy similares a los indicados anteriormente.
+ Un detalle que cabe resaltar en contraposición a los resultados obtenidos
+ con los tiempos individuales es que el tamaño de sublistas para las estructuras
  
+\family typewriter
+HollowList
+\family default
+ y 
+\family typewriter
+ptrHollowList 
+\family default
+se mantiene constante en 256.
 \end_layout
 
 \begin_layout Standard
@@ -1250,7 +1304,7 @@ Tiempos totales de las pruebas con elementos medianos
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1285,7 +1339,7 @@ Tiempos totales de las pruebas con elementos grandes
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 
 \series bold
 Memoria total usada
@@ -1327,7 +1381,7 @@ ptrHollowList
 \family default
  usan aproximadamente 50.000 KB y 95.000 KB respectivamente.
  Esta gran diferencia de usos de memoria se ve muy reducida en el caso de
- las estructuras grandes como se observa en la 
+ las estructuras grandes, como se observa en la 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "MemGra"
@@ -1364,7 +1418,7 @@ ptrHollowList
 \family default
 , usando 43.000 KB en el caso de elementos pequeños, 85.000 KB en el caso
  de elementos medianos y 350 KB en el caso de elementos grandes.
- Por ultimo, tal y como se observa en las gráficas, la estructura 
+ Por último, tal y como se observa en las gráficas, la estructura 
 \family typewriter
 BinaryHeap 
 \family default
@@ -1372,7 +1426,7 @@ tiene un uso de memoria similar al de las distintas estructuras
 \family typewriter
 HollowList
 \family default
-, superándolo en al algunos casos y empeorándolo en otros.
+, mejorándolo en algunos casos y empeorándolo en otros.
 \end_layout
 
 \begin_layout Standard
@@ -1382,7 +1436,7 @@ HollowList
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1465,7 +1519,7 @@ Uso de memoria en las pruebas con objetos medianos
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -1500,14 +1554,14 @@ Uso de memoria en las pruebas con objetos grandes
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 
 \series bold
-Fallos de página
+Fallos de página 
 \end_layout
 
 \begin_layout Standard
-En el caso de los fallos de pagina se observa la misma tendencia que en
+En el caso de los fallos de página se observa la misma tendencia que en
  el uso de memoria.
  Como se puede ver en la 
 \begin_inset CommandInset ref
@@ -1530,7 +1584,7 @@ noprefix "false"
 \end_inset
 
 , en las pruebas con elementos pequeños y medianos se observa una diferencia
- notable en el número de fallos de pagina que suceden con las estructuras
+ notable en el número de fallos de página que suceden con las estructuras
 \family typewriter
  HollowList 
 \family default
@@ -1546,7 +1600,7 @@ HollowList
 \family typewriter
 BinaryHeap 
 \family default
-frente al numero de fallos que se producen en el caso de 
+frente al número de fallos que se producen en el caso de 
 \family typewriter
 std::set
 \family default
@@ -1563,12 +1617,12 @@ noprefix "false"
 
  se observa que en el caso de las pruebas con elementos de mayor tamaño
  esta diferencia es menos significativa.
- En este caso la estructura 
+ En este caso, la estructura 
 \family typewriter
 std::set
 \family default
  tiene 110.000 fallos de página, llegando incluso a reducir el número de
- paginas que se obtienen al usar la estructura 
+ fallos de página que se obtienen al usar la estructura 
 \family typewriter
 BinaryHeap
 \family default
@@ -1577,8 +1631,7 @@ BinaryHeap
 \family typewriter
 HollowList
 \family default
- consiguen la mejor marca en este aspecto, obteniendo un total de 64.000
- fallos de pagina.
+ consiguen el mejor resultado , obteniendo un total de 64.000 fallos de página.
 \end_layout
 
 \begin_layout Standard
@@ -1727,40 +1780,48 @@ HollowList
 std::set
 \family default
 .
- Sin embargo, a pesar de ser la estructura más eficiente la 
+ Sin embargo, a pesar de ser la estructura más eficiente, 
 \family typewriter
 BinaryHeap
 \family default
  tiene un gran punto negativo, que dependiendo del uso que se desee dar
  a esta estructura puede hacer que se descarte como opción.
- Este problema es, como ya se ha comentado, que no soporta las búsquedas
- de elementos en la estructura, al contrario que las otras dos que si que
- las soportan.
- La clasificación de las otras dos estructuras es mas compleja.
- Por una parte, las 
+ Este problema es, como ya se ha comentado, que es posible implementar de
+ forma eficiente las búsquedas de elementos en la estructura, al contrario
+ que el resto de estructuras que sí que las permiten con un coste 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+.
+ La clasificación de las otras dos estructuras es más compleja.
+ Por una parte, las estructuras 
 \family typewriter
 HollowList
 \family default
- tienen un mejor rendimiento que el 
+ y 
+\family typewriter
+ptrHollowList 
+\family default
+tienen un mejor rendimiento que el 
 \family typewriter
 std::set 
 \family default
-al ser usadas con elementos pequeños, ademas de tener un uso de memoria
+al ser usadas con elementos pequeños, además de tener un uso de memoria
  mucho menor.
  Por otra parte, el 
 \family typewriter
 std:set 
 \family default
-tiene un mejor rendimiento con las estructuras más grandes y ademas la diferenci
+tiene un mejor rendimiento con las estructuras más grandes y además la diferenci
 a en el uso de memoria en estos casos entre estas dos estructuras se reduce
  considerablemente.
- Por ultimo, en estas pruebas no se ha comprobado la eficiencia del borrado
+ Por último, en estas pruebas no se ha comprobado la eficiencia del borrado
  de elementos concretos o la búsqueda de elementos, métricas que posiblemente
  tengan mejores resultados en el caso de 
 \family typewriter
 std::set 
 \family default
-que en las 
+que en el caso de las 
 \family typewriter
 HollowList
 \end_layout
@@ -1773,9 +1834,9 @@ HollowList
 , estas parecen obtener un mejor rendimiento con sublistas grandes cuando
  los elementos son pequeños y sublistas pequeñas cuando los elementos son
  grandes.
- Aunque las diferencias no son demasiado grandes seria posible mejorar los
- rendimientos de estas estructuras realizando pruebas con mas tamaños de
- sublistas.
+ Aunque las diferencias no son demasiado grandes, es posible que realizando
+ más pruebas con más tamaños de sublistas puedan descubrirse valores que
+ mejoren el rendimiento de las estructuras de una forma más significativa.
 \end_layout
 
 \begin_layout Standard
@@ -1788,18 +1849,21 @@ y
 \family typewriter
 ptrHollowList
 \family default
-, siendo esta ultima la que obtiene peores resultados, contrario a los resultado
-s esperados.
+, siendo esta última la que obtiene peores resultados, contrario a lo que
+ se esperaba.
 
 \family typewriter
  
 \family default
-La idea original de la implementación de ptrHollowList era añadir un nivel
- de indirección al usar los vectores a través de 
+La idea original de la implementación de 
+\family typewriter
+ptrHollowList
+\family default
+ era añadir un nivel de indirección al usar los vectores a través de 
 \family typewriter
 smart_pointers 
 \family default
-para así evitar que toda la memoria este en un mismo bloque y, en ultima
+para así evitar que toda la memoria esté en un mismo bloque y, en ultima
  instancia, el uso de esta estructura tenga los mismos costes que el uso
  de un 
 \family typewriter
@@ -1822,7 +1886,7 @@ std::vector,
 \family default
 en lugar de almacenar un array con los elementos del vector, almacena punteros
  a esa estructura (uno al principio de esa lista, otro al final, y otro
- a la ultima dirección de memoria que se tiene reservada).
+ a la última dirección de memoria que se tiene reservada).
  Esto hace que no solo no proporcione ninguna mejora el uso de indirección
  en este caso, sino que además genere un sobre coste, ya que por cada acceso
  que se desee hacer a un elemento concreto, la estructura 
@@ -1838,19 +1902,211 @@ HollowList
 \end_layout
 
 \begin_layout Standard
-En vista de estos nuevos detalles, se plantea una nueva estructura que consiste
- en un vector principal que a su vez contendrá sublistas.
- La diferencia con la 
+En vista de estos nuevos detalles, se decidió implementar la estructura
+ 
 \family typewriter
-HollowList 
+HollowListv2
 \family default
-es que estas sublistas estarán contenidas en un objeto que contendrá también
- el primer elemento de la sublistas.
- Con esto lo que se obtiene es que en las búsquedas sobre el vector principal
- se reducirán en 1 los accesos a memoria, ya que en lugar de obtener de
- memoria la sublista deseada y a continuación obtener de esa sublista el
- primer elemento se podrá acceder directamente al primer elemento de la
- sublista.
+ con la expectativa de que en las búsquedas sobre el vector principal se
+ reducirán en 1 los accesos a memoria, ya que en lugar de obtener de memoria
+ la sublista deseada y a continuación obtener de esa sublista el primer
+ elemento se podrá acceder directamente al primer elemento de la sublista.
+ Pero en contra de lo que se esperaba, en lugar de mejorar el rendimiento
+ de 
+\family typewriter
+HollowList
+\family default
+ se ha obtenido un peor rendimiento.
+\end_layout
+
+\begin_layout Standard
+Un detalle importante que no se observa en las graficas resumidas, en las
+ cuales solo se muestra la variación más eficiente de cada estructura, es
+ la diferencia que existe entre las variaciones de 
+\family typewriter
+HollowListv2
+\family default
+, y las variaciones del resto de implementaciones 
+\family typewriter
+HollowList
+\family default
+.
+ Como se observa en la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "TtotalPeq"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ , la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "TtotalMed"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ y, especialmente en la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "TtotalGra"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, las distintas variaciones de tanto 
+\family typewriter
+ptrHollowList 
+\family default
+como 
+\family typewriter
+HollowList
+\family default
+, a pesar de tener diferencias de rendimiento todas las variaciones, no
+ hay una gran dispersión entre los distintos valores, sin embargo, en el
+ caso de 
+\family typewriter
+HollowListv2 
+\family default
+hay grandes diferencias de rendimiento entre las distintas variaciones,
+ esto puede deberse a varios motivos, como algún error en la implementación
+ de esta estructura que resulte en que cuanto más grandes sean las sublistas
+ más ineficiente será la estructura, o que la variación de este parámetro
+ afecte más a esta estructura que al resto de 
+\family typewriter
+HollowList.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename include/Graficas/Todas figure_Tiempo total (s)-GenRandom-0.svg
+	scale 40
+	rotateOrigin leftTop
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "TtotalPeq"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tiempos totales de las pruebas con elementos pequeños
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename include/Graficas/Todas figure_Tiempo total (s)-GenRandom-1.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "TtotalMed"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tiempos totales de las pruebas con elementos medianos
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename include/Graficas/Todas figure_Tiempo total (s)-GenRandom-2.svg
+	scale 40
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "TtotalGra"
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tiempos totales de las pruebas con elementos grandes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard

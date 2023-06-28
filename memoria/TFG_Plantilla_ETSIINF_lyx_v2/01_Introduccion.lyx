@@ -314,14 +314,17 @@ s para la manipulación de información.
 \end_layout
 
 \begin_layout Standard
-Una de las implementaciones de lista ordenada más utilizadas es la ofrecida
- por el estándar C++ a través de la clase 
+En el caso de C++ se puede obtener la funcionalidad de lista ordenada utilizando
+ los métodos ofrecidos por la clase 
 \family typewriter
 std::set
 \family default
-.
- En este trabajo se propone la implementación de una serie de interfaces
- de lista ordenada con el objetivo de plantear alternativas frente al 
+, con la salvedad de que en esta clase no se permite insertar elementos
+ duplicados.
+ En este trabajo se propone la implementación de una serie de estructuras
+ de datos que ofrezcan la funcionalidad de lista ordenada que cumplan una
+ serie de requisitos para así poder compararlas entre ellas y con la estructura
+ de datos 
 \family typewriter
 std::set
 \family default
@@ -342,7 +345,7 @@ La necesidad de esta implementación surge de la demanda creciente de sistemas
 \family typewriter
 std::set
 \family default
- este optimizada, el desarrollo de una estructura alternativa más eficiente
+ esté optimizada, el desarrollo de una estructura alternativa más eficiente
  supondría una mejora en una gran cantidad de aplicaciones y sistemas.
  Además, aun en el caso de que se fracase en la implementación de una estructura
  más eficiente, la exploración de otras alternativas puede llevar a la concepció
@@ -361,8 +364,6 @@ El objetivo principal de este proyecto es la implementación de una interfaz
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Analizar las interfaces del 
 \family typewriter
 std::set
@@ -375,27 +376,24 @@ std::vector
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
-Diseñar e implementar alternativas al array que no usen almacenamiento contiguo
- de todos sus elementos con interfaz tipo conjunto ordenado.
- 
+Desarrollar una serie de estructuras de datos cuya funcionalidad cumpla
+ con los requisitos propuestos para una lista ordenada.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Diseñar e implementar un conjunto de pruebas automáticas para evaluar la
  validez y rendimiento de las estructuras de datos diseñadas.
  
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
-Analizar el rendimiento de estructuras de datos alternativas a los arrays
- cuya interfaz se corresponde con un conjunto indexado y compararlos con
- otras implementaciones.
+Analizar el rendimiento de estructuras de datos diseñadas a partir de los
+ requisitos de una lista ordenada y comparar los rendimientos de estas estructur
+as de datos entre ellas y con la estructura 
+\family typewriter
+std::set
+\family default
+, siendo utilizada como una lista ordenada.
 \end_layout
 
 \begin_layout Standard

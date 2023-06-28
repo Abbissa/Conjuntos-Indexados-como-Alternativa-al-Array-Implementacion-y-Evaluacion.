@@ -105,43 +105,92 @@ Resumen
 \end_layout
 
 \begin_layout Standard
-El presente documento aborda la comparación de tres estructuras de datos:
- std::set, HollowList y ptrHollowList, y BinaryHeap.
+En este trabajo se aborda la comparación de cinco estructuras de datos:
+ 
+\family typewriter
+std::set
+\family default
+, 
+\family typewriter
+HollowList
+\family default
+, 
+\family typewriter
+ptrHollowList
+\family default
+, 
+\family typewriter
+HollowListv2
+\family default
+ y 
+\family typewriter
+BinaryHeap
+\family default
+.
  Se examinan sus implementaciones, operaciones y se realizan pruebas para
  evaluar su rendimiento.
 \end_layout
 
 \begin_layout Standard
-La implementación de std::set en C++ utiliza un árbol rojo-negro, conocido
- como Red-Black Tree, que garantiza un árbol auto balanceado.
- Las operaciones de inserción, borrado y búsqueda en std::set tienen un
- tiempo de ejecución de O(log n), donde n es el número de elementos.
+La implementación de 
+\family typewriter
+std::set 
+\family default
+en C++ utiliza un árbol rojo-negro, conocido como Red-Black Tree, que garantiza
+ un árbol autobalanceado.
+ Las operaciones de inserción, borrado y búsqueda en 
+\family typewriter
+std::set 
+\family default
+tienen un coste de ejecución de O(log n), donde n es el número de elementos.
 \end_layout
 
 \begin_layout Standard
-Por otro lado, HollowList y ptrHollowList son estructuras que se basan en
- un vector de vectores para almacenar elementos.
- La diferencia entre ellas radica en que ptrHollowList almacena una lista
- de punteros a vectores, mientras que HollowList almacena directamente los
- vectores.
+Por otro lado, 
+\family typewriter
+HollowList
+\family default
+, 
+\family typewriter
+ptrHollowList 
+\family default
+y 
+\family typewriter
+HollowListv2
+\family default
+ son estructuras que se basan en un vector de vectores para almacenar elementos.
+ La diferencia entre ellas radica en que 
+\family typewriter
+ptrHollowList 
+\family default
+almacena una lista de punteros a vectores, mientras que HollowList almacena
+ directamente los vectores y por último, 
+\family typewriter
+HollowListv2
+\family default
+ almacena una lista de nodos que contienen un elemento y un vector.
  Estas estructuras realizan búsquedas binarias para determinar en qué vector
- insertar un nuevo elemento y tienen un tiempo de ejecución de O(log n)
- para la inserción.
+ insertar un nuevo elemento y tienen un coste de ejecución de O(log n) para
+ la inserción y búsqueda de elementos y O(1) para el borrado .
 \end_layout
 
 \begin_layout Standard
-El BinaryHeap es una implementación de un montículo sobre un array en lugar
- de un árbol.
- Permite el acceso a los nodos padre e hijos a través de cálculos de índice.
+El 
+\family typewriter
+BinaryHeap 
+\family default
+es una implementación de un montículo sobre un array en lugar de un árbol.
+ Permite el acceso a los nodos padre e hijos a través de cálculos de índice
+ en lugar de usando punteros.
  Las operaciones de inserción y borrado del primer elemento tienen un tiempo
- de ejecución de O(log n), mientras que la búsqueda no es posible de implementar
- eficientemente en esta estructura debido a su estructura de montículo.
+ de ejecución de O(log n), mientras que la búsqueda no es posible implementarla
+ de forma eficientemente en esta estructura debido a su estructura de montículo.
 \end_layout
 
 \begin_layout Standard
 Se realizaron pruebas en cada estructura, insertando elementos en diferentes
- cantidades y evaluando el tiempo de ejecución, uso de memoria y fallos
- de página.
+ cantidades y tamaños, y evaluando el tiempo de ejecución, uso de memoria
+ y fallos de página.
  Se utilizaron distintos objetos para almacenar en las estructuras y se
  probaron diferentes casos de entrada (datos ordenados, ordenados en orden
  inverso y en orden aleatorio).
@@ -150,7 +199,8 @@ Se realizaron pruebas en cada estructura, insertando elementos en diferentes
 \begin_layout Standard
 Los resultados de las pruebas permitieron comparar el rendimiento de cada
  estructura en términos de tiempo de ejecución, uso de memoria y fallos
- de página.
+ de página y sacar conclusiones sobre que estructura es la mas recomendable
+ dependiendo del caso de uso.
 \end_layout
 
 \begin_layout Standard
@@ -206,8 +256,8 @@ adds table of contents entry
 \begin_layout Standard
 
 \lang english
-This document addresses the comparison of three data structures: std::set,
- HollowList, ptrHollowList, and BinaryHeap.
+Int this document, the comparison of five data structures is addressed:
+ std::set, HollowList, ptrHollowList, HollowListv2, and BinaryHeap.
  Their implementations, operations, and performance are examined through
  tests.
 \end_layout
@@ -215,49 +265,55 @@ This document addresses the comparison of three data structures: std::set,
 \begin_layout Standard
 
 \lang english
-The implementation of std::set in C++ utilizes a red-black tree, known as
- Red-Black Tree, which ensures a self-balanced tree.
- The insertion, deletion, and search operations in std::set have a runtime
- of O(log n), where n is the number of elements.
+The implementation of std::set in C++ uses a red-black tree, known as a
+ Red-Black Tree, which guarantees a self-balancing tree.
+ The insertion, deletion, and search operations in std::set have an execution
+ cost of O(log n), where n is the number of elements.
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-On the other hand, HollowList and ptrHollowList are structures that rely
- on a vector of vectors to store elements.
- The difference between them lies in ptrHollowList storing a list of pointers
- to vectors, while HollowList directly stores the vectors.
+On the other hand, HollowList, ptrHollowList, and HollowListv2 are structures
+ that are based on a vector of vectors to store elements.
+ The difference between them lies in the fact that ptrHollowList stores
+ a list of pointers to vectors, while HollowList stores the vectors directly,
+ and finally, HollowListv2 stores a list of nodes that contain an element
+ and a vector.
  These structures perform binary searches to determine which vector to insert
- a new element into and have a runtime of O(log n) for insertion.
+ a new element into and have an execution cost of O(log n) for element insertion
+ and search, and O(1) for deletion.
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-The BinaryHeap is an implementation of a heap on top of an array instead
- of a tree.
- It allows access to parent and child nodes through index calculations.
- The insertion and removal operations of the first element have a runtime
- of O(log n), while searching is not efficiently implementable in this structure
- due to its heap structure.
+The BinaryHeap is an implementation of a heap on an array instead of a tree.
+ It allows access to parent and child nodes through index calculations instead
+ of using pointers.
+ The insertion and deletion of the first element operations have a runtime
+ of O(log n), while efficient implementation of search is not possible in
+ this structure due to its heap structure.
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-Tests were conducted on each structure, inserting elements in different
- quantities and evaluating the runtime, memory usage, and page faults.
- Various objects were used to store in the structures, and different input
- cases (sorted data, reverse sorted data, and randomly ordered data) were
- tested.
+Tests were conducted on each structure by inserting elements in different
+ quantities and sizes, evaluating execution time, memory usage, and page
+ faults.
+ Different objects were used to store data in the structures, and different
+ input cases were tested (sorted data, reverse sorted data, and randomly
+ ordered data).
 \end_layout
 
 \begin_layout Standard
 
 \lang english
-The test results enabled a comparison of the performance of each structure
- in terms of runtime, memory usage, and page faults.
+The test results allowed for comparing the performance of each structure
+ in terms of execution time, memory usage, and page faults, and drawing
+ conclusions about which structure is most recommended depending on the
+ use case.
 \end_layout
 
 \end_body

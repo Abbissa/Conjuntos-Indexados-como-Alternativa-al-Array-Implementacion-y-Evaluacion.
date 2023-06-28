@@ -301,7 +301,7 @@ thepage
 \end_layout
 
 \begin_layout Chapter
-Entorno de desarrollo y especificaciones
+Entorno de desarrollo 
 \end_layout
 
 \begin_layout Standard
@@ -327,7 +327,7 @@ CMake
  
 \begin_inset CommandInset citation
 LatexCommand cite
-key "CMAKE"
+key "CM1"
 literal "false"
 
 \end_inset
@@ -340,8 +340,8 @@ literal "false"
  CMake es una herramienta de gestión de proyectos software que permite compilar
  código y generar tests independientemente del sistema operativo que se
  use.
- Además esta herramienta permite generar de forma sencilla binarios de un
- mismo fichero con distintos parámetros de compilación, lo cual facilita
+ Además, esta herramienta permite generar de forma sencilla binarios de
+ un mismo fichero con distintos parámetros de compilación, lo cual facilita
  la realización de pruebas para binarios con distintos parámetros.
 \end_layout
 
@@ -351,9 +351,9 @@ literal "false"
 C: 
 \series default
 El lenguaje C se ha utilizado como transición entre Java, lenguaje con el
- cual se tenia más familiaridad, y C++, lenguaje en el que se ha desarrollado
+ cual se tenía más familiaridad, y C++, lenguaje en el que se ha desarrollado
  este trabajo.
- Esto se ha realizado de esta forma debido a que ya se tenia conocimientos
+ Esto se ha realizado de esta forma debido a que ya se tenía conocimientos
  del lenguaje C, al contrario que C++, lenguaje que no se había utilizado
  antes.
 \end_layout
@@ -373,9 +373,9 @@ El lenguaje C++ se ha utilizado debido a dos razones, es un lenguaje muy
 \series bold
 Python: 
 \series default
-por último se ha decidido usar Pyhton para graficar los resultados obtenidos
- de las ejecuciones de las distintas implementaciones sobre los distintos
- casos de prueba.
+por último, se ha decidido usar el lenguaje Pyhton para graficar los resultados
+ obtenidos de las ejecuciones de las distintas implementaciones sobre los
+ distintos casos de prueba.
  Se ha decidido usar este lenguaje por la facilidad que presenta a la hora
  de manejar ficheros csv, formato de salida de los casos de prueba, y filtrar
  según la implementación u otros criterios para poder visualizar los resultados.
@@ -388,7 +388,46 @@ Github:
 \series default
 para el control de versiones se ha decidido usar github debido al conocimiento
  que se tiene de esta herramienta, ya que es el sistema que se ha utilizado
- para la realización de otros proyectos.-O3
+ para la realización de otros proyectos.
+ Todo el material empleado para la realizacion de este trabajo está disponible
+ en: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "GIT"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Requisitos
+\end_layout
+
+\begin_layout Standard
+Para la implementación de las estructuras y asegurar las funcionalidades
+ de una lista ordenada se han definido los siguientes requisitos:
+\end_layout
+
+\begin_layout Itemize
+Operación para insertar elementos en la estructura de datos.
+\end_layout
+
+\begin_layout Itemize
+Operación para obtener el elemento más grande de la estructura de datos.
+\end_layout
+
+\begin_layout Itemize
+Operación para borrar el elemento más grande de la estructura.
+\end_layout
+
+\begin_layout Itemize
+El coste teórico de todas las operaciones no debe superar: 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

@@ -6,7 +6,7 @@ template <typename T>
 class ptrHollowList
 {
 public:
-    int THRESHOLD = 256;
+    int threshold = 256;
     std::vector<std::unique_ptr<std::vector<T>>> data;
     int tam = 0;
 
@@ -47,7 +47,7 @@ public:
         auto it = upper_bound(data[index]->begin(), data[index]->end(), elem);
         data[index]->insert(it, elem);
 
-        if (data[index]->size() > THRESHOLD)
+        if (data[index]->size() > threshold)
         {
             size_t mid = data[index]->size() / 2;
             auto new_vec = std::make_unique<std::vector<T>>(data[index]->begin() + mid, data[index]->end());

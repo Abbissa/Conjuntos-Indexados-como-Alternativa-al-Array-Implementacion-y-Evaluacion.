@@ -40,20 +40,20 @@ target_compile_definitions(GenInverse PUBLIC GNType=2)
 
 
 function(addHollowListExecutable type)
-    add_executable(HollowList${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp  ./InsercionEnListas/puntuacionLarge.hpp InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
+    add_executable(HollowList${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp  ./InsercionEnListas/puntuationLarge.hpp InsercionEnListas/puntuationMedium.hpp InsercionEnListas/puntuationSmall.hpp)
     target_compile_definitions(HollowList${type} PUBLIC HLType=0)
     target_compile_definitions(HollowList${type} PUBLIC testType=${type})
 endfunction(addHollowListExecutable type)
 
 function(addptrHollowListExecutable type)
-    add_executable(ptrHollowList${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
+    add_executable(ptrHollowList${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp ./InsercionEnListas/puntuationLarge.hpp ./InsercionEnListas/puntuationMedium.hpp InsercionEnListas/puntuationSmall.hpp)
     target_compile_definitions(ptrHollowList${type} PUBLIC HLType=1)
     target_compile_definitions(ptrHollowList${type} PUBLIC testType=${type})
     
 endfunction(addptrHollowListExecutable type)
 
 function(addHollowListv2Executable type)
-    add_executable(HollowListv2${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp ./Prototipo/HollowListv2.hpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
+    add_executable(HollowListv2${type} ./Prototipo/Test.cpp ./Prototipo/HollowList.hpp ./Prototipo/ptrHollowList.hpp ./Prototipo/HollowListv2.hpp ./InsercionEnListas/puntuationLarge.hpp ./InsercionEnListas/puntuationMedium.hpp InsercionEnListas/puntuationSmall.hpp)
     target_compile_definitions(HollowListv2${type} PUBLIC HLType=2)
     target_compile_definitions(HollowListv2${type} PUBLIC testType=${type})
     
@@ -61,21 +61,21 @@ endfunction(addHollowListv2Executable type)
 
 
 function(addTestVectorExecutable type)
-    add_executable(TestVector${type} ./Prototipo/TestVector.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
+    add_executable(TestVector${type} ./Prototipo/TestVector.cpp ./InsercionEnListas/puntuationLarge.hpp ./InsercionEnListas/puntuationMedium.hpp InsercionEnListas/puntuationSmall.hpp)
     target_compile_definitions(TestVector${type} PUBLIC testType=${type})
     
 endfunction()
 
 function(addTestSetExecutable type)
-    add_executable(TestSet${type} ./Prototipo/TestSet.cpp ./InsercionEnListas/puntuacionLarge.hpp ./InsercionEnListas/puntuacionMedium.hpp InsercionEnListas/puntuacionSmall.hpp)
+    add_executable(TestSet${type} ./Prototipo/TestSet.cpp ./InsercionEnListas/puntuationLarge.hpp ./InsercionEnListas/puntuationMedium.hpp InsercionEnListas/puntuationSmall.hpp)
     target_compile_definitions(TestSet${type} PUBLIC testType=${type})
 endfunction(addTestSetExecutable type)
 
 function(addBinaryHeapExecutable type)
     add_executable(TestBinaryHeap${type} ./Prototipo/TestBinaryHeap.cpp
-     ./InsercionEnListas/puntuacionLarge.hpp
-      ./InsercionEnListas/puntuacionMedium.hpp 
-      InsercionEnListas/puntuacionSmall.hpp)
+     ./InsercionEnListas/puntuationLarge.hpp
+      ./InsercionEnListas/puntuationMedium.hpp 
+      InsercionEnListas/puntuationSmall.hpp)
     target_compile_definitions(TestBinaryHeap${type} PUBLIC testType=${type})
 endfunction(addBinaryHeapExecutable type)
 

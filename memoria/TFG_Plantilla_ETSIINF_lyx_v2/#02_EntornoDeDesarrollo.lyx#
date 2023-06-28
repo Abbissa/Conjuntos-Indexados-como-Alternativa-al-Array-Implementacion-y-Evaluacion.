@@ -301,7 +301,7 @@ thepage
 \end_layout
 
 \begin_layout Chapter
-Entorno de desarrollo y especificaciones
+Entorno de desarrollo 
 \end_layout
 
 \begin_layout Standard
@@ -324,11 +324,11 @@ s de las que dispone para trabajar con distintos lenguajes y tipos de fichero.
 CMake
 \series default
 \lang english
-
+ 
 \begin_inset CommandInset citation
-LatexCommand cite
-key "CMAKE"
-literal "true"
+LatexCommand keyonly
+key "CM1"
+literal "false"
 
 \end_inset
 
@@ -391,44 +391,33 @@ para el control de versiones se ha decidido usar github debido al conocimiento
  para la realización de otros proyectos.
 \end_layout
 
-\begin_layout Section
-Especificaciones del sistema
+\begin_layout Chapter
+Requisitos
+\end_layout
+
+\begin_layout Standard
+Para la implementacion de las estrucuras y asegurar las funcionalidades
+ de una lista ordenado se han definido los siguientes requisitos:
 \end_layout
 
 \begin_layout Itemize
-Procesador: AMD Ryzen 5 5500U with Radeon Graphics 2.10 GHz
+Operación para insertar elementos en la estructura de datos.
 \end_layout
 
 \begin_layout Itemize
-RAM: 8 GB
+Operación para obtener el elemento más grande de la estructura de datos.
 \end_layout
 
 \begin_layout Itemize
-Sockets: 1
+Operacion para borrar el elemento más grande de la estructura.
 \end_layout
 
 \begin_layout Itemize
-Nucleos: 6
-\end_layout
+El coste teórico de todas las opeaciones no debe superar: 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
 
-\begin_layout Itemize
-Procesadores lógicos: 12
-\end_layout
-
-\begin_layout Itemize
-Cache L1: 384 kB
-\end_layout
-
-\begin_layout Itemize
-Cache L2 3 MB
-\end_layout
-
-\begin_layout Itemize
-Cache L3: 8 MB
-\end_layout
-
-\begin_layout Itemize
-Compilador: GNU 9.3.0 con opción -O3
+.
 \end_layout
 
 \begin_layout Standard

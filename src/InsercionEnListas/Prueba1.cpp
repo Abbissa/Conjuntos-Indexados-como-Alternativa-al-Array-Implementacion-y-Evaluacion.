@@ -7,10 +7,10 @@
 #include <chrono>
 #include <iomanip>
 
-#include "puntuacionSmall.hpp"
-#include "puntuacionMedium.hpp"
-#include "puntuacionLarge.hpp"
-typedef puntuacionSmall puntuacion;
+#include "puntuationSmall.hpp"
+#include "puntuationMedium.hpp"
+#include "puntuationLarge.hpp"
+typedef puntuationSmall puntuation;
 using namespace std;
 
 void prueba1();
@@ -19,9 +19,9 @@ void prueba3();
 
 int main()
 {
-    puntuacion p = puntuacion(1, 2);
-    puntuacionMedium p2 = puntuacionMedium(1, 2);
-    puntuacionLarge p3 = puntuacionLarge(1, 2);
+    puntuation p = puntuation(1, 2);
+    puntuationMedium p2 = puntuationMedium(1, 2);
+    puntuationLarge p3 = puntuationLarge(1000000000, 2000000000);
     cout << sizeof(p) << endl;
     cout << sizeof(p2) << endl;
     cout << sizeof(p3) << endl;
@@ -40,13 +40,13 @@ void prueba1()
         cout << "Error al abrir ejemplo.dat\n";
         exit(EXIT_FAILURE);
     }
-    vector<puntuacion> datos;
+    vector<puntuation> datos;
     double time;
     int memory;
     while (fich >> time)
     {
         fich >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         datos.push_back(p);
     }
     size_t i = 0;
@@ -66,13 +66,13 @@ void prueba2()
         cout << "Error al abrir ejemplo.dat\n";
         exit(EXIT_FAILURE);
     }
-    vector<puntuacion> datos;
+    vector<puntuation> datos;
     double time;
     int memory;
     while (fich >> time)
     {
         fich >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         auto it = lower_bound(datos.begin(), datos.end(), p);
         datos.insert(it, p);
     }
@@ -86,7 +86,7 @@ void prueba2()
 }
 void prueba3()
 {
-    vector<puntuacion> datos;
+    vector<puntuation> datos;
     double ti;
     int memory;
     int n = 100000;
@@ -98,7 +98,7 @@ void prueba3()
         ti = (double)(rand());
         memory = rand();
 
-        puntuacion p = puntuacion(ti, memory);
+        puntuation p = puntuation(ti, memory);
         auto it = upper_bound(datos.begin(), datos.end(), p);
         datos.insert(it, p);
     }

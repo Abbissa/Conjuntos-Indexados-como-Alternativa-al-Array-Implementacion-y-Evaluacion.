@@ -5,10 +5,10 @@
 #include "HollowList.hpp"
 #include "ptrHollowList.hpp"
 #include "HollowListv2.hpp"
-#include "../InsercionEnListas/puntuacionSmall.hpp"
-#include "../InsercionEnListas/puntuacionMedium.hpp"
-#include "../InsercionEnListas/puntuacionLarge.hpp"
 
+#include "../InsercionEnListas/puntuationSmall.hpp"
+#include "../InsercionEnListas/puntuationMedium.hpp"
+#include "../InsercionEnListas/puntuationLarge.hpp"
 template <typename T>
 #if (HLType == 0)
 using HL = HollowList<T>;
@@ -22,13 +22,13 @@ using HL = HollowListv2<T>;
 #endif
 
 #if (testType == 0)
-typedef puntuacionSmall puntuacion;
+typedef puntuationSmall puntuation;
 #define TYPE "Small"
 #elif (testType == 1)
-typedef puntuacionMedium puntuacion;
+typedef puntuationMedium puntuation;
 #define TYPE "Medium"
 #elif (testType == 2)
-typedef puntuacionLarge puntuacion;
+typedef puntuationLarge puntuation;
 #define TYPE "Large"
 #endif
 
@@ -38,20 +38,20 @@ int runTestCase(int, int);
 int main(int argc, char const *argv[])
 {
     int size = 100000;
-    int THRESHOLD = 256;
+    int threshold = 256;
     if (argc >= 2)
 
         size = atoi(argv[1]);
     if (argc >= 3)
-        THRESHOLD = atoi(argv[2]);
+        threshold = atoi(argv[2]);
 
-    return runTestCase(size, THRESHOLD);
+    return runTestCase(size, threshold);
 }
 
-int runTestCase(int elems, int THRESHOLD)
+int runTestCase(int elems, int threshold)
 {
-    HL<puntuacion> hl;
-    hl.THRESHOLD = THRESHOLD;
+    HL<puntuation> hl;
+    hl.threshold = threshold;
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, nullptr);
@@ -63,7 +63,7 @@ int runTestCase(int elems, int THRESHOLD)
 
         cin >> time;
         cin >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         hl.insert(p);
     }
 
@@ -74,24 +74,24 @@ int runTestCase(int elems, int THRESHOLD)
     while (cin >> time && !cin.eof())
     {
         cin >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         hl.remove();
         hl.insert(p);
     }
     gettimeofday(&tf, nullptr);
 
-    cout << NOMBRE << "-" << hl.THRESHOLD << ","
+    cout << NOMBRE << "-" << hl.threshold << ","
          << "INSERT," << TYPE << "," << hl.size() << "," << tiempo << endl;
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    cout << NOMBRE << "-" << hl.THRESHOLD << ","
+    cout << NOMBRE << "-" << hl.threshold << ","
          << "USAGE," << TYPE << "," << hl.size() << "," << tiempo << endl;
     gettimeofday(&ti, nullptr);
     int tam = hl.size();
-    puntuacion p = hl.remove();
+    puntuation p = hl.remove();
     while (!hl.isEmpty())
     {
 
-        puntuacion temp = hl.remove();
+        puntuation temp = hl.remove();
         if (temp > p)
         {
             cerr << "Error: HollowList no ordenado" << endl;
@@ -101,7 +101,7 @@ int runTestCase(int elems, int THRESHOLD)
     }
     gettimeofday(&tf, nullptr);
     tiempo = (tf.tv_sec - ti.tv_sec) + (tf.tv_usec - ti.tv_usec) / 1000000.0;
-    cout << NOMBRE << "-" << hl.THRESHOLD << ","
+    cout << NOMBRE << "-" << hl.threshold << ","
          << "REMOVE," << TYPE << "," << tam << "," << tiempo << endl;
     return 0;
 }

@@ -308,8 +308,8 @@ Desarrollo
 Implementaciones a comparar
 \end_layout
 
-\begin_layout Subsection*
-3.1.1 std::set
+\begin_layout Subsection
+std::set
 \end_layout
 
 \begin_layout Standard
@@ -361,7 +361,7 @@ Los nodos a la derecha de un determinado nodo siempre serán mayores que
 \end_layout
 
 \begin_layout Standard
-Este conjunto de condiciones garantizan un árbol auto balanceado, lo cual
+Este conjunto de condiciones garantizan un árbol autobalanceado, lo cual
  resulta en los siguientes costes para cada operación:
 \end_layout
 
@@ -389,8 +389,13 @@ Búsqueda:
 
 \end_layout
 
-\begin_layout Subsection*
-3.1.2 HollowList, ptrHollowList y HollowListv2
+\begin_layout Standard
+Por lo tanto, esta estructura cumple con los requisitos definidos para una
+ lista ordenada.
+\end_layout
+
+\begin_layout Subsection
+HollowList, ptrHollowList y HollowListv2
 \end_layout
 
 \begin_layout Standard
@@ -423,7 +428,8 @@ ptrHollowList
 \family typewriter
 std::vector
 \family default
-.En la 
+.
+ En la 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "ptrHollowList"
@@ -438,17 +444,23 @@ noprefix "false"
 ptrHollowList
 \family default
  de sublistas de 4 elementos como máximo.
- En el ejemplo la lista de vectores aparece marcada en verde mientras los
- vectores secundarios son marcados en morado.
+ En el ejemplo, la lista de vectores aparece marcada en verde, mientras
+ los vectores secundarios son marcados en morado.
  También se puede observar que, aunque el tamaño máximo de las sublistas
- es 4, puede haber sublistas dentro de la estructura con menos elementos,
- esto lo que permite es insertar elementos en mitad de la lista son tener
+ es 4, puede haber sublistas dentro de la estructura con menos elementos.
+ Esto lo que permite es insertar elementos en mitad de la lista sin tener
  que mover ningún elemento ya almacenado, en el ejemplo podrían introducirse
  elementos con valor entre 23 y 35, 42 y 45 o superiores a 47 sin ningún
  coste adicional.
  Estas operaciones en un vector sin huecos tendrían el coste adicional de
  desplazar los elementos que se sitúen por detrás de la posición donde se
- desea insertar el elemento para poder hacerle hueco.
+ desea insertar el elemento para poder hacerle hueco, sin embargo, en las
+ estructuras 
+\family typewriter
+HollowList
+\family default
+ la cota máxima de elementos a desplazar es el número de elementos que contenga
+ la lista.
 \end_layout
 
 \begin_layout Standard
@@ -552,7 +564,7 @@ Estructura HollowList con sublistas de 4 elementos
 \end_layout
 
 \begin_layout Standard
-Por ultimo, la estructura 
+Por último, la estructura 
 \family typewriter
 HollowListv2
 \family default
@@ -560,10 +572,10 @@ HollowListv2
 \family typewriter
 HollowList
 \family default
- que se ideo tras observar los resultados obtenidos, analizar el origen
+ que se ideó tras observar los resultados obtenidos, analizar el origen
  de estos resultados y pensar en como solucionar los problemas encontrados.
- Tanto los resultados como el análisis se pueden encontrar en la capitulo
- resultados.
+ Tanto los resultados como el análisis se pueden encontrar en el capítulo
+ de resultados.
 \end_layout
 
 \begin_layout Standard
@@ -572,8 +584,8 @@ Esta estructura parte del mismo concepto que
 HollowList
 \family default
 , la única diferencia es que se sustituye el listado de vectores por un
- listado de objetos que a su vez contendrán un elemento, el que seria el
- elemento más pequeño de las sublistas que se tenian en la estructura 
+ listado de objetos que a su vez contendrán un elemento, el que sería el
+ elemento más pequeño de las sublistas que se tenían en la estructura 
 \family typewriter
 HollowList
 \family default
@@ -600,7 +612,7 @@ noprefix "false"
 
 \end_inset
 
- se puede observar como seria una estructura HollowListv2 con los mismos
+ se puede observar como sería una estructura HollowListv2 con los mismos
  elementos que se han mostrado en los ejemplos anteriores.
 \end_layout
 
@@ -688,9 +700,11 @@ upper_bound
 , que devuelve la posición de un elemento a partir de un iterador de inicio,
  uno de final y el propio elemento, usando esa posición se inserta el elemento
  en el vector determinado.
- Por último se comprueba si el valor del vector supera un cierto valor límite,
- si esto sucede se extrae la mitad superior del vector y se inserta a continuaci
-ón en la lista de vectores.
+ Por último se comprueba si el tamaño del vector supera el valor límite
+ de tamaño máximo de las sublistas definido, en caso de que esto suceda,
+ se extrae la mitad superior del vector y esta se inserta a continuación
+ en la lista de vectores, con esto lo que se consigue es mantener una cota
+ máxima al coste de buscar elementos o insertar elementos nuevos.
 \end_layout
 
 \begin_layout Standard
@@ -712,6 +726,19 @@ m
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Dado que el coste aproximado de esta operacion es 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+ se verifica que esta estructura permite insertar nuevos elementos con un
+ coste menor o igual a 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -774,6 +801,19 @@ Resultado de insertar un 11 en una HollowList
 \end_inset
 
 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -783,18 +823,24 @@ Consulta del último elemento
 \end_layout
 
 \begin_layout Standard
-Para consultar el primer valor de la lista se recupera el último valor del
- último vector de la lista.
+Para consultar el elemento con mayor valor de la estructura se recupera
+ el último elemento del último vector de la lista.
 \end_layout
 
 \begin_layout Standard
 Debido a que la operación de consulta accede de forma directa al último
- elemento de la lista se puede concluir que el coste de esta operación es
- 
+ elemento de la lista, se puede concluir que el coste de esta operación
+ es 
 \begin_inset Formula $O(1)$
 \end_inset
 
+, por lo tanto se verifica que la estructura permite la consulta del último
+ elemento con un coste menor o igual a 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
 .
+ 
 \end_layout
 
 \begin_layout Standard
@@ -813,6 +859,16 @@ Para eliminar el elemento con mayor valor de la lista se elimina el último
 De forma análoga a la consulta del último elemento de la estructura, se
  puede concluir que el coste de esta operación es 
 \begin_inset Formula $O(1)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Por lo que se verifica que la estructura permite el borrado del último elemento
+ con un coste menor o igual a 
+\begin_inset Formula $O(\log\left(n\right))$
 \end_inset
 
 .
@@ -836,7 +892,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -858,7 +914,9 @@ name "BorrarElementosHollowList"
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Borrado de elementos dos elementos de una Hollow List 
+Borrado de elementos dos elementos de una 
+\family typewriter
+HollowList 
 \end_layout
 
 \end_inset
@@ -876,9 +934,10 @@ Operaciones adicionales
 \end_layout
 
 \begin_layout Standard
-Aunque estas operaciones no se han implementado, por no ser necesarias o
- por no ser tan óptimas como las que ya se han implementado, se puede calcular
- el coste y explicar como se podrían implementar algunas operaciones adicionales.
+Aunque estas operaciones no se han implementado, por no ser necesarias para
+ las pruebas que se deseaban realizar o por no ser tan óptimas como las
+ que ya se han implementado, se puede calcular el coste y explicar como
+ se podrían implementar algunas operaciones adicionales.
 \end_layout
 
 \begin_layout Standard
@@ -889,9 +948,9 @@ Búsqueda
 
 \begin_layout Standard
 La operación de búsqueda realizaría las mismas búsquedas que la inserción,
- una búsqueda en la lista principal para encontrar el vector donde se puede
- encontrar el elemento y una segunda dentro de ese vector para encontrar,
- si se encuentra, el elemento en la lista.
+ una búsqueda en la lista principal para encontrar el vector donde podría
+ encontrarse el elemento que se está buscando y una segunda dentro de ese
+ vector para determinar si el elemento se encuentra en la lista.
 \end_layout
 
 \begin_layout Standard
@@ -910,10 +969,10 @@ Borrado del primer elemento
 \end_layout
 
 \begin_layout Standard
-Esta funcionalidad no se ha implementado ya que es posible realizar esta
- funcionalidad invirtiendo los criterios de ordenación del objeto que se
- desea ordenar.
- Además esta operación tiene un coste adicional en comparación con el borrado
+Esta funcionalidad no se ha implementado porque es posible realizar esta
+ funcionalidad invirtiendo los criterios de ordenación del elemento con
+ el que se desee utilizar la estructura.
+ Además, esta operación tiene un coste adicional en comparación con el borrado
  del último elemento.
  
 \end_layout
@@ -922,7 +981,8 @@ Esta funcionalidad no se ha implementado ya que es posible realizar esta
 La implementación de este método se realizaría borrando el primer elemento
  del primer vector de la lista.
  Esta operación tendría un sobrecoste, ya que al borrar el primer elemento
- el resto del vector tendría que adelantarse una posición en memoria.
+ del vector el resto de elementos tendría que desplazarse una posición en
+ memoria para ocupar la posición del elemento borrado.
 \end_layout
 
 \begin_layout Standard
@@ -931,7 +991,7 @@ El coste de esta operación se puede concluir que sería aproximadamente
 \end_inset
 
 , con el matiz de que al borrar el primer elemento hay que recolocar el
- resto del vector con lo que el coste real es 
+ resto de elementos del vector, con lo que el coste real es 
 \begin_inset Formula $O(m)$
 \end_inset
 
@@ -945,18 +1005,18 @@ Consultar primer elemento
 \end_layout
 
 \begin_layout Standard
-La consulta del primer elemento de la estructura, al contrario que el borrado
+La consulta del primer elemento de la estructura, al contrario que el borrado,
  no conlleva un sobrecoste con respecto a la consulta del último.
- Para realizar esta operación se consultar el primer elemento de la primera
- lista, lo que hace que la operación tenga un coste 
+ Para realizar esta operación se consulta el primer elemento del primer
+ vector de la lista, lo que hace que la operación tenga un coste 
 \begin_inset Formula $O(1)$
 \end_inset
 
 .
 \end_layout
 
-\begin_layout Subsection*
-3.1.3 BinaryHeap
+\begin_layout Subsection
+BinaryHeap
 \end_layout
 
 \begin_layout Standard
@@ -966,8 +1026,9 @@ BinaryHeap
 \family default
  es una implementación de un montículo sobre un array en lugar de sobre
  un árbol.
- Esto implica que en lugar a los nodos hijo o padre a través de los atributos
- del nodo actual, se accede aplicando un cálculo al índice actual.
+ Esto implica que en lugar de usarse punteros para acceder a los nodos hijo
+ o padre del nodo actual, se accede aplicando un cálculo sobre el índice
+ del nodo actual.
  Dependiendo de a que nodo se desee acceder hay que realizar las siguientes
  operaciones:
 \end_layout
@@ -1006,10 +1067,10 @@ De esta forma se puede acceder al nodo que se desee en tiempo constante.
  de 32 bits a 3·8 bytes en una máquina de 64 bits.
  La segunda ventaja viene por la adyacencia de los elementos en memoria.
  Al recuperar un elemento de memoria principal cuando se dé un fallo de
- caché el sistema operativo recuperará además regiones extra de memoria.
+ caché, el sistema operativo recuperará además regiones extra de memoria.
  Esto en el caso del vector significa recuperar más valores adyacentes al
- recuperado los cuales pueden necesitarse en el futuro y al haberse recuperado
- de está forma no se necesitará recuperarlo de memoria principal.
+ recuperado, los cuales pueden necesitarse en el futuro y al haberse recuperado
+ de esta forma no se necesitará recuperarlo de memoria principal.
 \end_layout
 
 \begin_layout Standard
@@ -1038,7 +1099,7 @@ noprefix "false"
  Como se puede ver en este ejemplo, lo único que asegura esta estructura
  con respecto al orden de los elementos es que el primer elemento siempre
  será el menor elemento almacenado en la estructura, esto, como se verá
- más adelante, supone un problema para implementar algunas operaciones.
+ más adelante, supone un problema para implementar la búsqueda de elementos.
  
 \end_layout
 
@@ -1187,9 +1248,9 @@ Esta operación se divide en dos fases, insertar el elemento y colocarlo
 \begin_inset Formula $\log_{2}\left(n\right)$
 \end_inset
 
- donde n es el numero de elementos almacenados en la estructura, se puede
- concluir que tiene coste logarítmico, por tanto se puede concluir que el
- coste global de la operación es 
+ donde n es el número de elementos almacenados en la estructura, se puede
+ concluir que tiene coste logarítmico, por tanto, se puede concluir que
+ el coste global de la operación es 
 \family default
 \series default
 \shape default
@@ -1203,6 +1264,11 @@ Esta operación se divide en dos fases, insertar el elemento y colocarlo
 \noun default
 \color inherit
 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+ y, como consecuencia, se verifica que la estructura permite insertar elementos
+ nuevos con un coste menor o igual a 
 \begin_inset Formula $O(\log\left(n\right))$
 \end_inset
 
@@ -1220,7 +1286,7 @@ noprefix "false"
 
 \end_inset
 
- se puede observa el estado de la estructura tras insertar un 11 y restablecer
+ se puede observar el estado de la estructura tras insertar un 11 y restablecer
  el orden de la estructura y en la 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1285,6 +1351,7 @@ BinaryHeap
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1332,6 +1399,28 @@ BinaryHeap
 \begin_layout Standard
 
 \series bold
+Consulta del primer elemento de la estructura
+\end_layout
+
+\begin_layout Standard
+Para poder consultar el valor del primer elemento de la estructura es suficiente
+ con recuperar el valor del primer elemento del vector.
+ Por lo tanto, la consulta del primer elemento tiene un coste de 
+\begin_inset Formula $O(1)$
+\end_inset
+
+.
+ En consecuencia, se verifica que la estructura permite la consulta del
+ primer elemento con un coste menor o igual a 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 Borrar el primer elemento de la estructura
 \end_layout
 
@@ -1340,8 +1429,8 @@ El borrado del primer elemento se puede dividir en dos fases, la primera
  es el borrado del elemento y la segunda es el ajuste de la estructura para
  mantener la coherencia.
  Para la primera operación, en lugar de borrar el primer elemento de la
- estructura lo cual puede complicar el reajuste de la estructura, se intercambia
- el primer elemento con el último y a continuación se elimina el último
+ estructura, lo cual puede complicar el reajuste de la estructura , se intercamb
+ia el primer elemento con el último y a continuación se elimina el último
  elemento.
  Lo que se consigue con estas operaciones es conservar la estructura del
  array a la vez que se elimina el primer elemento de la lista.
@@ -1349,7 +1438,20 @@ El borrado del primer elemento se puede dividir en dos fases, la primera
  con sus dos hijos, y en el caso de que al menos uno de ellos sea menor
  que él se intercambiarán de posición con el menor de los dos y se repite
  la operación mientras uno de los dos hijos sea menor o los dos hijos sean
- nulos (sean indices mayores que el tamaño del vector).
+ nulos (sean índices mayores que el tamaño del vector).
+ Por lo tanto, la operación de borrado se puede concluir que tiene un coste
+ 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+ dado que se hacen dos comparaciones mas un cambio de elementos por cada
+ nivel del árbol en el peor caso, luego cumple con la condición de poder
+ borrar el primer elemento de la estructura con un coste menor o igual a
+ 
+\begin_inset Formula $O(\log\left(n\right))$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1377,8 +1479,9 @@ noprefix "false"
 
  se muestra en forma de árbol para facilitar su comprensión.
  En estas imágenes se puede observar como se ha intercambiado la posición
- del primer y ultimo elemento y posteriormente se ha colocado el elemento
+ del primer y último elemento y posteriormente se ha colocado el elemento
  del nodo raíz, en este caso 45, en el lugar que le corresponde.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1429,6 +1532,7 @@ Borrado de un elemento en una BinaryHeap
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status collapsed
@@ -1480,17 +1584,17 @@ Búsqueda
 \end_layout
 
 \begin_layout Standard
-En el caso de esta estructura no se puede implementar la operación de búsqueda,
- esto se debe a que lo único que asegura la estructura en cuanto al orden
- de los elementos es que los hijos de un determinado nodo siempre tendrán
- un valor mayor o igual que el del propio nodo.
- Por lo tanto no hay forma de comprobar si un elemento está en la estructura
+En el caso de esta estructura no se puede implementar la operación de búsqueda
+ de forma eficiente, esto se debe a que lo único que asegura la estructura
+ es que los hijos de un determinado nodo siempre tendrán un valor mayor
+ o igual que el del propio nodo.
+ Por lo tanto, no hay forma de comprobar si un elemento está en la estructura
  que no pase por comprobar todos los elementos.
- Esto se puede optimizar ya que una vez encuentras un nodo con valor mayor
+ Esto se puede optimizar, ya que una vez encuentras un nodo con valor mayor
  al que se busca se puede descartar esa rama por completo, pero aun en ese
  caso sería una operación muy costosa y que en el peor caso tenga coste
  
-\begin_inset Formula $O(\log\left(n\right))$
+\begin_inset Formula $O(n)$
 \end_inset
 
 .
@@ -1500,8 +1604,8 @@ En el caso de esta estructura no se puede implementar la operación de búsqueda
 Pruebas realizadas
 \end_layout
 
-\begin_layout Subsection*
-3.2.1 Estructura de las pruebas realizadas
+\begin_layout Subsection
+Estructura de las pruebas realizadas
 \end_layout
 
 \begin_layout Standard
@@ -1509,13 +1613,12 @@ Las pruebas que se han realizado sobre estas estructuras han consistido
  en insertar elementos, desde 500.000 elementos hasta 4.000.000, para medir
  los tiempos al insertar.
  A continuación se realiza la eliminación e insertado de 1.000.000 de elementos
- para probar el rendimiento de cada estructura con una cantidad de elementos
- considerable.
+ para probar el rendimiento al usar cada estructura con una cantidad de
+ elementos considerable.
  Por último se borran todos los elementos que sigan almacenados para medir
  el rendimiento en el borrado.
- Además se han realizado estas pruebas sobre cada estructura con varios
- objetos para almacenar en la estructura y con varios casos de entrada de
- los datos en la estructura.
+ Además, se han realizado estas pruebas sobre cada estructura con distintos
+ objetos para almacenar.
  Los objetos a insertar son los siguientes:
 \end_layout
 
@@ -1570,7 +1673,7 @@ int
 \family default
  y un 
 \family typewriter
-array de chars
+array de char
 \family default
  que contiene los valores 
 \begin_inset Quotes fld
@@ -1611,7 +1714,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset CommandInset include
 LatexCommand lstinputlisting
-filename "src/puntuacionSmall.hpp"
+filename "src/puntuationSmall.hpp"
 lstparams "firstline=6,lastline=16,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
 
 \end_inset
@@ -1653,7 +1756,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset CommandInset include
 LatexCommand lstinputlisting
-filename "src/puntuacionMedium.hpp"
+filename "src/puntuationMedium.hpp"
 lstparams "firstline=6,lastline=18,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
 
 \end_inset
@@ -1695,7 +1798,7 @@ status collapsed
 \begin_layout Plain Layout
 \begin_inset CommandInset include
 LatexCommand lstinputlisting
-filename "src/puntuacionLarge.hpp"
+filename "src/puntuationLarge.hpp"
 lstparams "firstline=6,lastline=22,basicstyle={\\fontsize{9}{10}\\selectfont},numbers=left,language={C++}"
 
 \end_inset
@@ -1725,11 +1828,11 @@ name "Objeto grande"
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-Para la creación de estos objetos para su posterior uso en los distintos
- casos de prueba que se han implementado, se ha utilizado una clase, 
+\begin_layout Standard
+Para la inicializar estos objetos durante las pruebas que se han implementado,
+ se ha utilizado una clase, 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "Generadores de numeros"
@@ -1739,8 +1842,10 @@ noprefix "false"
 
 \end_inset
 
-, para poder generar números en orden creciente, decreciente o aleatorio
- dependiendo de el parámetro con el que se compile el programa.
+, que puede generar números en orden creciente, decreciente o aleatorio,
+ dependiendo del parámetro con el que se compile el programa, y escribirlos
+ en la salida estándar para poder inicializar los objetos con los números
+ generados.
  De este código cabe resaltar dos detalles, el primero es el uso de macros
  para definir como serán los números que generará dependiendo del valor
  de 
@@ -1754,7 +1859,7 @@ GNType
 std::mt19937 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "std::mt19937"
+key "std1"
 literal "false"
 
 \end_inset
@@ -1772,7 +1877,7 @@ std::uniform_int_distribution
  
 \begin_inset CommandInset citation
 LatexCommand cite
-key "std::uniform_int_distribution"
+key "std2"
 literal "false"
 
 \end_inset
@@ -1823,7 +1928,7 @@ name "Generadores de numeros"
 \end_layout
 
 \begin_layout Standard
-Una vez se ha establecido los objetos que se van a usar para las pruebas
+Una vez se han establecido los objetos que se van a usar para las pruebas
  y los valores que estos podrán tener, se pueden explicar las pruebas que
  se van a realizar y los valores que se van a extraer de ellas.
 \end_layout
@@ -1840,9 +1945,9 @@ ptrHollowList
 \family default
 y 
 \family typewriter
-HollowListv2 
+HollowListv2
 \family default
-ya que las diferencias entre este código y el utilizado para las pruebas
+, ya que las diferencias entre este código y el utilizado para las pruebas
  sobre el resto de estructuras se reducen al uso de macros para determinar
  que estructura se va a usar y la inicialización de las estructuras con
  el tamaño de las sublistas deseado.
@@ -1935,7 +2040,7 @@ noprefix "false"
 \end_inset
 
 , se puede ver la definición de dos parámetros que se definen en ejecución,
- el primero es el el numero de elementos con el que se van a realizar las
+ el primero es el el número de elementos con el que se van a realizar las
  pruebas, que tomará valores entre 500.000 y 4.000.000, y el valor del tamaño
  máximo de las sublistas, que podrá ser 512, 256 o 128.
  
@@ -2001,16 +2106,8 @@ noprefix "false"
  Esta se puede dividir en tres partes, en todas ellas se mide el tiempo
  que tarde la ejecución, para ello se usa la estructura 
 \family typewriter
-timeval 
+timeval
 \family default
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "timeval"
-literal "false"
-
-\end_inset
-
  y el método 
 \family typewriter
 gettimeofday 
@@ -2026,10 +2123,10 @@ literal "false"
 para medir los tiempos de inicio y fin de la prueba.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 Primero se inserta en la estructura tantos objetos 
 \family typewriter
-puntuacion 
+puntuation 
 \family default
 como se haya definido en los parámetros, para ello se leen dos números de
  entrada estándar, se crea el objeto 
@@ -2041,20 +2138,22 @@ y se inserta en la estructura.
  que ha tardado en ejecutarse la inserción de los elementos.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 Una vez insertados los elementos deseados se entra en un bucle en el cual
  se eliminan y se insertan elementos hasta el fin de los datos de entrada,
  por como se ejecutan las pruebas se insertan y eliminan un total de 1.000.000
  de elementos.
- Cuando se han insertado y eliminado todos los elementos deseados se calcula
+ Cuando se han insertado y eliminado todos los elementos deseados, se calcula
  el tiempo que se ha tardado en ejecutar y se muestran por pantalla los
  resultados.
 \end_layout
 
-\begin_layout Standard
-Por ultimo se eliminan todos los elementos restantes de la estructura, para
- ello se usa un bucle en el cual, mientras la estructura no esté vacia se
- eliminan elementos y se comprueba que el orden es correcto, en 
+\begin_layout Enumerate
+Por último se eliminan todos los elementos restantes de la estructura, para
+ ello se usa un bucle en el cual, mientras la estructura no este vacia se
+ eliminan elementos y se comprueba que el orden es correcto, en caso contrario
+ se muestra un mensaje de error y se termina la ejecución con un código
+ de error.
 \end_layout
 
 \begin_layout Standard
@@ -2062,7 +2161,7 @@ Por ultimo se eliminan todos los elementos restantes de la estructura, para
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset CommandInset include
@@ -2101,35 +2200,19 @@ name "Exec"
 
 \end_layout
 
-\begin_layout Itemize
-Tiempo de ejecución en insertado, uso y borrado
-\end_layout
-
-\begin_layout Itemize
-Tiempo total
-\end_layout
-
-\begin_layout Itemize
-Uso de memoria
-\end_layout
-
-\begin_layout Itemize
-Fallos de página
-\end_layout
-
-\begin_layout Subsection*
-3.2.2 Generación de las pruebas
+\begin_layout Subsection
+Generación de las pruebas
 \end_layout
 
 \begin_layout Standard
 La generación de las pruebas se puede dividir en dos partes, la compilación
- de los binarios de las distintas pruebas y la creación de los mismos.
+ de los binarios de las distintas pruebas y la ejecución de las pruebas.
 \end_layout
 
 \begin_layout Standard
-En el código utilizado para la generación de los binarios 
+En el 
 \begin_inset CommandInset ref
-LatexCommand eqref
+LatexCommand ref
 reference "Compilacion de los tests"
 plural "false"
 caps "false"
@@ -2137,9 +2220,10 @@ noprefix "false"
 
 \end_inset
 
- se puede observar que se ha utilizado una función para generalizar la compilaci
-ón y posteriormente se define un bucle para iterar sobre los distintos objetos
- y definir las compilaciones para todas las estructuras.
+ se puede observar un script de CMake en el que se define una función para
+ generalizar la compilación y posteriormente se usa un bucle para iterar
+ sobre los distintos objetos y definir las compilaciones para todas las
+ estructuras.
  En el ejemplo de función se define primero el ejecutable junto con los
  distintos ficheros necesarios para generar el binario y posteriormente
  se añaden las definiciones necesarias para cada test.
@@ -2161,7 +2245,7 @@ ptrHollowList
 \family typewriter
 HollowList
 \family default
- o 
+ u 
 \family typewriter
 HollowListv2
 \family default
@@ -2213,8 +2297,9 @@ name "Compilacion de los tests"
 \end_layout
 
 \begin_layout Standard
-Además de la compilación de los tests, también se han de compilar los ejecutable
-s que serán la entrada de las pruebas 
+Además de la compilación de las pruebas, también se han de compilar los
+ ejecutables de los generadores de números que determinaran la entrada de
+ los casos de prueba 
 \begin_inset CommandInset ref
 LatexCommand eqref
 reference "Compilación de los generadores"
@@ -2224,8 +2309,9 @@ noprefix "false"
 
 \end_inset
 
-, en este caso son generadores de números que se usarán para construir los
- objetos que se van a insertar en las estructuras.
+.
+ Estos generadores escribirán por entrada estándar los números generados
+ para que puedan ser usados en la ejecución de pruebas.
 \begin_inset Float algorithm
 placement H
 wide false
@@ -2269,7 +2355,9 @@ name "Compilación de los generadores"
 
 \begin_layout Standard
 Una vez se ha definido la compilación de los binarios se pueden definir
- las pruebas que se van a realizar 
+ las pruebas que se van a realizar.
+ Para ello se utilizan dos funciones en el script de CMake que se observa
+ en el 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "Generacion de las pruebas"
@@ -2279,30 +2367,44 @@ noprefix "false"
 
 \end_inset
 
-.
- Para ello se utilizan dos funciones, una para definir las pruebas de las
- estructuras HollowList, ya que necesitan un parámetro extra para definir
- el tamaño de las sublistas, y otra para definir el resto de casos de prueba.
- En ambas se realiza la misma operación, se usa un add_custom_command
+, una para definir las pruebas de las estructuras 
+\family typewriter
+HollowList
+\family default
+, ya que necesitan un parámetro extra para definir el tamaño de las sublistas,
+ y otra para definir el resto de casos de prueba.
+ En ambas se realiza la misma operación, se usa un 
+\family typewriter
+add_custom_command
+\family default
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "CMAKE_ADD_CUSTOM_COMMAND"
+key "CM2"
 literal "false"
 
 \end_inset
 
 en el que se definen dos commands, uno para crear un fichero y escribir
- en él la entrada de la prueba, lineas 8 y 22, y un segundo en el que se
- define la ejecución de la prueba, lineas 9-12 y 23-26.
+ en él la entrada de la prueba, líneas 8 y 22, y un segundo en el que se
+ define la ejecución de la prueba, líneas 9-12 y 23-26.
 \end_layout
 
 \begin_layout Standard
-La definición de la ejecuciones divide en dos partes, la primera es la definició
-n de los 4 parámetros del mandato /usr/bin/time, el primero es definir la
- salida de este mandato, el segundo es la opción -a, que se usa para indicar
- al mandato que concatene los resultados al final del fichero en lugar de
- borrar el contenido y escribir los resultados, el tercer parámetro indica
- el formato de la salida, que indica los siguientes campos:
+La definición de las ejecuciones divide en dos partes, la primera es la
+ definición de los 4 parámetros del mandato /usr/bin/time 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "usr/bin/time"
+literal "false"
+
+\end_inset
+
+, el primero es definir la salida de este mandato, el segundo es la opción
+ -a, que se usa para indicar al mandato que concatene los resultados al
+ final del fichero en lugar de borrar el contenido y escribir los resultados,
+ el tercer parámetro indica el formato de la salida, que indica los siguientes
+ campos:
 \end_layout
 
 \begin_layout Itemize
@@ -2318,7 +2420,7 @@ Objeto utilizado
 \end_layout
 
 \begin_layout Itemize
-Numero de elementos
+Número de elementos
 \end_layout
 
 \begin_layout Itemize
@@ -2340,17 +2442,24 @@ Número de fallos de página menores, o recuperables.
 
 \begin_layout Standard
 Y el último parámetro indica la ejecución sobre la cual se van a recopilar
- estos datos, el test que se va a ejecutar con parámetro el número de elementos
- a insertar en la prueba, entrada el fichero creado anteriormente y salida
- la la variable output.
+ estos datos, el test que se va a ejecutar con un parámetro que indica el
+ número de elementos a insertar en la prueba, con entrada el fichero creado
+ anteriormente y salida el fichero definido por la variable 
+\family typewriter
+output
+\family default
+.
 \end_layout
 
 \begin_layout Standard
 Una vez definida esta función se puede utilizar en el bucle donde se crean
- todas las pruebas, el cuál itera desde el valor 500.000 hasta el 4.000.000
+ todas las pruebas, el cual itera desde el valor 500.000 hasta el 4.000.000,
  sumando 500.000 en cada iteración.
  Dentro de este bucle se itera sobre los distintos generadores de casos
- de prueba y sobre los distintos objetos, se define como variable output
+ de prueba y sobre los distintos objetos, se define como variable 
+\family typewriter
+output
+\family default
  un fichero por cada uno de los generadores y se define los casos de prueba
  llamando a la función ya mencionada con cada una de las estructuras.
  Además, cada test se realizará un total de 3 veces con el fin de obtener
@@ -2396,12 +2505,12 @@ name "Generacion de las pruebas"
 
 \end_layout
 
-\begin_layout Subsection*
-3.2.3 Resultados esperados
+\begin_layout Subsection
+Resultados esperados
 \end_layout
 
 \begin_layout Standard
-Una vez exploradas las operaciones de insertado y borrado se puede teorizar
+Una vez exploradas las operaciones de insertado y borrado, se puede teorizar
  que tanto en el caso de insertar elementos, como en el caso de buscar elementos
 , en las estructuras que lo permiten, los tiempos de ejecución deberían
  resultar similares, ya que estas operaciones tienen el mismo coste en todas
@@ -2410,20 +2519,36 @@ Una vez exploradas las operaciones de insertado y borrado se puede teorizar
 \end_inset
 
 .
- Sin embargo el borrado de elementos debería mostrar tiempos de ejecución
- mucho menores en el caso de las estructuras HollowList, ya que el coste
- de la operación de borrado en esta estructura es constante, mientras que
- en el resto de estructuras es logarítmico.
- Por otra parte, en cuanto al uso de la memoria la estructura std::set debería
- ser la que más consumo de memoria tenga, ya que por cada nodo necesita
+ Sin embargo, el borrado de elementos debería mostrar tiempos de ejecución
+ mucho menores en el caso de las estructuras 
+\family typewriter
+HollowList
+\family default
+, ya que el coste de la operación de borrado en esta estructura es constante,
+ mientras que en el resto de estructuras es logarítmico.
+ Por otra parte, en cuanto al uso de la memoria, la estructura std::set
+ debería ser la que más consumo de memoria tenga, ya que por cada nodo necesita
  3 punteros adicionales.
- El segundo lugar sería esperable que lo ocupase la estructura HollowList,
- debido a que esta estructura usa una cantidad de std::vector que crece
- de forma linear, cada uno con tres punteros, uno al inicio del vector,
- otro al final y otro al final de la memoria reservada.
+ El segundo lugar sería esperable que lo ocupase las estructuras 
+\family typewriter
+HollowList
+\family default
+, debido a que esta estructura usa una cantidad de 
+\family typewriter
+std::vector
+\family default
+ que crece de forma linear, cada uno con tres punteros, uno al inicio del
+ vector, otro al final y otro al final de la memoria reservada.
  Por último, la estructura con un menor uso de memoria se espera sea el
- BinaryHeap, ya que la memoria que usa es la de un único std::vector más
- la de los elementos que almacena por lo tanto no tiene un coste adicional
+ 
+\family typewriter
+BinaryHeap
+\family default
+, ya que la memoria que usa es la de un único 
+\family typewriter
+std::vector
+\family default
+ más la de los elementos que almacena, por lo tanto, no tiene un coste adicional
  por cada elemento insertado.
 \end_layout
 

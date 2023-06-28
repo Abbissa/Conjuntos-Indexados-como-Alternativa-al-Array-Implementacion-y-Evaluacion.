@@ -2,18 +2,18 @@
 #include <sys/time.h>
 #include <set>
 #include <algorithm>
-#include "../InsercionEnListas/puntuacionSmall.hpp"
-#include "../InsercionEnListas/puntuacionMedium.hpp"
-#include "../InsercionEnListas/puntuacionLarge.hpp"
+#include "../InsercionEnListas/puntuationSmall.hpp"
+#include "../InsercionEnListas/puntuationMedium.hpp"
+#include "../InsercionEnListas/puntuationLarge.hpp"
 
 #if (testType == 0)
-typedef puntuacionSmall puntuacion;
+typedef puntuationSmall puntuation;
 #define TYPE "Small"
 #elif (testType == 1)
-typedef puntuacionMedium puntuacion;
+typedef puntuationMedium puntuation;
 #define TYPE "Medium"
 #elif (testType == 2)
-typedef puntuacionLarge puntuacion;
+typedef puntuationLarge puntuation;
 #define TYPE "Large"
 
 #endif
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 
 int runTestCase(int size)
 {
-    set<puntuacion> set;
+    set<puntuation> set;
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, nullptr);
@@ -46,7 +46,7 @@ int runTestCase(int size)
 
         cin >> time;
         cin >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         set.insert(p);
         // j++;
     }
@@ -61,7 +61,7 @@ int runTestCase(int size)
     {
         // j++;
         cin >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         set.erase(set.begin());
         set.insert(p);
     }
@@ -71,11 +71,11 @@ int runTestCase(int size)
     cout << "TestSet,USAGE," << TYPE << "," << set.size() << "," << tiempo << endl;
     gettimeofday(&ti, nullptr);
     int tam = set.size();
-    puntuacion p = *set.begin();
+    puntuation p = *set.begin();
     set.erase(set.begin());
     while (set.size() > 0)
     {
-        puntuacion temp = *set.begin();
+        puntuation temp = *set.begin();
         set.erase(set.begin());
         if (p > temp)
         {

@@ -2,19 +2,20 @@
 #include <sys/time.h>
 #include <set>
 #include <algorithm>
-#include "../InsercionEnListas/puntuacionSmall.hpp"
-#include "../InsercionEnListas/puntuacionMedium.hpp"
-#include "../InsercionEnListas/puntuacionLarge.hpp"
-#include "./BinaryHeapArray.hpp"
+
+#include "BinaryHeapArray.hpp"
+#include "../InsercionEnListas/puntuationSmall.hpp"
+#include "../InsercionEnListas/puntuationMedium.hpp"
+#include "../InsercionEnListas/puntuationLarge.hpp"
 
 #if (testType == 0)
-typedef puntuacionSmall puntuacion;
+typedef puntuationSmall puntuation;
 #define TYPE "Small"
 #elif (testType == 1)
-typedef puntuacionMedium puntuacion;
+typedef puntuationMedium puntuation;
 #define TYPE "Medium"
 #elif (testType == 2)
-typedef puntuacionLarge puntuacion;
+typedef puntuationLarge puntuation;
 #define TYPE "Large"
 
 #endif
@@ -34,7 +35,7 @@ int main(int argc, char const *argv[])
 
 int runTestCase(int size)
 {
-    BinaryHeap<puntuacion> bh;
+    BinaryHeap<puntuation> bh;
     struct timeval ti, tf;
     double tiempo;
     gettimeofday(&ti, nullptr);
@@ -46,7 +47,7 @@ int runTestCase(int size)
 
         cin >> time;
         cin >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         bh.insert(p);
     }
 
@@ -59,7 +60,7 @@ int runTestCase(int size)
     while (cin >> time && !cin.eof())
     {
         cin >> memory;
-        puntuacion p = puntuacion(time, memory);
+        puntuation p = puntuation(time, memory);
         bh.extractMin();
         bh.insert(p);
     }
@@ -68,10 +69,10 @@ int runTestCase(int size)
     cout << "TestBinaryHeap,USAGE," << TYPE << "," << bh.size() << "," << tiempo << endl;
     gettimeofday(&ti, nullptr);
     int tam = bh.size();
-    puntuacion p = bh.extractMin();
+    puntuation p = bh.extractMin();
     while (bh.empty() == false)
     {
-        puntuacion temp = bh.extractMin();
+        puntuation temp = bh.extractMin();
         if (temp < p)
         {
             cerr << "ERROR" << endl;

@@ -8,13 +8,13 @@ int generateInversedOrderedNumbers(int);
 int generateOrderedNumbers(int);
 
 #if (GNType == 0)
-#define GEN_NUMBERS(n) generateRandomNumbers(n)
+#define GEN_NUMBERS generateRandomNumbers
 #define GEN "Random"
 #elif (GNType == 1)
-#define GEN_NUMBERS(n) generateOrderedNumbers(n)
+#define GEN_NUMBERS generateOrderedNumbers
 #define GEN "Ordered"
 #elif (GNType == 2)
-#define GEN_NUMBERS(n) generateInversedOrderedNumbers(n)
+#define GEN_NUMBERS generateInversedOrderedNumbers
 #define GEN "Inversed"
 #endif
 
